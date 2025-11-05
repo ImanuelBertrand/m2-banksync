@@ -268,6 +268,7 @@ class DunningListing extends AbstractDataProvider
             'invoice_date' => 'invoice.created_at',
             'invoice_increment_id' => 'invoice.increment_id',
             'is_sent' => 'sent_at',
+            'is_archived' => 'archived_at',
         ];
 
         if (isset($changes[$field])) {
