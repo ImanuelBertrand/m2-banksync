@@ -24,7 +24,7 @@ class MatchTransactions extends Command
         Matcher            $matcher,
         Config             $config,
         ProgressBarFactory $progressBarFactory,
-        string             $name = null,
+        ?string $name = null,
     ) {
         parent::__construct($name);
         $this->matcher = $matcher;

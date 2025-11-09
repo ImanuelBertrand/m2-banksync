@@ -37,7 +37,7 @@ class CalcHashes extends Command
         TempTransactionRepository        $tempTransactionRepository,
         TransactionRepository            $transactionRepository,
         ProgressBarFactory               $progressBarFactory,
-        string                           $name = null,
+        ?string $name = null,
     ) {
         parent::__construct($name);
         $this->hashes = $hashes;
