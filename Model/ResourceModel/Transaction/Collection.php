@@ -2,8 +2,8 @@
 
 namespace Ibertrand\BankSync\Model\ResourceModel\Transaction;
 
-use Ibertrand\BankSync\Model\Transaction as TransactionModel;
 use Ibertrand\BankSync\Model\ResourceModel\Transaction as TransactionResource;
+use Ibertrand\BankSync\Model\Transaction as TransactionModel;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection

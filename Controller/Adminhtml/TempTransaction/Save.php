@@ -17,10 +17,10 @@ class Save extends Action
     protected TempTransactionRepository $tempTransactionRepository;
 
     public function __construct(
-        Action\Context            $context,
+        Action\Context $context,
         TempTransactionRepository $tempTransactionRepository,
-        Booker                    $booker,
-        Logger                    $logger,
+        Booker $booker,
+        Logger $logger,
     ) {
         parent::__construct($context);
         $this->tempTransactionRepository = $tempTransactionRepository;

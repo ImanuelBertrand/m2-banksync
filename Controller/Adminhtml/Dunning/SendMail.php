@@ -19,9 +19,9 @@ class SendMail extends Action
     private Logger $logger;
 
     /**
-     * @param Context           $context
+     * @param Context $context
      * @param DunningRepository $dunningRepository
-     * @param Logger            $logger
+     * @param Logger $logger
      */
     public function __construct(Context $context, DunningRepository $dunningRepository, Logger $logger)
     {

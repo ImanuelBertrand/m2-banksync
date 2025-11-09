@@ -21,8 +21,8 @@ class MatchTransactions extends Command
     protected Config $config;
 
     public function __construct(
-        Matcher            $matcher,
-        Config             $config,
+        Matcher $matcher,
+        Config $config,
         ProgressBarFactory $progressBarFactory,
         ?string $name = null,
     ) {

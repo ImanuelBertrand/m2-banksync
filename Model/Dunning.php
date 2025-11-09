@@ -54,15 +54,15 @@ class Dunning extends AbstractModel
     protected Logger $logger;
 
     public function __construct(
-        Context           $context,
-        Registry          $registry,
-        DunningHelper     $dunningHelper,
+        Context $context,
+        Registry $registry,
+        DunningHelper $dunningHelper,
         InvoiceRepository $invoiceRepository,
-        TransportBuilder  $transportBuilder,
-        Logger            $logger,
+        TransportBuilder $transportBuilder,
+        Logger $logger,
         ?AbstractResource $resource = null,
         ?AbstractDb $resourceCollection = null,
-        array             $data = [],
+        array $data = [],
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->dunningHelper = $dunningHelper;

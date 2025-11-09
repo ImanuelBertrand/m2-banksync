@@ -35,22 +35,22 @@ class MassArchive extends Action
     protected Logger $logger;
 
     /**
-     * @param Context                  $context
-     * @param DateTime                 $dateTime
-     * @param FileFactory              $fileFactory
-     * @param Filter                   $filter
+     * @param Context $context
+     * @param DateTime $dateTime
+     * @param FileFactory $fileFactory
+     * @param Filter $filter
      * @param DunningCollectionFactory $collectionFactory
-     * @param DunningRepository        $dunningRepository
-     * @param Logger                   $logger
+     * @param DunningRepository $dunningRepository
+     * @param Logger $logger
      */
     public function __construct(
-        Context                  $context,
-        DateTime                 $dateTime,
-        FileFactory              $fileFactory,
-        Filter                   $filter,
+        Context $context,
+        DateTime $dateTime,
+        FileFactory $fileFactory,
+        Filter $filter,
         DunningCollectionFactory $collectionFactory,
-        DunningRepository        $dunningRepository,
-        Logger                   $logger,
+        DunningRepository $dunningRepository,
+        Logger $logger,
     ) {
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;

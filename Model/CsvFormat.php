@@ -74,22 +74,22 @@ class CsvFormat extends AbstractModel
     protected Logger $logger;
 
     /**
-     * @param Context               $context
-     * @param Registry              $registry
-     * @param Csv                   $csvProcessor
-     * @param Logger                $logger
+     * @param Context $context
+     * @param Registry $registry
+     * @param Csv $csvProcessor
+     * @param Logger $logger
      * @param AbstractResource|null $resource
-     * @param AbstractDb|null       $resourceCollection
-     * @param array                 $data
+     * @param AbstractDb|null $resourceCollection
+     * @param array $data
      */
     public function __construct(
-        Context          $context,
-        Registry         $registry,
-        Csv              $csvProcessor,
-        Logger           $logger,
+        Context $context,
+        Registry $registry,
+        Csv $csvProcessor,
+        Logger $logger,
         ?AbstractResource $resource = null,
         ?AbstractDb $resourceCollection = null,
-        array            $data = [],
+        array $data = [],
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->csvProcessor = $csvProcessor;
@@ -131,7 +131,7 @@ class CsvFormat extends AbstractModel
                 $csvNames = explode($this->getDelimiter(), $csvName);
                 $values = [];
                 foreach ($csvNames as $_csvName) {
-                    $values[] = $this-> getValue($row, trim($_csvName), $this->getData($name . '_regex'));
+                    $values[] = $this->getValue($row, trim($_csvName), $this->getData($name . '_regex'));
                 }
                 $rowValues[$name] = trim(implode(' / ', $values), ' /');
             }
@@ -151,7 +151,7 @@ class CsvFormat extends AbstractModel
     }
 
     /**
-     * @param array  $row
+     * @param array $row
      * @param string $column
      * @param string $regexPattern
      * @return string

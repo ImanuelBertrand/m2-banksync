@@ -12,11 +12,11 @@ class Actions extends Column
     protected UrlInterface $urlBuilder;
 
     public function __construct(
-        ContextInterface   $context,
+        ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        UrlInterface       $urlBuilder,
-        array              $components = [],
-        array              $data = []
+        UrlInterface $urlBuilder,
+        array $components = [],
+        array $data = [],
     ) {
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);

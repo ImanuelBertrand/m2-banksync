@@ -35,21 +35,21 @@ class Dunning extends AbstractPdf
     protected Emulation $appEmulation;
 
     public function __construct(
-        Data                  $paymentData,
-        StringUtils           $string,
-        ScopeConfigInterface  $scopeConfig,
-        Filesystem            $filesystem,
-        Config                $pdfConfig,
-        Factory               $pdfTotalFactory,
-        ItemsFactory          $pdfItemsFactory,
-        TimezoneInterface     $localeDate,
-        StateInterface        $inlineTranslation,
-        Renderer              $addressRenderer,
-        Emulation             $appEmulation,
+        Data $paymentData,
+        StringUtils $string,
+        ScopeConfigInterface $scopeConfig,
+        Filesystem $filesystem,
+        Config $pdfConfig,
+        Factory $pdfTotalFactory,
+        ItemsFactory $pdfItemsFactory,
+        TimezoneInterface $localeDate,
+        StateInterface $inlineTranslation,
+        Renderer $addressRenderer,
+        Emulation $appEmulation,
         StoreManagerInterface $storeManager,
-        array                 $data = [],
+        array $data = [],
         ?Database $fileStorageDatabase = null,
-        ?RtlTextHandler       $rtlTextHandler = null,
+        ?RtlTextHandler $rtlTextHandler = null,
     ) {
         $this->_storeManager = $storeManager;
         $this->appEmulation = $appEmulation;

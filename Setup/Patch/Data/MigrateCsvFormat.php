@@ -16,13 +16,13 @@ class MigrateCsvFormat implements DataPatchInterface, PatchRevertableInterface
     private ScopeConfigInterface $scopeConfig;
 
     /**
-     * @param CsvFormatFactory     $csvFormatFactory
-     * @param CsvFormatRepository  $csvFormatRepository
+     * @param CsvFormatFactory $csvFormatFactory
+     * @param CsvFormatRepository $csvFormatRepository
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        CsvFormatFactory     $csvFormatFactory,
-        CsvFormatRepository  $csvFormatRepository,
+        CsvFormatFactory $csvFormatFactory,
+        CsvFormatRepository $csvFormatRepository,
         ScopeConfigInterface $scopeConfig,
     ) {
         $this->csvFormatFactory = $csvFormatFactory;

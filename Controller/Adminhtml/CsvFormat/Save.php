@@ -18,10 +18,10 @@ class Save extends Action
     private CsvFormatFactory $csvFormatFactory;
 
     public function __construct(
-        Action\Context      $context,
+        Action\Context $context,
         CsvFormatRepository $csvFormatRepository,
-        CsvFormatFactory    $csvFormatFactory,
-        Logger              $logger,
+        CsvFormatFactory $csvFormatFactory,
+        Logger $logger,
     ) {
         parent::__construct($context);
         $this->csvFormatRepository = $csvFormatRepository;

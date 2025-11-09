@@ -23,12 +23,12 @@ class CreateDunnings
     protected Logger $logger;
 
     public function __construct(
-        Config               $config,
-        Dunning              $dunningHelper,
-        CollectionFactory    $invoiceCollectionFactory,
+        Config $config,
+        Dunning $dunningHelper,
+        CollectionFactory $invoiceCollectionFactory,
         DunningResourceModel $dunningResourceModel,
-        StoreManager         $storeManager,
-        Logger               $logger,
+        StoreManager $storeManager,
+        Logger $logger,
     ) {
         $this->config = $config;
         $this->dunningHelper = $dunningHelper;

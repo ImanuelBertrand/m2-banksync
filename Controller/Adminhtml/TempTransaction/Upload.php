@@ -16,8 +16,8 @@ class Upload extends Action
     protected WriteInterface $varDirectory;
 
     public function __construct(
-        Action\Context  $context,
-        Filesystem      $filesystem,
+        Action\Context $context,
+        Filesystem $filesystem,
         UploaderFactory $fileUploaderFactory,
     ) {
         $this->varDirectory = $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);

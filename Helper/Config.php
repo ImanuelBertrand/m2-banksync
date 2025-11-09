@@ -143,7 +143,7 @@ class Config extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return mixed
      */
     public function getDunningEmailTemplate(string $type, int $storeId): mixed
@@ -153,7 +153,7 @@ class Config extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return bool
      */
     public function isDunningEnabled(string $type, int $storeId): bool
@@ -163,7 +163,7 @@ class Config extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return int
      */
     public function getDunningTypeDelay(string $type, int $storeId): int
@@ -173,7 +173,7 @@ class Config extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return bool
      */
     public function isAttacheTypePdf(string $type, int $storeId): bool
@@ -183,7 +183,7 @@ class Config extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return mixed
      */
     public function getDunningTypeLabel(string $type, int $storeId): mixed
@@ -200,7 +200,7 @@ class Config extends AbstractHelper
         return $this->scopeConfig->getValue("banksync/dunnings/email_identity", 'store', $storeId);
     }
 
-    public function getInvoiceDueDays():int
+    public function getInvoiceDueDays(): int
     {
         return (int)$this->scopeConfig->getValue('banksync/dunnings/due_days');
     }

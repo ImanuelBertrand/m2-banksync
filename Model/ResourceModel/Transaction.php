@@ -13,7 +13,7 @@ class Transaction extends AbstractDb
     protected TransactionFactory $transactionFactory;
 
     public function __construct(
-        Context            $context,
+        Context $context,
         TransactionFactory $transactionFactory,
         $connectionName = null,
     ) {

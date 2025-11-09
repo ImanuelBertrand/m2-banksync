@@ -16,7 +16,7 @@ class Unarchive extends Action
     private DunningRepository $dunningRepository;
 
     public function __construct(
-        Context           $context,
+        Context $context,
         DunningRepository $dunningRepository,
     ) {
         parent::__construct($context);

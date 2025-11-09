@@ -15,9 +15,9 @@ class RunMatching
     protected Config $config;
 
     public function __construct(
-        Logger  $logger,
+        Logger $logger,
         Matcher $matcher,
-        Config  $config,
+        Config $config,
     ) {
         $this->logger = $logger;
         $this->matcher = $matcher;

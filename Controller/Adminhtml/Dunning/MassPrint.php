@@ -38,22 +38,22 @@ class MassPrint extends Action
     protected DunningRepository $dunningRepository;
 
     /**
-     * @param Context                  $context
-     * @param DateTime                 $dateTime
-     * @param FileFactory              $fileFactory
-     * @param Filter                   $filter
+     * @param Context $context
+     * @param DateTime $dateTime
+     * @param FileFactory $fileFactory
+     * @param Filter $filter
      * @param DunningCollectionFactory $collectionFactory
-     * @param PdfDunning               $pdfInvoice
-     * @param DunningRepository        $dunningRepository
+     * @param PdfDunning $pdfInvoice
+     * @param DunningRepository $dunningRepository
      */
     public function __construct(
-        Context                  $context,
-        DateTime                 $dateTime,
-        FileFactory              $fileFactory,
-        Filter                   $filter,
+        Context $context,
+        DateTime $dateTime,
+        FileFactory $fileFactory,
+        Filter $filter,
         DunningCollectionFactory $collectionFactory,
-        PdfDunning               $pdfInvoice,
-        DunningRepository        $dunningRepository,
+        PdfDunning $pdfInvoice,
+        DunningRepository $dunningRepository,
     ) {
         $this->fileFactory = $fileFactory;
         $this->dateTime = $dateTime;

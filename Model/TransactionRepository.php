@@ -15,14 +15,14 @@ class TransactionRepository extends AbstractRepository
     /**
      * TransactionRepository constructor.
      *
-     * @param TransactionFactory  $objectFactory
+     * @param TransactionFactory $objectFactory
      * @param ObjectResourceModel $objectResourceModel
-     * @param CollectionFactory   $collectionFactory
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
-        TransactionFactory  $objectFactory,
+        TransactionFactory $objectFactory,
         ObjectResourceModel $objectResourceModel,
-        CollectionFactory   $collectionFactory,
+        CollectionFactory $collectionFactory,
     ) {
         $this->objectFactory = $objectFactory;
         $this->objectResourceModel = $objectResourceModel;

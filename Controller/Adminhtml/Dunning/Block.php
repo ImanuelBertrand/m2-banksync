@@ -24,16 +24,16 @@ class Block extends Action
     private DunningRepository $dunningRepository;
 
     /**
-     * @param Context           $context
+     * @param Context $context
      * @param InvoiceRepository $invoiceRepository
-     * @param Logger            $logger
+     * @param Logger $logger
      * @param CollectionFactory $dunningCollectionFactory
      * @param DunningRepository $dunningRepository
      */
     public function __construct(
-        Context           $context,
+        Context $context,
         InvoiceRepository $invoiceRepository,
-        Logger            $logger,
+        Logger $logger,
         CollectionFactory $dunningCollectionFactory,
         DunningRepository $dunningRepository,
     ) {
@@ -45,7 +45,7 @@ class Block extends Action
     }
 
     /**
-     * @param int  $invoiceId
+     * @param int $invoiceId
      * @param bool $paidStatus
      * @return void
      * @throws CouldNotSaveException
@@ -65,7 +65,7 @@ class Block extends Action
     }
 
     /**
-     * @param int  $invoiceId
+     * @param int $invoiceId
      * @param bool $setBlocked
      * @return void
      * @throws InputException

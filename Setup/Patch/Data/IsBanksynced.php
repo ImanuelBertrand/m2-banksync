@@ -18,8 +18,8 @@ class IsBanksynced implements DataPatchInterface, PatchRevertableInterface
 
 
     public function __construct(
-        CollectionFactory             $transactionCollectionFactory,
-        InvoiceRepositoryInterface    $invoiceRepository,
+        CollectionFactory $transactionCollectionFactory,
+        InvoiceRepositoryInterface $invoiceRepository,
         CreditmemoRepositoryInterface $creditmemoRepository,
     ) {
         $this->transactionCollectionFactory = $transactionCollectionFactory;

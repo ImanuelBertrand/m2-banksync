@@ -14,7 +14,7 @@ class TempTransaction extends AbstractDb
     protected TempTransactionFactory $tempTransactionFactory;
 
     public function __construct(
-        Context                $context,
+        Context $context,
         TempTransactionFactory $tempTransactionFactory,
         $connectionName = null,
     ) {

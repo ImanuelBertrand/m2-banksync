@@ -52,10 +52,10 @@ class Matching extends AbstractHelper
     ];
 
     public function __construct(
-        Context          $context,
-        CustomerFactory  $customerFactory,
+        Context $context,
+        CustomerFactory $customerFactory,
         CustomerResource $customerResource,
-        Config           $config,
+        Config $config,
     ) {
         $this->customerFactory = $customerFactory;
         $this->customerResource = $customerResource;
@@ -77,8 +77,8 @@ class Matching extends AbstractHelper
     }
 
     /**
-     * @param array        $nameScores
-     * @param array        $halfScoreKeys
+     * @param array $nameScores
+     * @param array $halfScoreKeys
      * @param Address|null $address
      * @return void
      */
@@ -130,7 +130,7 @@ class Matching extends AbstractHelper
     }
 
     /**
-     * @param TempTransaction    $tempTransaction
+     * @param TempTransaction $tempTransaction
      * @param Invoice|Creditmemo $document
      * @return array
      */
@@ -200,7 +200,7 @@ class Matching extends AbstractHelper
     }
 
     /**
-     * @param TempTransaction    $tempTransaction
+     * @param TempTransaction $tempTransaction
      * @param Invoice|Creditmemo $document
      *
      * @return float
@@ -226,9 +226,9 @@ class Matching extends AbstractHelper
      * Adds a score to the matches array.
      * It makes sure the score is only added if it's greater than the current score for the key.
      *
-     * @param array  $matches The array of matches.
+     * @param array $matches The array of matches.
      * @param string $key The key of the match to add the score to.
-     * @param float  $score The score to be added.
+     * @param float $score The score to be added.
      * @return array The updated array of matches with the added score.
      */
     protected function addScore(array $matches, string $key, float $score): array
@@ -255,7 +255,7 @@ class Matching extends AbstractHelper
     }
 
     /**
-     * @param TempTransaction    $tempTransaction
+     * @param TempTransaction $tempTransaction
      * @param Invoice|Creditmemo $document
      * @return array
      * @throws Exception
@@ -328,7 +328,7 @@ class Matching extends AbstractHelper
      *
      * The weighted aggregation makes sure the resulting score is between 0 and 1.
      *
-     * @param TempTransaction    $tempTransaction
+     * @param TempTransaction $tempTransaction
      * @param Invoice|Creditmemo $document
      *
      * @return float
@@ -340,7 +340,7 @@ class Matching extends AbstractHelper
     }
 
     /**
-     * @param TempTransaction    $tempTransaction
+     * @param TempTransaction $tempTransaction
      * @param Invoice|Creditmemo $document
      *
      * @return float

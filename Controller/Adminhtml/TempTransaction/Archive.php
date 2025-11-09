@@ -18,8 +18,8 @@ class Archive extends Action
 
     public function __construct(
         Context $context,
-        Booker  $booker,
-        Logger  $logger,
+        Booker $booker,
+        Logger $logger,
     ) {
         $this->booker = $booker;
         $this->logger = $logger;

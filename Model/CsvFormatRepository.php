@@ -15,14 +15,14 @@ class CsvFormatRepository extends AbstractRepository
     /**
      * CsvFormatRepository constructor.
      *
-     * @param CsvFormatFactory    $objectFactory
+     * @param CsvFormatFactory $objectFactory
      * @param ObjectResourceModel $objectResourceModel
-     * @param CollectionFactory   $collectionFactory
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
-        CsvFormatFactory    $objectFactory,
+        CsvFormatFactory $objectFactory,
         ObjectResourceModel $objectResourceModel,
-        CollectionFactory   $collectionFactory,
+        CollectionFactory $collectionFactory,
     ) {
         $this->objectFactory = $objectFactory;
         $this->objectResourceModel = $objectResourceModel;

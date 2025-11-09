@@ -22,11 +22,11 @@ class Unbook extends Action
     protected CollectionFactory $collectionFactory;
 
     public function __construct(
-        Action\Context    $context,
-        Filter            $filter,
+        Action\Context $context,
+        Filter $filter,
         CollectionFactory $collectionFactory,
-        Booker            $booker,
-        Logger            $logger,
+        Booker $booker,
+        Logger $logger,
     ) {
         parent::__construct($context);
         $this->filter = $filter;

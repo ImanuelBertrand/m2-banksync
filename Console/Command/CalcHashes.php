@@ -30,13 +30,13 @@ class CalcHashes extends Command
     protected TransactionRepository $transactionRepository;
 
     public function __construct(
-        Hashes                           $hashes,
-        Config                           $config,
+        Hashes $hashes,
+        Config $config,
         TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TransactionCollectionFactory     $transactionCollectionFactory,
-        TempTransactionRepository        $tempTransactionRepository,
-        TransactionRepository            $transactionRepository,
-        ProgressBarFactory               $progressBarFactory,
+        TransactionCollectionFactory $transactionCollectionFactory,
+        TempTransactionRepository $tempTransactionRepository,
+        TransactionRepository $transactionRepository,
+        ProgressBarFactory $progressBarFactory,
         ?string $name = null,
     ) {
         parent::__construct($name);

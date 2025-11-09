@@ -18,14 +18,14 @@ class DunningBlockButton extends Container
     protected Registry $coreRegistry;
 
     /**
-     * @param Context  $context
+     * @param Context $context
      * @param Registry $registry
-     * @param array    $data
+     * @param array $data
      */
     public function __construct(
-        Context  $context,
+        Context $context,
         Registry $registry,
-        array    $data = [],
+        array $data = [],
     ) {
         $this->coreRegistry = $registry;
         parent::__construct($context, $data);

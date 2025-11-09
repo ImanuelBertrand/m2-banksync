@@ -21,10 +21,10 @@ class PrintDunning extends Action
     private Dunning $dunningPdf;
 
     public function __construct(
-        Context           $context,
+        Context $context,
         DunningRepository $dunningRepository,
-        FileFactory       $fileFactory,
-        Dunning           $dunningPdf,
+        FileFactory $fileFactory,
+        Dunning $dunningPdf,
     ) {
         parent::__construct($context);
         $this->dunningRepository = $dunningRepository;

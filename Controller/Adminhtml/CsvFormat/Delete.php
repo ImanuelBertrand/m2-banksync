@@ -16,9 +16,9 @@ class Delete extends Action
     private CsvFormatRepository $csvFormatRepository;
 
     public function __construct(
-        Action\Context      $context,
+        Action\Context $context,
         CsvFormatRepository $csvFormatRepository,
-        Logger              $logger,
+        Logger $logger,
     ) {
         parent::__construct($context);
         $this->csvFormatRepository = $csvFormatRepository;

@@ -16,13 +16,13 @@ class Price extends \Magento\Sales\Ui\Component\Listing\Column\Price
     protected Currency $currency;
 
     public function __construct(
-        ContextInterface       $context,
-        UiComponentFactory     $uiComponentFactory,
+        ContextInterface $context,
+        UiComponentFactory $uiComponentFactory,
         PriceCurrencyInterface $priceFormatter,
-        StoreManagerInterface  $storeManager,
-        Currency               $currency,
-        array                  $components = [],
-        array                  $data = [],
+        StoreManagerInterface $storeManager,
+        Currency $currency,
+        array $components = [],
+        array $data = [],
     ) {
         parent::__construct(
             $context,

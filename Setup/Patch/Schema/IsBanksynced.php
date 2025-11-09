@@ -15,7 +15,7 @@ class IsBanksynced implements DataPatchInterface, PatchRevertableInterface
 
     public function __construct(
         ModuleDataSetupInterface $moduleDataSetup,
-        SalesSetup               $salesSetup,
+        SalesSetup $salesSetup,
     ) {
         $this->moduleDataSetup = $moduleDataSetup;
         $this->salesSetup = $salesSetup;

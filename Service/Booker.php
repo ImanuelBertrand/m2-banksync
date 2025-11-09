@@ -49,21 +49,21 @@ class Booker
     protected DunningRepository $dunningRepository;
 
     public function __construct(
-        TempTransactionResource          $tempTransactionResource,
-        TransactionResource              $transactionResource,
-        TempTransactionRepository        $tempTransactionRepository,
-        TransactionRepository            $transactionRepository,
+        TempTransactionResource $tempTransactionResource,
+        TransactionResource $transactionResource,
+        TempTransactionRepository $tempTransactionRepository,
+        TransactionRepository $transactionRepository,
         TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TransactionCollectionFactory     $transactionCollectionFactory,
+        TransactionCollectionFactory $transactionCollectionFactory,
         MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
-        MatchConfidenceRepository        $matchConfidenceRepository,
-        InvoiceRepository                $invoiceRepository,
-        CreditmemoRepository             $creditmemoRepository,
-        CollectionFactory                $dunningCollectionFactory,
-        DunningRepository                $dunningRepository,
-        Config                           $config,
-        Matching                         $matching,
-        Logger                           $logger,
+        MatchConfidenceRepository $matchConfidenceRepository,
+        InvoiceRepository $invoiceRepository,
+        CreditmemoRepository $creditmemoRepository,
+        CollectionFactory $dunningCollectionFactory,
+        DunningRepository $dunningRepository,
+        Config $config,
+        Matching $matching,
+        Logger $logger,
     ) {
         $this->tempTransactionResource = $tempTransactionResource;
         $this->transactionResource = $transactionResource;
@@ -100,7 +100,7 @@ class Booker
 
     /**
      * @param Invoice|Creditmemo $document
-     * @param bool               $isBanksynced
+     * @param bool $isBanksynced
      * @return void
      * @throws CouldNotSaveException
      */
@@ -169,9 +169,9 @@ class Booker
     }
 
     /**
-     * @param TempTransaction|int    $tempTransaction
+     * @param TempTransaction|int $tempTransaction
      * @param Invoice|Creditmemo|int $document
-     * @param bool                   $partial
+     * @param bool $partial
      *
      * @return Transaction
      *
@@ -181,9 +181,9 @@ class Booker
      * @throws CouldNotSaveException
      */
     public function book(
-        TempTransaction|int    $tempTransaction,
+        TempTransaction|int $tempTransaction,
         Invoice|Creditmemo|int $document,
-        bool                   $partial = false,
+        bool $partial = false,
     ): Transaction {
         $db = $this->tempTransactionResource->getConnection();
         $db->beginTransaction();

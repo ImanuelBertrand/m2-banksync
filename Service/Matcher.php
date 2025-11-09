@@ -47,17 +47,17 @@ class Matcher
 
     public function __construct(
         TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TempTransactionResource          $transactionResource,
-        Logger                           $logger,
-        InvoiceCollectionFactory         $invoiceCollectionFactory,
-        CreditmemoCollectionFactory      $creditmemoCollectionFactory,
-        MatchConfidenceFactory           $matchConfidenceFactory,
-        MatchConfidenceRepository        $matchConfidenceRepository,
+        TempTransactionResource $transactionResource,
+        Logger $logger,
+        InvoiceCollectionFactory $invoiceCollectionFactory,
+        CreditmemoCollectionFactory $creditmemoCollectionFactory,
+        MatchConfidenceFactory $matchConfidenceFactory,
+        MatchConfidenceRepository $matchConfidenceRepository,
         MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
-        CustomerCollectionFactory        $customerCollectionFactory,
-        OrderCollectionFactory           $orderCollectionFactory,
-        Config                           $config,
-        Matching                         $matching,
+        CustomerCollectionFactory $customerCollectionFactory,
+        OrderCollectionFactory $orderCollectionFactory,
+        Config $config,
+        Matching $matching,
     ) {
         $this->tempTransactionCollectionFactory = $tempTransactionCollectionFactory;
         $this->tempTransactionResource = $transactionResource;
@@ -414,7 +414,7 @@ class Matcher
 
     /**
      * @param TempTransaction $tempTransaction
-     * @param array           $documentIds
+     * @param array $documentIds
      *
      * @return void
      * @throws CouldNotSaveException

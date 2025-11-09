@@ -26,13 +26,13 @@ class MassBook extends Action
     protected Config $config;
 
     public function __construct(
-        Action\Context    $context,
-        Filter            $filter,
+        Action\Context $context,
+        Filter $filter,
         CollectionFactory $collectionFactory,
-        Matcher           $matcher,
-        Booker            $booker,
-        Logger            $logger,
-        Config            $config,
+        Matcher $matcher,
+        Booker $booker,
+        Logger $logger,
+        Config $config,
     ) {
         parent::__construct($context);
         $this->filter = $filter;

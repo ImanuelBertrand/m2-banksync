@@ -40,23 +40,23 @@ class TempTransactionSearchDocumentListing extends AbstractDataProvider
     protected Matching $matching;
 
     /**
-     * @param string                      $name
-     * @param string                      $primaryFieldName
-     * @param string                      $requestFieldName
-     * @param UrlInterface                $urlBuilder
-     * @param InvoiceCollectionFactory    $invoiceCollectionFactory
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
+     * @param UrlInterface $urlBuilder
+     * @param InvoiceCollectionFactory $invoiceCollectionFactory
      * @param CreditmemoCollectionFactory $creditmemoCollectionFactory
-     * @param TempTransactionRepository   $tempTransactionRepository
-     * @param OrderCollectionFactory      $orderCollectionFactory
-     * @param CustomerFactory             $customerFactory
-     * @param CustomerResource            $customerResource
-     * @param Http                        $request
-     * @param CustomerCollectionFactory   $customerCollectionFactory
-     * @param PriceHelper                 $priceHelper
-     * @param Display                     $displayHelper
-     * @param Matching                    $matching
-     * @param array                       $meta
-     * @param array                       $data
+     * @param TempTransactionRepository $tempTransactionRepository
+     * @param OrderCollectionFactory $orderCollectionFactory
+     * @param CustomerFactory $customerFactory
+     * @param CustomerResource $customerResource
+     * @param Http $request
+     * @param CustomerCollectionFactory $customerCollectionFactory
+     * @param PriceHelper $priceHelper
+     * @param Display $displayHelper
+     * @param Matching $matching
+     * @param array $meta
+     * @param array $data
      *
      * @throws LocalizedException
      * @throws NoSuchEntityException

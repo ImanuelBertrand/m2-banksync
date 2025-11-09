@@ -25,13 +25,13 @@ class Dunning extends AbstractHelper
     private InvoiceCollectionFactory $invoiceCollectionFactory;
 
     public function __construct(
-        Context                    $context,
-        Config                     $config,
-        DunningCollectionFactory   $dunningCollectionFactory,
-        DunningFactory             $dunningFactory,
+        Context $context,
+        Config $config,
+        DunningCollectionFactory $dunningCollectionFactory,
+        DunningFactory $dunningFactory,
         InvoiceRepositoryInterface $invoiceRepository,
-        InvoiceCollectionFactory   $invoiceCollectionFactory,
-        Logger                     $logger,
+        InvoiceCollectionFactory $invoiceCollectionFactory,
+        Logger $logger,
     ) {
         $this->config = $config;
         $this->dunningCollectionFactory = $dunningCollectionFactory;
@@ -90,7 +90,7 @@ class Dunning extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return string
      */
     public function getTypeLabel(string $type, int $storeId): string
@@ -100,7 +100,7 @@ class Dunning extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return bool
      */
     public function isTypeEnabled(string $type, int $storeId): bool
@@ -110,7 +110,7 @@ class Dunning extends AbstractHelper
 
     /**
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return bool
      */
     public function typeUsesPdf(string $type, int $storeId): bool
@@ -122,7 +122,7 @@ class Dunning extends AbstractHelper
      * Retrieves the delay in days for a given dunning type.
      *
      * @param string $type
-     * @param int    $storeId
+     * @param int $storeId
      * @return int Days
      */
     public function getTypeDelay(string $type, int $storeId): int
@@ -177,7 +177,7 @@ class Dunning extends AbstractHelper
 
     /**
      * @param Invoice $invoice
-     * @param string  $type
+     * @param string $type
      * @return DunningModel
      * @throws Exception
      */
@@ -219,7 +219,7 @@ class Dunning extends AbstractHelper
     }
 
     /**
-     * @param string   $getDunningType
+     * @param string $getDunningType
      * @param int|null $storeId
      * @return string
      */

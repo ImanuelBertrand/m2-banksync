@@ -23,11 +23,11 @@ class Delete extends Action
     protected CollectionFactory $collectionFactory;
 
     public function __construct(
-        Action\Context            $context,
+        Action\Context $context,
         TempTransactionRepository $tempTransactionRepository,
-        Filter                    $filter,
-        CollectionFactory         $collectionFactory,
-        Logger                    $logger,
+        Filter $filter,
+        CollectionFactory $collectionFactory,
+        Logger $logger,
     ) {
         parent::__construct($context);
         $this->tempTransactionRepository = $tempTransactionRepository;

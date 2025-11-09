@@ -18,9 +18,9 @@ class Display extends AbstractHelper
     private Matching $matching;
 
     public function __construct(
-        Context      $context,
+        Context $context,
         UrlInterface $urlBuilder,
-        Matching     $matching,
+        Matching $matching,
     ) {
         parent::__construct($context);
         $this->urlBuilder = $urlBuilder;
@@ -78,7 +78,7 @@ class Display extends AbstractHelper
 
     /**
      * @param DataObject $object
-     * @param array      $matchedTexts
+     * @param array $matchedTexts
      * @return string
      */
     public function getObjectLink(DataObject $object, array $matchedTexts = []): string

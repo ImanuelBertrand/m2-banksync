@@ -95,7 +95,7 @@ class TransactionListing extends AbstractDataProvider
                 $hasDocument = !empty($item['document_id']);
                 if ($hasDocument) {
                     $document = (
-                        $item['document_type'] == 'invoice'
+                    $item['document_type'] == 'invoice'
                         ? $this->invoiceRepository
                         : $this->creditmemoRepository
                     )->get($item['document_id']);
@@ -145,7 +145,7 @@ class TransactionListing extends AbstractDataProvider
 
     /**
      * @param Filter $filter
-     * @param int[]  $orderIds
+     * @param int[] $orderIds
      */
     protected function setFilterByOrderIds(Filter $filter, array $orderIds): void
     {

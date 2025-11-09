@@ -38,18 +38,18 @@ class ImportFile extends Action
     protected Hashes $hashes;
 
     public function __construct(
-        Action\Context                   $context,
-        Csv                              $csvProcessor,
-        TempTransactionFactory           $tempTransactionFactory,
-        TempTransactionResource          $tempTransactionResource,
-        TempTransactionRepository        $tempTransactionRepository,
+        Action\Context $context,
+        Csv $csvProcessor,
+        TempTransactionFactory $tempTransactionFactory,
+        TempTransactionResource $tempTransactionResource,
+        TempTransactionRepository $tempTransactionRepository,
         TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TransactionCollectionFactory     $transactionCollectionFactory,
-        CsvFormatRepository              $csvFormatRepository,
-        Logger                           $logger,
-        Matcher                          $matcher,
-        Config                           $config,
-        Hashes                           $hashes,
+        TransactionCollectionFactory $transactionCollectionFactory,
+        CsvFormatRepository $csvFormatRepository,
+        Logger $logger,
+        Matcher $matcher,
+        Config $config,
+        Hashes $hashes,
     ) {
         parent::__construct($context);
         $this->csvProcessor = $csvProcessor;
@@ -121,14 +121,16 @@ class ImportFile extends Action
                     continue;
                 }
 
-                $transaction = $this->tempTransactionFactory->create(['data' => [
-                    'payer_name' => $csvRow['payer_name'],
-                    'purpose' => $csvRow['purpose'],
-                    'amount' => $csvRow['amount'],
-                    'transaction_date' => $csvRow['transaction_date'],
-                    'csv_source' => $csvFormat->getName(),
-                    'dirty' => 1,
-                ]]);
+                $transaction = $this->tempTransactionFactory->create([
+                    'data' => [
+                        'payer_name' => $csvRow['payer_name'],
+                        'purpose' => $csvRow['purpose'],
+                        'amount' => $csvRow['amount'],
+                        'transaction_date' => $csvRow['transaction_date'],
+                        'csv_source' => $csvFormat->getName(),
+                        'dirty' => 1,
+                    ],
+                ]);
                 $transaction->setHash($this->hashes->calculateHash($transaction));
                 $transaction->setHasDataChanges(true);
                 $newTransactions[$transaction->getHash()] = $transaction;
