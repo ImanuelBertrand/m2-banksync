@@ -22,7 +22,10 @@ use Magento\Store\Model\App\Emulation;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Zend_Pdf;
+use Zend_Pdf_Color_GrayScale;
+use Zend_Pdf_Color_Rgb;
 use Zend_Pdf_Exception;
+use Zend_Pdf_Page;
 use Zend_Pdf_Style;
 
 class Dunning extends AbstractPdf
@@ -45,7 +48,7 @@ class Dunning extends AbstractPdf
         Emulation             $appEmulation,
         StoreManagerInterface $storeManager,
         array                 $data = [],
-        Database              $fileStorageDatabase = null,
+        ?Database $fileStorageDatabase = null,
         ?RtlTextHandler       $rtlTextHandler = null,
     ) {
         $this->_storeManager = $storeManager;
@@ -70,19 +73,19 @@ class Dunning extends AbstractPdf
     /**
      * Draw header for item table
      *
-     * @param \Zend_Pdf_Page $page
+     * @param Zend_Pdf_Page $page
      * @return void
      */
-    protected function _drawHeader(\Zend_Pdf_Page $page)
+    protected function _drawHeader(Zend_Pdf_Page $page)
     {
         /* Add table head */
         $this->_setFontRegular($page, 10);
-        $page->setFillColor(new \Zend_Pdf_Color_Rgb(0.93, 0.92, 0.92));
-        $page->setLineColor(new \Zend_Pdf_Color_GrayScale(0.5));
+        $page->setFillColor(new Zend_Pdf_Color_Rgb(0.93, 0.92, 0.92));
+        $page->setLineColor(new Zend_Pdf_Color_GrayScale(0.5));
         $page->setLineWidth(0.5);
         $page->drawRectangle(25, $this->y, 570, $this->y - 15);
         $this->y -= 10;
-        $page->setFillColor(new \Zend_Pdf_Color_Rgb(0, 0, 0));
+        $page->setFillColor(new Zend_Pdf_Color_Rgb(0, 0, 0));
 
         //columns headers
         $lines[0][] = ['text' => __('Products'), 'feed' => 35];
@@ -100,7 +103,7 @@ class Dunning extends AbstractPdf
         $lineBlock = ['lines' => $lines, 'height' => 5];
 
         $this->drawLineBlocks($page, [$lineBlock], ['table_header' => true]);
-        $page->setFillColor(new \Zend_Pdf_Color_GrayScale(0));
+        $page->setFillColor(new Zend_Pdf_Color_GrayScale(0));
         $this->y -= 20;
     }
 

@@ -354,7 +354,7 @@ class Booker
      * @return int[][]
      * @throws CouldNotSaveException
      */
-    public function autoBook(array $ids = null, $minThreshold = null): array
+    public function autoBook(?array $ids = null, $minThreshold = null): array
     {
         $result = [
             'success' => [],

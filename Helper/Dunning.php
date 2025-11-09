@@ -223,7 +223,7 @@ class Dunning extends AbstractHelper
      * @param int|null $storeId
      * @return string
      */
-    public function getEmailTemplate(string $getDunningType, int $storeId = null): string
+    public function getEmailTemplate(string $getDunningType, ?int $storeId = null): string
     {
         return $this->config->getDunningEmailTemplate($getDunningType, $storeId);
     }

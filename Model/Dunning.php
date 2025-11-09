@@ -60,8 +60,8 @@ class Dunning extends AbstractModel
         InvoiceRepository $invoiceRepository,
         TransportBuilder  $transportBuilder,
         Logger            $logger,
-        AbstractResource  $resource = null,
-        AbstractDb        $resourceCollection = null,
+        ?AbstractResource $resource = null,
+        ?AbstractDb $resourceCollection = null,
         array             $data = [],
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
