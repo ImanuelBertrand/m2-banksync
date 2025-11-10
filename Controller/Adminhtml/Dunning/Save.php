@@ -13,7 +13,6 @@ use Magento\Framework\Controller\ResultFactory;
 class Save extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
-    private DunningRepository $dunningRepository;
 
     public function __construct(
         Context $context,

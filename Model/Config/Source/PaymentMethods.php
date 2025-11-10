@@ -8,17 +8,9 @@ use Magento\Payment\Model\Config;
 
 class PaymentMethods implements OptionSourceInterface
 {
-    protected Config $paymentModelConfig;
-
-    /**
-     * PaymentMethods constructor.
-     *
-     * @param Config $paymentModelConfig
-     */
     public function __construct(
         protected readonly Config $paymentModelConfig,
     ) {
-        $this->paymentModelConfig = $paymentModelConfig;
     }
 
     /**

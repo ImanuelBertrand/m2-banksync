@@ -2,6 +2,7 @@
 
 namespace Ibertrand\BankSync\Ui\Component\Listing\Column\CsvFormat;
 
+use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;

@@ -16,9 +16,6 @@ use Magento\Framework\Controller\ResultFactory;
 class PrintDunning extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
-    private DunningRepository $dunningRepository;
-    private FileFactory $fileFactory;
-    private Dunning $dunningPdf;
 
     public function __construct(
         Context $context,

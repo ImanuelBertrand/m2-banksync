@@ -2,6 +2,7 @@
 
 namespace Ibertrand\BankSync\Model\Config\Source;
 
+use Ibertrand\BankSync\Model\ResourceModel\CsvFormat\CollectionFactory;
 use Magento\Framework\Data\OptionSourceInterface;
 
 class CsvFormats implements OptionSourceInterface
@@ -9,7 +10,7 @@ class CsvFormats implements OptionSourceInterface
     private array $data;
 
     public function __construct(
-        protected readonlyCollectionFactory $collectionFactory,
+        protected readonly CollectionFactory $collectionFactory,
     ) {
     }
 
