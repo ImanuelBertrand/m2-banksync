@@ -22,14 +22,11 @@ class PrintDunning extends Action
 
     public function __construct(
         Context $context,
-        DunningRepository $dunningRepository,
-        FileFactory $fileFactory,
-        Dunning $dunningPdf,
+        protected readonly DunningRepository $dunningRepository,
+        protected readonly FileFactory $fileFactory,
+        protected readonly Dunning $dunningPdf,
     ) {
         parent::__construct($context);
-        $this->dunningRepository = $dunningRepository;
-        $this->fileFactory = $fileFactory;
-        $this->dunningPdf = $dunningPdf;
     }
 
     /**

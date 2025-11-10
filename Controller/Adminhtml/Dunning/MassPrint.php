@@ -16,51 +16,23 @@ use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Ui\Component\MassAction\Filter;
 use Zend_Pdf_Exception;
 
 class MassPrint extends Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
 
     protected string $redirectUrl = 'banksync/dunning/index';
-    protected FileFactory $fileFactory;
-    protected DateTime $dateTime;
-    protected Filter $filter;
-    protected DunningCollectionFactory $collectionFactory;
-    protected PdfDunning $pdfDunning;
-    protected DunningRepository $dunningRepository;
 
-    /**
-     * @param Context $context
-     * @param DateTime $dateTime
-     * @param FileFactory $fileFactory
-     * @param Filter $filter
-     * @param DunningCollectionFactory $collectionFactory
-     * @param PdfDunning $pdfInvoice
-     * @param DunningRepository $dunningRepository
-     */
     public function __construct(
         Context $context,
-        DateTime $dateTime,
-        FileFactory $fileFactory,
-        Filter $filter,
-        DunningCollectionFactory $collectionFactory,
-        PdfDunning $pdfInvoice,
-        DunningRepository $dunningRepository,
+        protected readonly FileFactory $fileFactory,
+        protected readonly Filter $filter,
+        protected readonly DunningCollectionFactory $collectionFactory,
+        protected readonly PdfDunning $pdfDunning,
+        protected readonly DunningRepository $dunningRepository,
     ) {
-        $this->fileFactory = $fileFactory;
-        $this->dateTime = $dateTime;
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
-        $this->pdfDunning = $pdfInvoice;
-        $this->dunningRepository = $dunningRepository;
         parent::__construct($context);
     }
 

@@ -11,53 +11,23 @@ use Ibertrand\BankSync\Model\ResourceModel\Dunning\CollectionFactory as DunningC
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
-use Magento\Framework\App\Response\Http\FileFactory;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Ui\Component\MassAction\Filter;
 
 class MassArchive extends Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
 
     protected string $redirectUrl = 'banksync/dunning/index';
-    protected FileFactory $fileFactory;
-    protected DateTime $dateTime;
-    protected Filter $filter;
-    protected DunningCollectionFactory $collectionFactory;
-    protected DunningRepository $dunningRepository;
-    protected Logger $logger;
 
-    /**
-     * @param Context $context
-     * @param DateTime $dateTime
-     * @param FileFactory $fileFactory
-     * @param Filter $filter
-     * @param DunningCollectionFactory $collectionFactory
-     * @param DunningRepository $dunningRepository
-     * @param Logger $logger
-     */
     public function __construct(
         Context $context,
-        DateTime $dateTime,
-        FileFactory $fileFactory,
-        Filter $filter,
-        DunningCollectionFactory $collectionFactory,
-        DunningRepository $dunningRepository,
-        Logger $logger,
+        protected readonly Filter $filter,
+        protected readonly DunningCollectionFactory $collectionFactory,
+        protected readonly DunningRepository $dunningRepository,
+        protected readonly Logger $logger,
     ) {
-        $this->fileFactory = $fileFactory;
-        $this->dateTime = $dateTime;
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
-        $this->dunningRepository = $dunningRepository;
-        $this->logger = $logger;
         parent::__construct($context);
     }
 

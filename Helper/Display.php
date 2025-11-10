@@ -14,17 +14,12 @@ use Magento\Sales\Model\Order\Invoice;
 class Display extends AbstractHelper
 {
 
-    private UrlInterface $urlBuilder;
-    private Matching $matching;
-
     public function __construct(
         Context $context,
-        UrlInterface $urlBuilder,
-        Matching $matching,
+        protected readonly UrlInterface $urlBuilder,
+        protected readonly Matching $matching,
     ) {
         parent::__construct($context);
-        $this->urlBuilder = $urlBuilder;
-        $this->matching = $matching;
     }
 
     /**
@@ -74,7 +69,6 @@ class Display extends AbstractHelper
 
         return '';
     }
-
 
     /**
      * @param DataObject $object

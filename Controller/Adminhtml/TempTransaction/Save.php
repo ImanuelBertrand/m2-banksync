@@ -14,20 +14,13 @@ class Save extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_temp_transactions';
 
-    protected Logger $logger;
-    protected Booker $booker;
-    protected TempTransactionRepository $tempTransactionRepository;
-
     public function __construct(
         Action\Context $context,
-        TempTransactionRepository $tempTransactionRepository,
-        Booker $booker,
-        Logger $logger,
+        protected readonly TempTransactionRepository $tempTransactionRepository,
+        protected readonly Booker $booker,
+        protected readonly Logger $logger,
     ) {
         parent::__construct($context);
-        $this->tempTransactionRepository = $tempTransactionRepository;
-        $this->booker = $booker;
-        $this->logger = $logger;
     }
 
     /**

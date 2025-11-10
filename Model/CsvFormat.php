@@ -70,30 +70,17 @@ class CsvFormat extends AbstractModel
      * @var string
      */
     protected $_eventPrefix = 'banksync_csv_format_model';
-    protected Csv $csvProcessor;
-    protected Logger $logger;
 
-    /**
-     * @param Context $context
-     * @param Registry $registry
-     * @param Csv $csvProcessor
-     * @param Logger $logger
-     * @param AbstractResource|null $resource
-     * @param AbstractDb|null $resourceCollection
-     * @param array $data
-     */
     public function __construct(
         Context $context,
         Registry $registry,
-        Csv $csvProcessor,
-        Logger $logger,
+        protected readonly Csv $csvProcessor,
+        protected readonly Logger $logger,
         ?AbstractResource $resource = null,
         ?AbstractDb $resourceCollection = null,
         array $data = [],
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
-        $this->csvProcessor = $csvProcessor;
-        $this->logger = $logger;
     }
 
     /**

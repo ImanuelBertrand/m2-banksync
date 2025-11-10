@@ -20,16 +20,6 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DunningListing extends AbstractDataProvider
 {
-    protected UrlInterface $urlBuilder;
-    protected Config $config;
-    protected Display $display;
-    protected InvoiceRepository $invoiceRepository;
-    protected Logger $logger;
-    protected InvoiceCollectionFactory $invoiceCollectionFactory;
-    protected OrderCollectionFactory $orderCollectionFactory;
-    protected CustomerCollectionFactory $customerCollectionFactory;
-    protected OrderAddressCollectionFactory $orderAddressCollectionFactory;
-    protected CollectionFactory $dunningCollectionFactory;
     const JOIN_CONFIG = [
         'invoice' => [
             'table_name' => 'sales_invoice',
@@ -48,41 +38,28 @@ class DunningListing extends AbstractDataProvider
         'invoice_increment_id' => ['invoice'],
     ];
     protected array $joinedTables = [];
-    protected PriceHelper $priceHelper;
 
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
-        Config $config,
-        Display $display,
-        UrlInterface $urlBuilder,
-        InvoiceRepository $invoiceRepository,
-        InvoiceCollectionFactory $invoiceCollectionFactory,
-        OrderCollectionFactory $orderCollectionFactory,
-        CustomerCollectionFactory $customerCollectionFactory,
-        OrderAddressCollectionFactory $orderAddressCollectionFactory,
-        CollectionFactory $dunningCollectionFactory,
-        Logger $logger,
-        PriceHelper $priceHelper,
+        protected readonly Config $config,
+        protected readonly Display $display,
+        protected readonly UrlInterface $urlBuilder,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly InvoiceCollectionFactory $invoiceCollectionFactory,
+        protected readonly OrderCollectionFactory $orderCollectionFactory,
+        protected readonly CustomerCollectionFactory $customerCollectionFactory,
+        protected readonly OrderAddressCollectionFactory $orderAddressCollectionFactory,
+        protected readonly CollectionFactory $dunningCollectionFactory,
+        protected readonly Logger $logger,
+        protected readonly PriceHelper $priceHelper,
         array $meta = [],
         array $data = [],
     ) {
         $this->collection = $collectionFactory->create();
 
-        $this->config = $config;
-        $this->display = $display;
-        $this->urlBuilder = $urlBuilder;
-        $this->invoiceRepository = $invoiceRepository;
-        $this->invoiceCollectionFactory = $invoiceCollectionFactory;
-        $this->orderCollectionFactory = $orderCollectionFactory;
-        $this->customerCollectionFactory = $customerCollectionFactory;
-        $this->orderAddressCollectionFactory = $orderAddressCollectionFactory;
-        $this->dunningCollectionFactory = $dunningCollectionFactory;
-        $this->priceHelper = $priceHelper;
-
-        $this->logger = $logger;
         parent::__construct(
             $name,
             $primaryFieldName,

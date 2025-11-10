@@ -18,23 +18,15 @@ use Magento\Ui\Component\MassAction\Filter;
 class Delete extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
-    protected Logger $logger;
-    protected TempTransactionRepository $tempTransactionRepository;
-    protected Filter $filter;
-    protected CollectionFactory $collectionFactory;
 
     public function __construct(
         Action\Context $context,
-        TempTransactionRepository $tempTransactionRepository,
-        Filter $filter,
-        CollectionFactory $collectionFactory,
-        Logger $logger,
+        protected readonly TempTransactionRepository $tempTransactionRepository,
+        protected readonly Filter $filter,
+        protected readonly CollectionFactory $collectionFactory,
+        protected readonly Logger $logger,
     ) {
         parent::__construct($context);
-        $this->tempTransactionRepository = $tempTransactionRepository;
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
-        $this->logger = $logger;
     }
 
     /**

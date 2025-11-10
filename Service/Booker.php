@@ -32,54 +32,24 @@ use Magento\Sales\Model\Order\InvoiceRepository;
 
 class Booker
 {
-    protected TransactionResource $transactionResource;
-    protected TempTransactionResource $tempTransactionResource;
-    protected TempTransactionRepository $tempTransactionRepository;
-    protected InvoiceRepository $invoiceRepository;
-    protected CreditmemoRepository $creditmemoRepository;
-    protected TransactionRepository $transactionRepository;
-    protected TempTransactionCollectionFactory $tempTransactionCollectionFactory;
-    protected TransactionCollectionFactory $transactionCollectionFactory;
-    protected MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory;
-    protected MatchConfidenceRepository $matchConfidenceRepository;
-    protected Config $config;
-    protected Matching $matching;
-    protected Logger $logger;
-    protected CollectionFactory $dunningCollectionFactory;
-    protected DunningRepository $dunningRepository;
 
     public function __construct(
-        TempTransactionResource $tempTransactionResource,
-        TransactionResource $transactionResource,
-        TempTransactionRepository $tempTransactionRepository,
-        TransactionRepository $transactionRepository,
-        TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TransactionCollectionFactory $transactionCollectionFactory,
-        MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
-        MatchConfidenceRepository $matchConfidenceRepository,
-        InvoiceRepository $invoiceRepository,
-        CreditmemoRepository $creditmemoRepository,
-        CollectionFactory $dunningCollectionFactory,
-        DunningRepository $dunningRepository,
-        Config $config,
-        Matching $matching,
-        Logger $logger,
+        protected readonly TempTransactionResource $tempTransactionResource,
+        protected readonly TransactionResource $transactionResource,
+        protected readonly TempTransactionRepository $tempTransactionRepository,
+        protected readonly TransactionRepository $transactionRepository,
+        protected readonly TempTransactionCollectionFactory $tempTransactionCollectionFactory,
+        protected readonly TransactionCollectionFactory $transactionCollectionFactory,
+        protected readonly MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
+        protected readonly MatchConfidenceRepository $matchConfidenceRepository,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly CreditmemoRepository $creditmemoRepository,
+        protected readonly CollectionFactory $dunningCollectionFactory,
+        protected readonly DunningRepository $dunningRepository,
+        protected readonly Config $config,
+        protected readonly Matching $matching,
+        protected readonly Logger $logger,
     ) {
-        $this->tempTransactionResource = $tempTransactionResource;
-        $this->transactionResource = $transactionResource;
-        $this->tempTransactionRepository = $tempTransactionRepository;
-        $this->transactionRepository = $transactionRepository;
-        $this->tempTransactionCollectionFactory = $tempTransactionCollectionFactory;
-        $this->transactionCollectionFactory = $transactionCollectionFactory;
-        $this->matchConfidenceCollectionFactory = $matchConfidenceCollectionFactory;
-        $this->matchConfidenceRepository = $matchConfidenceRepository;
-        $this->invoiceRepository = $invoiceRepository;
-        $this->creditmemoRepository = $creditmemoRepository;
-        $this->dunningCollectionFactory = $dunningCollectionFactory;
-        $this->dunningRepository = $dunningRepository;
-        $this->config = $config;
-        $this->matching = $matching;
-        $this->logger = $logger;
     }
 
     /**
@@ -301,7 +271,6 @@ class Booker
             if ($transaction->getPartialHash()) {
                 $tempTransactionCollection = $this->tempTransactionCollectionFactory->create()
                     ->addFieldToFilter('partial_hash', $transaction->getPartialHash());
-
 
                 if ($tempTransactionCollection->getSize() > 0) {
                     /** @var TempTransaction $tempTransaction */

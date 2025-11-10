@@ -17,28 +17,15 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory as Invoice
 class Dunning extends AbstractHelper
 {
 
-    protected Config $config;
-    protected DunningCollectionFactory $dunningCollectionFactory;
-    protected DunningFactory $dunningFactory;
-    protected InvoiceRepositoryInterface $invoiceRepository;
-    private Logger $logger;
-    private InvoiceCollectionFactory $invoiceCollectionFactory;
-
     public function __construct(
         Context $context,
-        Config $config,
-        DunningCollectionFactory $dunningCollectionFactory,
-        DunningFactory $dunningFactory,
-        InvoiceRepositoryInterface $invoiceRepository,
-        InvoiceCollectionFactory $invoiceCollectionFactory,
-        Logger $logger,
+        protected readonly Config $config,
+        protected readonly DunningCollectionFactory $dunningCollectionFactory,
+        protected readonly DunningFactory $dunningFactory,
+        protected readonly InvoiceRepositoryInterface $invoiceRepository,
+        protected readonly InvoiceCollectionFactory $invoiceCollectionFactory,
+        protected readonly Logger $logger,
     ) {
-        $this->config = $config;
-        $this->dunningCollectionFactory = $dunningCollectionFactory;
-        $this->dunningFactory = $dunningFactory;
-        $this->invoiceRepository = $invoiceRepository;
-        $this->invoiceCollectionFactory = $invoiceCollectionFactory;
-        $this->logger = $logger;
         parent::__construct($context);
     }
 

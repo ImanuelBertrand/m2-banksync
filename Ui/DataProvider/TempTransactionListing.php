@@ -22,49 +22,28 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class TempTransactionListing extends AbstractDataProvider
 {
-    protected UrlInterface $urlBuilder;
-    protected CreditmemoRepository $creditmemoRepository;
-    protected InvoiceRepository $invoiceRepository;
-    protected Logger $logger;
-    protected MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory;
-    protected CustomerFactory $customerFactory;
-    protected CustomerResource $customerResource;
-    protected Data $priceHelper;
-    protected Matching $matching;
-    protected Display $display;
-    protected Config $config;
 
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
-        UrlInterface $urlBuilder,
-        InvoiceRepository $invoiceRepository,
-        CreditmemoRepository $creditmemoRepository,
-        MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
-        CustomerFactory $customerFactory,
-        CustomerResource $customerResource,
-        Matching $matching,
-        Display $displayHelper,
-        Config $config,
-        Logger $logger,
-        Data $priceHelper,
+        protected readonly UrlInterface $urlBuilder,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly CreditmemoRepository $creditmemoRepository,
+        protected readonly MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
+        protected readonly CustomerFactory $customerFactory,
+        protected readonly CustomerResource $customerResource,
+        protected readonly Matching $matching,
+        protected readonly Display $display,
+        protected readonly Config $config,
+        protected readonly Logger $logger,
+        protected readonly Data $priceHelper,
         array $meta = [],
         array $data = [],
     ) {
         $this->collection = $collectionFactory->create();
-        $this->urlBuilder = $urlBuilder;
-        $this->invoiceRepository = $invoiceRepository;
-        $this->creditmemoRepository = $creditmemoRepository;
-        $this->matchConfidenceCollectionFactory = $matchConfidenceCollectionFactory;
-        $this->customerFactory = $customerFactory;
-        $this->customerResource = $customerResource;
-        $this->matching = $matching;
-        $this->display = $displayHelper;
-        $this->config = $config;
-        $this->logger = $logger;
-        $this->priceHelper = $priceHelper;
+
         parent::__construct(
             $name,
             $primaryFieldName,
@@ -178,7 +157,6 @@ class TempTransactionListing extends AbstractDataProvider
             $confidence = count($matches) > 0
                 ? max(array_map(fn ($match) => $match->getConfidence(), $matches))
                 : null;
-
 
             if ($confidence === null) {
                 $text = '-';

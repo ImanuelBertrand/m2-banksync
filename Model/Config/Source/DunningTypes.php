@@ -7,14 +7,9 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class DunningTypes implements OptionSourceInterface
 {
-    protected Dunning $dunningHelper;
-
-    /**
-     * @param Dunning $dunningHelper
-     */
-    public function __construct(Dunning $dunningHelper)
-    {
-        $this->dunningHelper = $dunningHelper;
+    public function __construct(
+        protected readonly Dunning $dunningHelper,
+    ) {
     }
 
     /**

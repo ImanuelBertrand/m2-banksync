@@ -17,10 +17,9 @@ class Save extends Action
 
     public function __construct(
         Context $context,
-        DunningRepository $dunningRepository,
+        protected readonly DunningRepository $dunningRepository,
     ) {
         parent::__construct($context);
-        $this->dunningRepository = $dunningRepository;
     }
 
     /**

@@ -12,17 +12,13 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class Delete extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_csv_format';
-    protected Logger $logger;
-    private CsvFormatRepository $csvFormatRepository;
 
     public function __construct(
         Action\Context $context,
-        CsvFormatRepository $csvFormatRepository,
-        Logger $logger,
+        protected readonly CsvFormatRepository $csvFormatRepository,
+        protected readonly Logger $logger,
     ) {
         parent::__construct($context);
-        $this->csvFormatRepository = $csvFormatRepository;
-        $this->logger = $logger;
     }
 
     /**

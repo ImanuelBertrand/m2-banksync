@@ -2,23 +2,16 @@
 
 namespace Ibertrand\BankSync\Model\Config\Source;
 
-use Ibertrand\BankSync\Model\ResourceModel\CsvFormat\CollectionFactory;
 use Magento\Framework\Data\OptionSourceInterface;
 
 class CsvFormats implements OptionSourceInterface
 {
     private array $data;
 
-    private CollectionFactory $collectionFactory;
-
-    /**
-     * @param CollectionFactory $collectionFactory
-     */
-    public function __construct(CollectionFactory $collectionFactory)
-    {
-        $this->collectionFactory = $collectionFactory;
+    public function __construct(
+        protected readonlyCollectionFactory $collectionFactory,
+    ) {
     }
-
 
     /**
      * @return array|array[]

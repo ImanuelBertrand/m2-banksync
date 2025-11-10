@@ -12,15 +12,12 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Price extends \Magento\Sales\Ui\Component\Listing\Column\Price
 {
-    protected StoreManagerInterface $storeManager;
-    protected Currency $currency;
-
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         PriceCurrencyInterface $priceFormatter,
-        StoreManagerInterface $storeManager,
-        Currency $currency,
+        protected readonly StoreManagerInterface $storeManager,
+        protected readonly Currency $currency,
         array $components = [],
         array $data = [],
     ) {
@@ -33,8 +30,6 @@ class Price extends \Magento\Sales\Ui\Component\Listing\Column\Price
             $currency,
             $storeManager
         );
-        $this->storeManager = $storeManager;
-        $this->currency = $currency;
     }
 
     /**

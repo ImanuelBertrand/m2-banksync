@@ -20,29 +20,16 @@ class MassBook extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
 
-    protected Logger $logger;
-    protected Matcher $matcher;
-    protected Booker $booker;
-    protected Filter $filter;
-    protected CollectionFactory $collectionFactory;
-    protected Config $config;
-
     public function __construct(
         Action\Context $context,
-        Filter $filter,
-        CollectionFactory $collectionFactory,
-        Matcher $matcher,
-        Booker $booker,
-        Logger $logger,
-        Config $config,
+        protected readonly Filter $filter,
+        protected readonly CollectionFactory $collectionFactory,
+        protected readonly Matcher $matcher,
+        protected readonly Booker $booker,
+        protected readonly Logger $logger,
+        protected readonly Config $config,
     ) {
         parent::__construct($context);
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
-        $this->matcher = $matcher;
-        $this->booker = $booker;
-        $this->logger = $logger;
-        $this->config = $config;
     }
 
     /**

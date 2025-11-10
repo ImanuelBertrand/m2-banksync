@@ -28,49 +28,25 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory as Invoice
 
 class Matcher
 {
-    protected TempTransactionCollectionFactory $tempTransactionCollectionFactory;
-    protected TempTransactionResource $tempTransactionResource;
-    protected Logger $logger;
-    protected InvoiceCollectionFactory $invoiceCollectionFactory;
-    protected CreditmemoCollectionFactory $creditmemoCollectionFactory;
-    protected MatchConfidenceFactory $matchConfidenceFactory;
-    protected MatchConfidenceRepository $matchConfidenceRepository;
-    protected MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory;
     /**
      * @var callable
      */
     protected $progressCallBack;
-    protected CustomerCollectionFactory $customerCollectionFactory;
-    protected OrderCollectionFactory $orderCollectionFactory;
-    protected Config $config;
-    protected Matching $matching;
 
     public function __construct(
-        TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TempTransactionResource $transactionResource,
-        Logger $logger,
-        InvoiceCollectionFactory $invoiceCollectionFactory,
-        CreditmemoCollectionFactory $creditmemoCollectionFactory,
-        MatchConfidenceFactory $matchConfidenceFactory,
-        MatchConfidenceRepository $matchConfidenceRepository,
-        MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
-        CustomerCollectionFactory $customerCollectionFactory,
-        OrderCollectionFactory $orderCollectionFactory,
-        Config $config,
-        Matching $matching,
+        protected readonly TempTransactionCollectionFactory $tempTransactionCollectionFactory,
+        protected readonly TempTransactionResource $tempTransactionResource,
+        protected readonly Logger $logger,
+        protected readonly InvoiceCollectionFactory $invoiceCollectionFactory,
+        protected readonly CreditmemoCollectionFactory $creditmemoCollectionFactory,
+        protected readonly MatchConfidenceFactory $matchConfidenceFactory,
+        protected readonly MatchConfidenceRepository $matchConfidenceRepository,
+        protected readonly MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
+        protected readonly CustomerCollectionFactory $customerCollectionFactory,
+        protected readonly OrderCollectionFactory $orderCollectionFactory,
+        protected readonly Config $config,
+        protected readonly Matching $matching,
     ) {
-        $this->tempTransactionCollectionFactory = $tempTransactionCollectionFactory;
-        $this->tempTransactionResource = $transactionResource;
-        $this->logger = $logger;
-        $this->invoiceCollectionFactory = $invoiceCollectionFactory;
-        $this->creditmemoCollectionFactory = $creditmemoCollectionFactory;
-        $this->matchConfidenceFactory = $matchConfidenceFactory;
-        $this->matchConfidenceRepository = $matchConfidenceRepository;
-        $this->matchConfidenceCollectionFactory = $matchConfidenceCollectionFactory;
-        $this->customerCollectionFactory = $customerCollectionFactory;
-        $this->orderCollectionFactory = $orderCollectionFactory;
-        $this->config = $config;
-        $this->matching = $matching;
     }
 
     /**

@@ -12,16 +12,14 @@ use Magento\MediaStorage\Model\File\UploaderFactory;
 
 class Upload extends Action
 {
-    protected UploaderFactory $fileUploaderFactory;
     protected WriteInterface $varDirectory;
 
     public function __construct(
         Action\Context $context,
         Filesystem $filesystem,
-        UploaderFactory $fileUploaderFactory,
+        protected readonly UploaderFactory $fileUploaderFactory,
     ) {
         $this->varDirectory = $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
-        $this->fileUploaderFactory = $fileUploaderFactory;
         parent::__construct($context);
     }
 

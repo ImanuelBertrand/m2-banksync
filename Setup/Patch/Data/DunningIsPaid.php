@@ -12,20 +12,10 @@ use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
 class DunningIsPaid implements DataPatchInterface, PatchRevertableInterface
 {
-    private CollectionFactory $dunningCollectionFactory;
-    private DunningRepository $dunningRepository;
-
-
-    /**
-     * @param CollectionFactory $dunningCollectionFactory
-     * @param DunningRepository $dunningRepository
-     */
     public function __construct(
-        CollectionFactory $dunningCollectionFactory,
-        DunningRepository $dunningRepository,
+        protected readonly CollectionFactory $dunningCollectionFactory,
+        protected readonly DunningRepository $dunningRepository,
     ) {
-        $this->dunningCollectionFactory = $dunningCollectionFactory;
-        $this->dunningRepository = $dunningRepository;
     }
 
     /**

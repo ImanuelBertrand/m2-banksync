@@ -13,14 +13,12 @@ use Magento\Framework\Controller\ResultFactory;
 class Unarchive extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
-    private DunningRepository $dunningRepository;
 
     public function __construct(
         Context $context,
-        DunningRepository $dunningRepository,
+        protected readonly DunningRepository $dunningRepository,
     ) {
         parent::__construct($context);
-        $this->dunningRepository = $dunningRepository;
     }
 
     /**

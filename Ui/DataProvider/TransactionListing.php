@@ -23,55 +23,28 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class TransactionListing extends AbstractDataProvider
 {
-    protected UrlInterface $urlBuilder;
-    protected Config $config;
-    protected Display $display;
-    protected InvoiceRepository $invoiceRepository;
-    protected CreditmemoRepository $creditmemoRepository;
-    protected Logger $logger;
-    protected InvoiceCollectionFactory $invoiceCollectionFactory;
-    protected CreditmemoCollectionFactory $creditmemoCollectionFactory;
-    protected OrderCollectionFactory $orderCollectionFactory;
-    protected CustomerCollectionFactory $customerCollectionFactory;
-    protected OrderAddressCollectionFactory $orderAddressCollectionFactory;
-    private CustomerFactory $customerFactory;
-    private CustomerResource $customerResource;
-
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
-        Config $config,
-        Display $display,
-        UrlInterface $urlBuilder,
-        InvoiceRepository $invoiceRepository,
-        CreditmemoRepository $creditmemoRepository,
-        InvoiceCollectionFactory $invoiceCollectionFactory,
-        CreditmemoCollectionFactory $creditmemoCollectionFactory,
-        OrderCollectionFactory $orderCollectionFactory,
-        CustomerCollectionFactory $customerCollectionFactory,
-        OrderAddressCollectionFactory $orderAddressCollectionFactory,
-        CustomerFactory $customerFactory,
-        CustomerResource $customerResource,
-        Logger $logger,
+        protected readonly Config $config,
+        protected readonly Display $display,
+        protected readonly UrlInterface $urlBuilder,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly CreditmemoRepository $creditmemoRepository,
+        protected readonly InvoiceCollectionFactory $invoiceCollectionFactory,
+        protected readonly CreditmemoCollectionFactory $creditmemoCollectionFactory,
+        protected readonly OrderCollectionFactory $orderCollectionFactory,
+        protected readonly CustomerCollectionFactory $customerCollectionFactory,
+        protected readonly OrderAddressCollectionFactory $orderAddressCollectionFactory,
+        protected readonly CustomerFactory $customerFactory,
+        protected readonly CustomerResource $customerResource,
+        protected readonly Logger $logger,
         array $meta = [],
         array $data = [],
     ) {
         $this->collection = $collectionFactory->create();
-        $this->config = $config;
-        $this->display = $display;
-        $this->urlBuilder = $urlBuilder;
-        $this->invoiceRepository = $invoiceRepository;
-        $this->creditmemoRepository = $creditmemoRepository;
-        $this->invoiceCollectionFactory = $invoiceCollectionFactory;
-        $this->creditmemoCollectionFactory = $creditmemoCollectionFactory;
-        $this->orderCollectionFactory = $orderCollectionFactory;
-        $this->customerCollectionFactory = $customerCollectionFactory;
-        $this->orderAddressCollectionFactory = $orderAddressCollectionFactory;
-        $this->customerFactory = $customerFactory;
-        $this->customerResource = $customerResource;
-        $this->logger = $logger;
         parent::__construct(
             $name,
             $primaryFieldName,
@@ -95,7 +68,7 @@ class TransactionListing extends AbstractDataProvider
                 $hasDocument = !empty($item['document_id']);
                 if ($hasDocument) {
                     $document = (
-                    $item['document_type'] == 'invoice'
+                        $item['document_type'] == 'invoice'
                         ? $this->invoiceRepository
                         : $this->creditmemoRepository
                     )->get($item['document_id']);

@@ -50,17 +50,14 @@ class TempTransaction extends AbstractModel
     public function __construct(
         Context $context,
         Registry $registry,
-        InvoiceRepository $invoiceRepository,
-        CreditmemoRepository $creditmemoRepository,
-        MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly CreditmemoRepository $creditmemoRepository,
+        protected readonly MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
         ?AbstractResource $resource = null,
         ?AbstractDb $resourceCollection = null,
         array $data = [],
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
-        $this->invoiceRepository = $invoiceRepository;
-        $this->creditmemoRepository = $creditmemoRepository;
-        $this->matchConfidenceCollectionFactory = $matchConfidenceCollectionFactory;
     }
 
     protected function _construct()

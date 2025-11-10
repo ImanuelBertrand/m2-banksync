@@ -13,20 +13,14 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class Save extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_csv_format';
-    protected Logger $logger;
-    private CsvFormatRepository $csvFormatRepository;
-    private CsvFormatFactory $csvFormatFactory;
 
     public function __construct(
         Action\Context $context,
-        CsvFormatRepository $csvFormatRepository,
-        CsvFormatFactory $csvFormatFactory,
-        Logger $logger,
+        protected readonly CsvFormatRepository $csvFormatRepository,
+        protected readonly CsvFormatFactory $csvFormatFactory,
+        protected readonly Logger $logger,
     ) {
         parent::__construct($context);
-        $this->csvFormatRepository = $csvFormatRepository;
-        $this->csvFormatFactory = $csvFormatFactory;
-        $this->logger = $logger;
     }
 
     /**

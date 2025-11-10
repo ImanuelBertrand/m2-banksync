@@ -10,24 +10,11 @@ use Magento\Sales\Model\Order\Invoice;
 
 class DunningBlockButton extends Container
 {
-    /**
-     * Core registry
-     *
-     * @var Registry
-     */
-    protected Registry $coreRegistry;
-
-    /**
-     * @param Context $context
-     * @param Registry $registry
-     * @param array $data
-     */
     public function __construct(
         Context $context,
-        Registry $registry,
+        protected readonly Registry $registry,
         array $data = [],
     ) {
-        $this->coreRegistry = $registry;
         parent::__construct($context, $data);
     }
 
@@ -70,7 +57,7 @@ class DunningBlockButton extends Container
      */
     protected function getInvoice(): EntityInterface
     {
-        return $this->coreRegistry->registry('current_invoice');
+        return $this->registry->registry('current_invoice');
     }
 
     /**

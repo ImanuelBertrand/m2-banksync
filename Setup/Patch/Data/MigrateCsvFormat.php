@@ -11,23 +11,11 @@ use Magento\Framework\Setup\Patch\PatchRevertableInterface;
 
 class MigrateCsvFormat implements DataPatchInterface, PatchRevertableInterface
 {
-    private CsvFormatFactory $csvFormatFactory;
-    private CsvFormatRepository $csvFormatRepository;
-    private ScopeConfigInterface $scopeConfig;
-
-    /**
-     * @param CsvFormatFactory $csvFormatFactory
-     * @param CsvFormatRepository $csvFormatRepository
-     * @param ScopeConfigInterface $scopeConfig
-     */
     public function __construct(
-        CsvFormatFactory $csvFormatFactory,
-        CsvFormatRepository $csvFormatRepository,
-        ScopeConfigInterface $scopeConfig,
+        protected readonly CsvFormatFactory $csvFormatFactory,
+        protected readonly CsvFormatRepository $csvFormatRepository,
+        protected readonly ScopeConfigInterface $scopeConfig,
     ) {
-        $this->csvFormatFactory = $csvFormatFactory;
-        $this->csvFormatRepository = $csvFormatRepository;
-        $this->scopeConfig = $scopeConfig;
     }
 
     /**

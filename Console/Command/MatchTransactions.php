@@ -16,20 +16,13 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class MatchTransactions extends Command
 {
-    protected Matcher $matcher;
-    protected ProgressBarFactory $progressBarFactory;
-    protected Config $config;
-
     public function __construct(
-        Matcher $matcher,
-        Config $config,
-        ProgressBarFactory $progressBarFactory,
+        protected readonly Matcher $matcher,
+        protected readonly Config $config,
+        protected readonly ProgressBarFactory $progressBarFactory,
         ?string $name = null,
     ) {
         parent::__construct($name);
-        $this->matcher = $matcher;
-        $this->config = $config;
-        $this->progressBarFactory = $progressBarFactory;
     }
 
     /**

@@ -12,16 +12,12 @@ use Magento\Framework\Controller\ResultFactory;
 class Book extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
-    protected Booker $booker;
-    protected Logger $logger;
 
     public function __construct(
         Context $context,
-        Booker $booker,
-        Logger $logger,
+        protected readonly Booker $booker,
+        protected readonly Logger $logger,
     ) {
-        $this->booker = $booker;
-        $this->logger = $logger;
         parent::__construct($context);
     }
 

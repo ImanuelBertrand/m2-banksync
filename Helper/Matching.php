@@ -16,11 +16,6 @@ use Magento\Sales\Model\Order\Invoice;
 
 class Matching extends AbstractHelper
 {
-
-    protected CustomerResource $customerResource;
-    protected CustomerFactory $customerFactory;
-    private Config $config;
-
     const SPECIAL_CHARACTERS = [
         'ae' => '(?:[aáà]e|ä|æ)',
         'oe' => '(?:[oóò]e|ö|œ)',
@@ -53,14 +48,10 @@ class Matching extends AbstractHelper
 
     public function __construct(
         Context $context,
-        CustomerFactory $customerFactory,
-        CustomerResource $customerResource,
-        Config $config,
+        protected readonly CustomerFactory $customerFactory,
+        protected readonly CustomerResource $customerResource,
+        protected readonly Config $config,
     ) {
-        $this->customerFactory = $customerFactory;
-        $this->customerResource = $customerResource;
-        $this->config = $config;
-
         parent::__construct($context);
     }
 

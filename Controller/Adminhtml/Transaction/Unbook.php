@@ -18,23 +18,14 @@ class Unbook extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
 
-    protected Logger $logger;
-    protected Booker $booker;
-    protected Filter $filter;
-    protected CollectionFactory $collectionFactory;
-
     public function __construct(
         Action\Context $context,
-        Filter $filter,
-        CollectionFactory $collectionFactory,
-        Booker $booker,
-        Logger $logger,
+        protected readonly Filter $filter,
+        protected readonly CollectionFactory $collectionFactory,
+        protected readonly Booker $booker,
+        protected readonly Logger $logger,
     ) {
         parent::__construct($context);
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
-        $this->booker = $booker;
-        $this->logger = $logger;
     }
 
     /**

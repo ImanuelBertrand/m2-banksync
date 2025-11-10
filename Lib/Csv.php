@@ -11,16 +11,16 @@ use ValueError;
 class Csv extends CoreCsv
 {
     protected bool $hasHeaders;
-    protected Logger $logger;
     protected int $ignoreLeadingLines = 0;
     protected int $ignoreTailingLines = 0;
     protected bool $ignoreInvalidLines = false;
     protected string $encoding = 'UTF-8';
 
-    public function __construct(File $file, Logger $logger)
-    {
+    public function __construct(
+        File $file,
+        protected readonly Logger $logger,
+    ) {
         parent::__construct($file);
-        $this->logger = $logger;
     }
 
     /**

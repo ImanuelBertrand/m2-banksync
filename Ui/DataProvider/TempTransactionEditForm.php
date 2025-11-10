@@ -9,19 +9,16 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 class TempTransactionEditForm extends AbstractDataProvider
 {
 
-    private DataPersistor $dataPersistor;
-
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
-        DataPersistor $dataPersistor,
+        protected readonly DataPersistor $dataPersistor,
         array $meta = [],
         array $data = [],
     ) {
         $this->collection = $collectionFactory->create();
-        $this->dataPersistor = $dataPersistor;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 

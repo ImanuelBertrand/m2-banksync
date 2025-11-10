@@ -31,9 +31,6 @@ use Zend_Pdf_Style;
 class Dunning extends AbstractPdf
 {
 
-    protected StoreManagerInterface $_storeManager;
-    protected Emulation $appEmulation;
-
     public function __construct(
         Data $paymentData,
         StringUtils $string,
@@ -45,14 +42,12 @@ class Dunning extends AbstractPdf
         TimezoneInterface $localeDate,
         StateInterface $inlineTranslation,
         Renderer $addressRenderer,
-        Emulation $appEmulation,
-        StoreManagerInterface $storeManager,
+        protected readonly Emulation $appEmulation,
+        protected readonly StoreManagerInterface $storeManager,
         array $data = [],
         ?Database $fileStorageDatabase = null,
         ?RtlTextHandler $rtlTextHandler = null,
     ) {
-        $this->_storeManager = $storeManager;
-        $this->appEmulation = $appEmulation;
         parent::__construct(
             $paymentData,
             $string,
@@ -137,7 +132,7 @@ class Dunning extends AbstractPdf
                     Area::AREA_FRONTEND,
                     true
                 );
-                $this->_storeManager->setCurrentStore($dunning->getStoreId());
+                $this->storeManager->setCurrentStore($dunning->getStoreId());
             }
             $page = $this->newPage();
             $order = $dunning->getOrder();

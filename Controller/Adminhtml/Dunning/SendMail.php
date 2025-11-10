@@ -16,19 +16,12 @@ class SendMail extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
 
-    private DunningRepository $dunningRepository;
-    private Logger $logger;
-
-    /**
-     * @param Context $context
-     * @param DunningRepository $dunningRepository
-     * @param Logger $logger
-     */
-    public function __construct(Context $context, DunningRepository $dunningRepository, Logger $logger)
-    {
+    public function __construct(
+        Context $context,
+        protected readonly DunningRepository $dunningRepository,
+        protected readonly Logger $logger,
+    ) {
         parent::__construct($context);
-        $this->dunningRepository = $dunningRepository;
-        $this->logger = $logger;
     }
 
     /**

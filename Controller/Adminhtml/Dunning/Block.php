@@ -19,30 +19,14 @@ class Block extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
 
-    private InvoiceRepository $invoiceRepository;
-    private Logger $logger;
-    private CollectionFactory $dunningCollectionFactory;
-    private DunningRepository $dunningRepository;
-
-    /**
-     * @param Context $context
-     * @param InvoiceRepository $invoiceRepository
-     * @param Logger $logger
-     * @param CollectionFactory $dunningCollectionFactory
-     * @param DunningRepository $dunningRepository
-     */
     public function __construct(
         Context $context,
-        InvoiceRepository $invoiceRepository,
-        Logger $logger,
-        CollectionFactory $dunningCollectionFactory,
-        DunningRepository $dunningRepository,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly Logger $logger,
+        protected readonly CollectionFactory $dunningCollectionFactory,
+        protected readonly DunningRepository $dunningRepository,
     ) {
         parent::__construct($context);
-        $this->invoiceRepository = $invoiceRepository;
-        $this->logger = $logger;
-        $this->dunningCollectionFactory = $dunningCollectionFactory;
-        $this->dunningRepository = $dunningRepository;
     }
 
     /**

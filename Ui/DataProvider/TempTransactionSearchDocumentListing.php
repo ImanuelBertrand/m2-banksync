@@ -26,74 +26,25 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class TempTransactionSearchDocumentListing extends AbstractDataProvider
 {
-    protected UrlInterface $urlBuilder;
-    protected InvoiceCollectionFactory $invoiceCollectionFactory;
-    protected CreditmemoCollectionFactory $creditmemoCollectionFactory;
-    protected TempTransactionRepository $tempTransactionRepository;
-    protected Http $request;
-    protected OrderCollectionFactory $orderCollectionFactory;
-    protected CustomerResource $customerResource;
-    protected CustomerFactory $customerFactory;
-    protected Display $display;
-    protected CustomerCollectionFactory $customerCollectionFactory;
-    protected PriceHelper $priceHelper;
-    protected Matching $matching;
-
-    /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param UrlInterface $urlBuilder
-     * @param InvoiceCollectionFactory $invoiceCollectionFactory
-     * @param CreditmemoCollectionFactory $creditmemoCollectionFactory
-     * @param TempTransactionRepository $tempTransactionRepository
-     * @param OrderCollectionFactory $orderCollectionFactory
-     * @param CustomerFactory $customerFactory
-     * @param CustomerResource $customerResource
-     * @param Http $request
-     * @param CustomerCollectionFactory $customerCollectionFactory
-     * @param PriceHelper $priceHelper
-     * @param Display $displayHelper
-     * @param Matching $matching
-     * @param array $meta
-     * @param array $data
-     *
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
-     */
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-        UrlInterface $urlBuilder,
-        InvoiceCollectionFactory $invoiceCollectionFactory,
-        CreditmemoCollectionFactory $creditmemoCollectionFactory,
-        TempTransactionRepository $tempTransactionRepository,
-        OrderCollectionFactory $orderCollectionFactory,
-        CustomerFactory $customerFactory,
-        CustomerResource $customerResource,
-        Http $request,
-        CustomerCollectionFactory $customerCollectionFactory,
-        PriceHelper $priceHelper,
-        Display $displayHelper,
-        Matching $matching,
+        protected readonly UrlInterface $urlBuilder,
+        protected readonly InvoiceCollectionFactory $invoiceCollectionFactory,
+        protected readonly CreditmemoCollectionFactory $creditmemoCollectionFactory,
+        protected readonly TempTransactionRepository $tempTransactionRepository,
+        protected readonly OrderCollectionFactory $orderCollectionFactory,
+        protected readonly CustomerFactory $customerFactory,
+        protected readonly CustomerResource $customerResource,
+        protected readonly Http $request,
+        protected readonly CustomerCollectionFactory $customerCollectionFactory,
+        protected readonly PriceHelper $priceHelper,
+        protected readonly Display $display,
+        protected readonly Matching $matching,
         array $meta = [],
         array $data = [],
     ) {
-        $this->urlBuilder = $urlBuilder;
-        $this->invoiceCollectionFactory = $invoiceCollectionFactory;
-        $this->creditmemoCollectionFactory = $creditmemoCollectionFactory;
-        $this->tempTransactionRepository = $tempTransactionRepository;
-        $this->orderCollectionFactory = $orderCollectionFactory;
-        $this->customerFactory = $customerFactory;
-        $this->customerResource = $customerResource;
-        $this->display = $displayHelper;
-        $this->matching = $matching;
-        $this->customerCollectionFactory = $customerCollectionFactory;
-        $this->priceHelper = $priceHelper;
-
-        $this->request = $request;
-
         $this->createCollection();
 
         parent::__construct(

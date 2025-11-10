@@ -21,33 +21,6 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory as Invoice
 
 class TempTransactionDetailsListing extends TempTransactionSearchDocumentListing
 {
-    protected MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory;
-    protected MatchConfidence $matchConfidenceResource;
-
-    /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param UrlInterface $urlBuilder
-     * @param InvoiceCollectionFactory $invoiceCollectionFactory
-     * @param CreditmemoCollectionFactory $creditmemoCollectionFactory
-     * @param TempTransactionRepository $tempTransactionRepository
-     * @param OrderCollectionFactory $orderCollectionFactory
-     * @param CustomerFactory $customerFactory
-     * @param CustomerResource $customerResource
-     * @param Http $request
-     * @param CustomerCollectionFactory $customerCollectionFactory
-     * @param PriceHelper $priceHelper
-     * @param MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory
-     * @param MatchConfidence $matchConfidenceResource
-     * @param Display $display
-     * @param Matching $matching
-     * @param array $meta
-     * @param array $data
-     *
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
-     */
     public function __construct(
         $name,
         $primaryFieldName,
@@ -62,16 +35,13 @@ class TempTransactionDetailsListing extends TempTransactionSearchDocumentListing
         Http $request,
         CustomerCollectionFactory $customerCollectionFactory,
         PriceHelper $priceHelper,
-        MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
-        MatchConfidence $matchConfidenceResource,
+        protected readonly MatchConfidenceCollectionFactory $matchConfidenceCollectionFactory,
+        protected readonly MatchConfidence $matchConfidenceResource,
         Display $display,
         Matching $matching,
         array $meta = [],
         array $data = [],
     ) {
-        $this->matchConfidenceCollectionFactory = $matchConfidenceCollectionFactory;
-        $this->matchConfidenceResource = $matchConfidenceResource;
-
         parent::__construct(
             $name,
             $primaryFieldName,

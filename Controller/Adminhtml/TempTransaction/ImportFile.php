@@ -25,44 +25,22 @@ use Magento\Framework\Exception\LocalizedException;
 class ImportFile extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
-    protected Csv $csvProcessor;
-    protected TempTransactionFactory $tempTransactionFactory;
-    protected TempTransactionResource $tempTransactionResource;
-    protected Logger $logger;
-    protected Matcher $matcher;
-    protected TempTransactionRepository $tempTransactionRepository;
-    protected TempTransactionCollectionFactory $tempTransactionCollectionFactory;
-    protected TransactionCollectionFactory $transactionCollectionFactory;
-    protected CsvFormatRepository $csvFormatRepository;
-    protected Config $config;
-    protected Hashes $hashes;
 
     public function __construct(
         Action\Context $context,
-        Csv $csvProcessor,
-        TempTransactionFactory $tempTransactionFactory,
-        TempTransactionResource $tempTransactionResource,
-        TempTransactionRepository $tempTransactionRepository,
-        TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TransactionCollectionFactory $transactionCollectionFactory,
-        CsvFormatRepository $csvFormatRepository,
-        Logger $logger,
-        Matcher $matcher,
-        Config $config,
-        Hashes $hashes,
+        protected readonly Csv $csvProcessor,
+        protected readonly TempTransactionFactory $tempTransactionFactory,
+        protected readonly TempTransactionResource $tempTransactionResource,
+        protected readonly TempTransactionRepository $tempTransactionRepository,
+        protected readonly TempTransactionCollectionFactory $tempTransactionCollectionFactory,
+        protected readonly TransactionCollectionFactory $transactionCollectionFactory,
+        protected readonly CsvFormatRepository $csvFormatRepository,
+        protected readonly Logger $logger,
+        protected readonly Matcher $matcher,
+        protected readonly Config $config,
+        protected readonly Hashes $hashes,
     ) {
         parent::__construct($context);
-        $this->csvProcessor = $csvProcessor;
-        $this->tempTransactionFactory = $tempTransactionFactory;
-        $this->tempTransactionResource = $tempTransactionResource;
-        $this->tempTransactionRepository = $tempTransactionRepository;
-        $this->tempTransactionCollectionFactory = $tempTransactionCollectionFactory;
-        $this->transactionCollectionFactory = $transactionCollectionFactory;
-        $this->csvFormatRepository = $csvFormatRepository;
-        $this->logger = $logger;
-        $this->matcher = $matcher;
-        $this->config = $config;
-        $this->hashes = $hashes;
     }
 
     /**

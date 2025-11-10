@@ -14,28 +14,14 @@ use Magento\Store\Model\StoreManager;
 
 class CreateDunnings
 {
-
-    protected Dunning $dunningHelper;
-    protected Config $config;
-    protected CollectionFactory $invoiceCollectionFactory;
-    protected DunningResourceModel $dunningResourceModel;
-    protected StoreManager $storeManager;
-    protected Logger $logger;
-
     public function __construct(
-        Config $config,
-        Dunning $dunningHelper,
-        CollectionFactory $invoiceCollectionFactory,
-        DunningResourceModel $dunningResourceModel,
-        StoreManager $storeManager,
-        Logger $logger,
+        protected readonly Config $config,
+        protected readonly Dunning $dunningHelper,
+        protected readonly CollectionFactory $invoiceCollectionFactory,
+        protected readonly DunningResourceModel $dunningResourceModel,
+        protected readonly StoreManager $storeManager,
+        protected readonly Logger $logger,
     ) {
-        $this->config = $config;
-        $this->dunningHelper = $dunningHelper;
-        $this->invoiceCollectionFactory = $invoiceCollectionFactory;
-        $this->dunningResourceModel = $dunningResourceModel;
-        $this->storeManager = $storeManager;
-        $this->logger = $logger;
     }
 
     /**
@@ -46,7 +32,6 @@ class CreateDunnings
     {
         return !empty($this->dunningHelper->getEnabledDunningTypes($storeId));
     }
-
 
     /**
      * @param Schedule $schedule

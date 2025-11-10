@@ -21,32 +21,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CalcHashes extends Command
 {
-    protected Hashes $hashes;
-    protected Config $config;
-    protected ProgressBarFactory $progressBarFactory;
-    protected TempTransactionCollectionFactory $tempTransactionCollectionFactory;
-    protected TransactionCollectionFactory $transactionCollectionFactory;
-    protected TempTransactionRepository $tempTransactionRepository;
-    protected TransactionRepository $transactionRepository;
 
     public function __construct(
-        Hashes $hashes,
-        Config $config,
-        TempTransactionCollectionFactory $tempTransactionCollectionFactory,
-        TransactionCollectionFactory $transactionCollectionFactory,
-        TempTransactionRepository $tempTransactionRepository,
-        TransactionRepository $transactionRepository,
-        ProgressBarFactory $progressBarFactory,
+        protected readonly Hashes $hashes,
+        protected readonly Config $config,
+        protected readonly TempTransactionCollectionFactory $tempTransactionCollectionFactory,
+        protected readonly TransactionCollectionFactory $transactionCollectionFactory,
+        protected readonly TempTransactionRepository $tempTransactionRepository,
+        protected readonly TransactionRepository $transactionRepository,
+        protected readonly ProgressBarFactory $progressBarFactory,
         ?string $name = null,
     ) {
         parent::__construct($name);
-        $this->hashes = $hashes;
-        $this->config = $config;
-        $this->tempTransactionCollectionFactory = $tempTransactionCollectionFactory;
-        $this->transactionCollectionFactory = $transactionCollectionFactory;
-        $this->tempTransactionRepository = $tempTransactionRepository;
-        $this->transactionRepository = $transactionRepository;
-        $this->progressBarFactory = $progressBarFactory;
     }
 
     /**

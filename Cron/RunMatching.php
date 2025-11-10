@@ -10,18 +10,11 @@ use Magento\Cron\Model\Schedule;
 
 class RunMatching
 {
-    protected Logger $logger;
-    protected Matcher $matcher;
-    protected Config $config;
-
     public function __construct(
-        Logger $logger,
-        Matcher $matcher,
-        Config $config,
+        protected readonly Logger $logger,
+        protected readonly Matcher $matcher,
+        protected readonly Config $config,
     ) {
-        $this->logger = $logger;
-        $this->matcher = $matcher;
-        $this->config = $config;
     }
 
     /**

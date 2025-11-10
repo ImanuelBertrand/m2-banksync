@@ -16,7 +16,7 @@ class PaymentMethods implements OptionSourceInterface
      * @param Config $paymentModelConfig
      */
     public function __construct(
-        Config $paymentModelConfig,
+        protected readonly Config $paymentModelConfig,
     ) {
         $this->paymentModelConfig = $paymentModelConfig;
     }

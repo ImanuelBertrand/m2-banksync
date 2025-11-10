@@ -11,15 +11,13 @@ use Magento\Framework\Model\ResourceModel\Db\Context;
 
 class TempTransaction extends AbstractDb
 {
-    protected TempTransactionFactory $tempTransactionFactory;
 
     public function __construct(
         Context $context,
-        TempTransactionFactory $tempTransactionFactory,
+        protected readonly TempTransactionFactory $tempTransactionFactory,
         $connectionName = null,
     ) {
         parent::__construct($context, $connectionName);
-        $this->tempTransactionFactory = $tempTransactionFactory;
     }
 
     protected function _construct()

@@ -48,27 +48,19 @@ class Dunning extends AbstractModel
      * @var string
      */
     protected $_eventPrefix = 'banksync_dunning_model';
-    protected DunningHelper $dunningHelper;
-    protected InvoiceRepository $invoiceRepository;
-    protected TransportBuilder $transportBuilder;
-    protected Logger $logger;
 
     public function __construct(
         Context $context,
         Registry $registry,
-        DunningHelper $dunningHelper,
-        InvoiceRepository $invoiceRepository,
-        TransportBuilder $transportBuilder,
-        Logger $logger,
+        protected readonly DunningHelper $dunningHelper,
+        protected readonly InvoiceRepository $invoiceRepository,
+        protected readonly TransportBuilder $transportBuilder,
+        protected readonly Logger $logger,
         ?AbstractResource $resource = null,
         ?AbstractDb $resourceCollection = null,
         array $data = [],
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
-        $this->dunningHelper = $dunningHelper;
-        $this->invoiceRepository = $invoiceRepository;
-        $this->transportBuilder = $transportBuilder;
-        $this->logger = $logger;
     }
 
     /**
@@ -110,7 +102,6 @@ class Dunning extends AbstractModel
     {
         return $this->getInvoice()->getOrder();
     }
-
 
     /**
      * @return int
@@ -167,7 +158,6 @@ class Dunning extends AbstractModel
         $customerName = trim($order->getCustomerName());
 
         $this->logger->info('Sending dunning mail to ' . $order->getCustomerEmail());
-
 
         $emailTemplateVariables = [
             'invoice_id' => $invoice->getIncrementId(),
