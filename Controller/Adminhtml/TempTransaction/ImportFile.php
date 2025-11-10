@@ -24,7 +24,7 @@ use Magento\Framework\Exception\LocalizedException;
 
 class ImportFile extends Action
 {
-    const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
     protected Csv $csvProcessor;
     protected TempTransactionFactory $tempTransactionFactory;
     protected TempTransactionResource $tempTransactionResource;

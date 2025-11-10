@@ -12,7 +12,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Archive extends Action
 {
-
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
     private DunningRepository $dunningRepository;
 
     public function __construct(
@@ -48,10 +48,5 @@ class Archive extends Action
         $this->messageManager->addSuccessMessage(__('The dunning was archived.'));
 
         return $redirect;
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::sub_menu_dunnings');
     }
 }

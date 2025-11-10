@@ -16,6 +16,8 @@ use Magento\Ui\Component\MassAction\Filter;
 
 class Unbook extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
+
     protected Logger $logger;
     protected Booker $booker;
     protected Filter $filter;
@@ -71,10 +73,5 @@ class Unbook extends Action
         }
         return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)
             ->setPath('*/' . ($fail > 0 ? 'transaction' : 'temptransaction') . '/index');
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::book');
     }
 }

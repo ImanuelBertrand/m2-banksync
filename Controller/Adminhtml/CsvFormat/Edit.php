@@ -7,7 +7,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Edit extends Action
 {
-    const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_csv_format';
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_csv_format';
 
     public function execute()
     {

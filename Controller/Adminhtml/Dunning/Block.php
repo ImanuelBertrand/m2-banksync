@@ -17,7 +17,8 @@ use Magento\Sales\Model\Order\InvoiceRepository;
 
 class Block extends Action
 {
-    const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
+
     private InvoiceRepository $invoiceRepository;
     private Logger $logger;
     private CollectionFactory $dunningCollectionFactory;

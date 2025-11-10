@@ -18,6 +18,8 @@ use Magento\Ui\Component\MassAction\Filter;
 
 class MassBook extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
+
     protected Logger $logger;
     protected Matcher $matcher;
     protected Booker $booker;
@@ -87,10 +89,5 @@ class MassBook extends Action
         }
 
         return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::book');
     }
 }

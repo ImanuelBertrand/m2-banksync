@@ -17,6 +17,7 @@ use Magento\Ui\Component\MassAction\Filter;
 
 class Delete extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
     protected Logger $logger;
     protected TempTransactionRepository $tempTransactionRepository;
     protected Filter $filter;
@@ -71,10 +72,5 @@ class Delete extends Action
         }
 
         return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::sub_menu_import');
     }
 }

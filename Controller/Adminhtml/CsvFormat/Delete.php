@@ -11,7 +11,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class Delete extends Action
 {
-    const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_csv_format';
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_csv_format';
     protected Logger $logger;
     private CsvFormatRepository $csvFormatRepository;
 

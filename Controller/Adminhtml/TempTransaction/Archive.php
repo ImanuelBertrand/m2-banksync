@@ -11,8 +11,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Archive extends Action
 {
-    const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
-
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
     protected Booker $booker;
     protected Logger $logger;
 

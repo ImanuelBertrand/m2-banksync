@@ -15,7 +15,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class PrintDunning extends Action
 {
-
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
     private DunningRepository $dunningRepository;
     private FileFactory $fileFactory;
     private Dunning $dunningPdf;
@@ -67,10 +67,5 @@ class PrintDunning extends Action
         $redirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $redirect->setPath('*/*/index');
         return $redirect;
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::sub_menu_dunnings');
     }
 }

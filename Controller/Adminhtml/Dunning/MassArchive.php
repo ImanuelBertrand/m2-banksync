@@ -24,7 +24,7 @@ class MassArchive extends Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
 
     protected string $redirectUrl = 'banksync/dunning/index';
     protected FileFactory $fileFactory;

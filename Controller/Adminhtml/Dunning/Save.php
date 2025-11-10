@@ -12,7 +12,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Save extends Action
 {
-
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
     private DunningRepository $dunningRepository;
 
     public function __construct(
@@ -49,10 +49,5 @@ class Save extends Action
         $this->messageManager->addSuccessMessage(__('The dunning was saved successfully.'));
 
         return $redirect;
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::sub_menu_dunnings');
     }
 }

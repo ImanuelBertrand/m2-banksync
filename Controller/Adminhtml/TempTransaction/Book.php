@@ -11,6 +11,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Book extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::book';
     protected Booker $booker;
     protected Logger $logger;
 
@@ -22,11 +23,6 @@ class Book extends Action
         $this->booker = $booker;
         $this->logger = $logger;
         parent::__construct($context);
-    }
-
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::book');
     }
 
     public function execute()

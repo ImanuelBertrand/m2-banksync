@@ -12,6 +12,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class Save extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_temp_transactions';
+
     protected Logger $logger;
     protected Booker $booker;
     protected TempTransactionRepository $tempTransactionRepository;
@@ -56,8 +58,4 @@ class Save extends Action
         return $this->resultRedirectFactory->create()->setPath('*/*/index');
     }
 
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::sub_menu_temp_transactions');
-    }
 }

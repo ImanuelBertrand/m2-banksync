@@ -14,6 +14,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class SendMail extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_dunnings';
 
     private DunningRepository $dunningRepository;
     private Logger $logger;
@@ -61,13 +62,5 @@ class SendMail extends Action
         }
 
         return $redirect;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Ibertrand_BankSync::sub_menu_dunnings');
     }
 }
