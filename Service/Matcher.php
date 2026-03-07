@@ -46,8 +46,7 @@ class Matcher
         protected readonly OrderCollectionFactory $orderCollectionFactory,
         protected readonly Config $config,
         protected readonly Matching $matching,
-    ) {
-    }
+    ) {}
 
     /**
      * @param callable $progressCallBack

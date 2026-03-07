@@ -12,4 +12,7 @@ return RectorConfig::configure()
         __DIR__ . '/vendor',
         RemoveParentCallWithoutParentRector::class,
     ])
-    ->withPhpSets(php81: true);
+    ->withPhpSets(php81: true)
+    ->withPreparedSets(
+        codeQuality: true,
+    );
