@@ -21,7 +21,7 @@ class Hashes extends AbstractHelper
                     $transaction->getPayerName(),
                     number_format($transaction->getAmount(), 2, '.', ''),
                     $transaction->getPurpose(),
-                    date('Y-m-d H:i:s', strtotime($transaction->getTransactionDate())),
+                    date('Y-m-d H:i:s', strtotime((string) $transaction->getTransactionDate())),
                 ]
             )
         );

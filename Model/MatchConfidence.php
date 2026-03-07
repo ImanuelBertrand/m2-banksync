@@ -18,7 +18,7 @@ class MatchConfidence extends AbstractModel
 {
     protected function _construct()
     {
-        $this->_init('Ibertrand\BankSync\Model\ResourceModel\MatchConfidence');
+        $this->_init(ResourceModel\MatchConfidence::class);
     }
 
 }

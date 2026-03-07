@@ -252,7 +252,7 @@ class Matcher
         $amountThreshold = $this->config->getAmountThreshold();
         $latestDate = date(
             'Y-m-d H:i:s',
-            strtotime($tempTransaction->getTransactionDate()) + $this->config->getDateThreshold() * 86400
+            strtotime((string) $tempTransaction->getTransactionDate()) + $this->config->getDateThreshold() * 86400
         );
 
         $collection = $this->getBaseDocumentCollection($tempTransaction)

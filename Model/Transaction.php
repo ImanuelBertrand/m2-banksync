@@ -38,6 +38,6 @@ class Transaction extends AbstractModel
 {
     protected function _construct()
     {
-        $this->_init('Ibertrand\BankSync\Model\ResourceModel\Transaction');
+        $this->_init(ResourceModel\Transaction::class);
     }
 }

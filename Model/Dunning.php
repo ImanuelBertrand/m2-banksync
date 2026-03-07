@@ -155,7 +155,7 @@ class Dunning extends AbstractModel
         $templateCode = $this->getEmailTemplate();
         $dueDays = $this->dunningHelper->getInvoiceDueDays();
         $invoiceDueDate = strtotime($invoice->getCreatedAt()) + $dueDays * 86400;
-        $customerName = trim($order->getCustomerName());
+        $customerName = trim((string) $order->getCustomerName());
 
         $this->logger->info('Sending dunning mail to ' . $order->getCustomerEmail());
 

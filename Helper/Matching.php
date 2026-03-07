@@ -64,7 +64,7 @@ class Matching extends AbstractHelper
     {
         $name = mb_strtolower($name);
         $name = preg_replace('/\s+/u', ' ', $name);
-        return trim($name);
+        return trim((string) $name);
     }
 
     /**
@@ -130,8 +130,8 @@ class Matching extends AbstractHelper
         $transactionName = $tempTransaction->getPayerName();
         $transactionNames = [$transactionName];
         $fixedTransactionName = "";
-        if (str_contains($transactionName, ',')) {
-            $parts = preg_split('/\s*,\s*/', $transactionName);
+        if (str_contains((string) $transactionName, ',')) {
+            $parts = preg_split('/\s*,\s*/', (string) $transactionName);
             if (count($parts) == 2) {
                 $fixedTransactionName = $parts[1] . ' ' . $parts[0];
             }
@@ -153,7 +153,7 @@ class Matching extends AbstractHelper
             }
             foreach ($transactionNames as $transactionName) {
                 $pattern = $this->getMatchPattern($name);
-                if (preg_match($pattern, $transactionName)) {
+                if (preg_match($pattern, (string) $transactionName)) {
                     $matches[$name] = $score;
                 }
             }

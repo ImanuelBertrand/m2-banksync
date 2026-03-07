@@ -92,9 +92,9 @@ class Config extends AbstractHelper
     public function getStartDate(): string
     {
         $config = $this->scopeConfig->getValue('banksync/matching/filter/start_date');
-        $timestamp = strtotime($config);
+        $timestamp = strtotime((string) $config);
         return $timestamp !== false
-            ? date('Y-m-d', strtotime($config))
+            ? date('Y-m-d', strtotime((string) $config))
             : '2000-01-01';
     }
 

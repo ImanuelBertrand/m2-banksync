@@ -152,7 +152,7 @@ class CsvFormat extends AbstractModel
         }
 
         try {
-            $columnContent = trim($row[$column]) ?? '';
+            $columnContent = trim($row[$column] ?? '');
         } catch (Exception $e) {
             $this->logger->error($e->getMessage());
             $this->logger->error('Column: ' . $column);
@@ -194,7 +194,7 @@ class CsvFormat extends AbstractModel
             throw new Exception('Invalid amount format: ' . $originalValue);
         }
 
-        return number_format((float)$value, 2, '.', ''); // return as string to avoid floating point errors
+        return number_format((float) $value, 2, '.', ''); // return as string to avoid floating point errors
     }
 
     /**

@@ -1,7 +1,12 @@
 <?php
 
-\Magento\Framework\Component\ComponentRegistrar::register(
-    \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Ibertrand_BankSync',
-    __DIR__
-);
+use Magento\Framework\Component\ComponentRegistrar;
+
+// Class check to make standalone linter tools work
+if (class_exists(ComponentRegistrar::class)) {
+    ComponentRegistrar::register(
+        ComponentRegistrar::MODULE,
+        'Ibertrand_BankSync',
+        __DIR__
+    );
+}

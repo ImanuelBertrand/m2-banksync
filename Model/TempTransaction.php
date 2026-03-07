@@ -62,7 +62,7 @@ class TempTransaction extends AbstractModel
 
     protected function _construct()
     {
-        $this->_init('Ibertrand\BankSync\Model\ResourceModel\TempTransaction');
+        $this->_init(ResourceModel\TempTransaction::class);
     }
 
     /**

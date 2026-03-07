@@ -214,9 +214,9 @@ class DunningListing extends AbstractDataProvider
             'email_address' => 'order.customer_email',
             'invoice_date' => 'invoice.created_at',
             'invoice_increment_id' => 'invoice.increment_id',
-            'is_sent' => [$this, 'setFilterIsSent'],
-            'is_archived' => [$this, 'setFilterIsArchived'],
-            'name' => [$this, 'setFilterName'],
+            'is_sent' => $this->setFilterIsSent(...),
+            'is_archived' => $this->setFilterIsArchived(...),
+            'name' => $this->setFilterName(...),
             'document_amount' => 'invoice.grand_total',
         ];
 
