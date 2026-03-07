@@ -63,7 +63,7 @@ class MassSend extends Action
 
         $failed = 0;
         $success = 0;
-        if (count($dunnings) == 0) {
+        if (count($dunnings) === 0) {
             $this->messageManager->addErrorMessage('No dunnings selected.');
         }
         foreach ($dunnings as $dunning) {

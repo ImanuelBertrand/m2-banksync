@@ -29,7 +29,7 @@ class CreateDunnings
      */
     protected function hasEnabledTypes(int $storeId): bool
     {
-        return !empty($this->dunningHelper->getEnabledDunningTypes($storeId));
+        return $this->dunningHelper->getEnabledDunningTypes($storeId) !== [];
     }
 
     /**
@@ -64,7 +64,7 @@ class CreateDunnings
         $this->logger->info("Found " . $openInvoices->count() . " potential invoices to create dunnings for");
         $count = 0;
         foreach ($openInvoices as $invoice) {
-            if ($dunning = $this->dunningHelper->getDunningToSend($invoice)) {
+            if (($dunning = $this->dunningHelper->getDunningToSend($invoice)) instanceof \Ibertrand\BankSync\Model\Dunning) {
                 $count++;
                 if ($this->dunningHelper->isAutoSendMailEnabled($storeId)) {
                     $dunning->sendMail();

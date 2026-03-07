@@ -37,9 +37,9 @@ class Save extends Action
         }
 
         try {
-            $format = !empty($id)
-                ? $this->csvFormatRepository->getById($id)
-                : $this->csvFormatFactory->create();
+            $format = empty($id)
+                ? $this->csvFormatFactory->create()
+                : $this->csvFormatRepository->getById($id);
 
             $format->setName($this->getRequest()->getParam('name'));
             $format->setHasHeader(!empty($this->getRequest()->getParam('has_header')));

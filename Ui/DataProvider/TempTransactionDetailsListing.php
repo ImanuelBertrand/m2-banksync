@@ -76,7 +76,7 @@ class TempTransactionDetailsListing extends TempTransactionSearchDocumentListing
             ->addFieldToFilter('temp_transaction_id', $tempTransaction->getId())
             ->getColumnValues('document_id');
 
-        $this->collection = $documentType
+        $this->collection = $documentType === 'invoice'
             ? $this->invoiceCollectionFactory->create()
             : $this->creditmemoCollectionFactory->create();
 

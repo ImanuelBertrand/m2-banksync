@@ -75,7 +75,7 @@ class TempTransactionSearchDocumentListing extends AbstractDataProvider
         $tempTransaction = $this->getTempTransaction();
         $documentType = $tempTransaction->getDocumentType();
 
-        $this->collection = $documentType
+        $this->collection = $documentType === 'invoice'
             ? $this->invoiceCollectionFactory->create()
             : $this->creditmemoCollectionFactory->create();
     }

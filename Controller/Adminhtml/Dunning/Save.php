@@ -36,7 +36,7 @@ class Save extends Action
         }
 
         $comment = $this->getRequest()->getParam('comment');
-        if (is_string($comment) && empty(trim($comment))) {
+        if (is_string($comment) && trim($comment) === '') {
             $comment = null;
         }
 

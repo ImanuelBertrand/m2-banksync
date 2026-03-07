@@ -75,7 +75,7 @@ class Matching extends AbstractHelper
      */
     protected function addAddressScores(array &$nameScores, array &$halfScoreKeys, ?Order\Address $address): void
     {
-        if (!$address) {
+        if (!$address instanceof \Magento\Sales\Model\Order\Address) {
             return;
         }
         $nameScores = array_merge($nameScores, [
@@ -148,7 +148,7 @@ class Matching extends AbstractHelper
         $matches = [];
         foreach ($nameScores as $name => $score) {
             $name = $this->normalizeName($name);
-            if (empty($name)) {
+            if ($name === '') {
                 continue;
             }
             foreach ($transactionNames as $transactionName) {
@@ -169,7 +169,7 @@ class Matching extends AbstractHelper
      */
     protected function aggregateScores(array $scores): float
     {
-        if (empty($scores)) {
+        if ($scores === []) {
             return 0.0;
         }
         rsort($scores);
@@ -254,7 +254,7 @@ class Matching extends AbstractHelper
     public function getPurposeMatches(TempTransaction $tempTransaction, Invoice|Creditmemo $document): array
     {
         $purpose = trim($tempTransaction->getPurpose() ?? "");
-        if (empty($purpose)) {
+        if ($purpose === '') {
             return [];
         }
 
@@ -276,7 +276,7 @@ class Matching extends AbstractHelper
 
         foreach ($nameScores as $text => $score) {
             $textNormalized = $this->normalizeName($text);
-            if (empty($textNormalized)) {
+            if ($textNormalized === '') {
                 continue;
             }
             $pattern = $this->getMatchPattern($textNormalized);

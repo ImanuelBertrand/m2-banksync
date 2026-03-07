@@ -199,9 +199,9 @@ class Dunning extends AbstractHelper
     public function getDunningToSend(Invoice $invoice): ?DunningModel
     {
         $dunningTypeToSend = $this->getDunningTypeToSend($invoice);
-        return !empty($dunningTypeToSend)
-            ? $this->getDunning($invoice, $dunningTypeToSend)
-            : null;
+        return $dunningTypeToSend === null
+            ? null
+            : $this->getDunning($invoice, $dunningTypeToSend);
     }
 
     /**
@@ -248,7 +248,7 @@ class Dunning extends AbstractHelper
     protected function getMinDelay(int $storeId): int
     {
         $types = $this->getEnabledDunningTypes($storeId);
-        if (empty($types)) {
+        if ($types === []) {
             return 0;
         }
         return min(array_map(fn($type) => $this->getTypeDelay($type, $storeId), $types));
@@ -271,7 +271,7 @@ class Dunning extends AbstractHelper
             ->addFieldToFilter('banksync_dunning_blocked_at', ['null' => true]);
 
         $paymentMethods = $this->config->getPaymentMethods();
-        if (!empty($paymentMethods)) {
+        if ($paymentMethods !== []) {
             $collection->join(
                 ['payment' => 'sales_order_payment'],
                 'main_table.order_id = payment.parent_id',

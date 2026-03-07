@@ -33,10 +33,10 @@ class MassBook extends Action
     }
 
     /**
-     * @return int[]|null
+     * @return int[]
      * @throws LocalizedException
      */
-    protected function getIds(): ?array
+    protected function getIds(): array
     {
         return $this->filter->getCollection($this->collectionFactory->create())->getAllIds();
     }
@@ -50,7 +50,7 @@ class MassBook extends Action
         $ids = $this->getIds();
         # When IDs are selected, don't check the threshold (manual action).
         # Otherwise, only autobook if the threshold is reached.
-        $minThreshold = empty($ids) ? null : 0;
+        $minThreshold = $ids === [] ? null : 0;
         $results = $this->booker->autoBook($ids, $minThreshold);
         $successCount = count($results['success']);
         $errorCount = count($results['error']);
@@ -64,7 +64,7 @@ class MassBook extends Action
             }
         }
 
-        if ($successCount > 0 && $errorCount == 0) {
+        if ($successCount > 0 && $errorCount === 0) {
             $msg = __("%1 transactions have been booked successfully.", $successCount);
             $this->messageManager->addSuccessMessage($msg);
         } elseif ($successCount > 0 && $errorCount > 0) {

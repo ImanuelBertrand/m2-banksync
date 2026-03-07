@@ -70,7 +70,7 @@ class MassArchive extends Action
 
         /** @var Dunning[] $dunnings */
         $dunnings = $collection->getItems();
-        if (count($dunnings) == 0) {
+        if (count($dunnings) === 0) {
             $this->messageManager->addErrorMessage('No dunnings selected.');
             return $resultRedirect;
         }

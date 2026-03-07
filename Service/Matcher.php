@@ -46,7 +46,8 @@ class Matcher
         protected readonly OrderCollectionFactory $orderCollectionFactory,
         protected readonly Config $config,
         protected readonly Matching $matching,
-    ) {}
+    ) {
+    }
 
     /**
      * @param callable $progressCallBack
@@ -93,7 +94,7 @@ class Matcher
         $collection->getSelect()->where('tt.document_id is null');
 
         $paymentMethods = $this->config->getPaymentMethods();
-        if (!empty($paymentMethods)) {
+        if ($paymentMethods !== []) {
             $collection->join(
                 ['payment' => 'sales_order_payment'],
                 'main_table.order_id = payment.parent_id',
@@ -110,8 +111,11 @@ class Matcher
      */
     public function extractDocumentNumbersFromPurpose(?string $purpose): array
     {
+        if ($purpose === null || trim($purpose) === '') {
+            return [];
+        }
         $pattern = $this->config->getNrFilterPattern('document');
-        if (empty($purpose) || empty($pattern)) {
+        if ($pattern === '') {
             return [];
         }
         if (!preg_match_all($pattern, $purpose, $matches)) {
@@ -132,7 +136,7 @@ class Matcher
     public function getDocumentsViaDocumentNumbers(TempTransaction $tempTransaction): array
     {
         $numbers = $this->extractDocumentNumbersFromPurpose($tempTransaction->getPurpose());
-        if (empty($numbers)) {
+        if ($numbers === []) {
             return [];
         }
 
@@ -148,8 +152,11 @@ class Matcher
      */
     public function extractOrderNumbersFromPurpose(?string $purpose): array
     {
+        if ($purpose === null || $purpose === '') {
+            return [];
+        }
         $pattern = $this->config->getNrFilterPattern('order');
-        if (empty($purpose) || empty($pattern)) {
+        if ($pattern === '') {
             return [];
         }
         if (!preg_match_all($pattern, $purpose, $matches)) {
@@ -169,7 +176,7 @@ class Matcher
     protected function getDocumentsViaOrderNumbers(TempTransaction $tempTransaction): array
     {
         $numbers = $this->extractOrderNumbersFromPurpose($tempTransaction->getPurpose());
-        if (empty($numbers)) {
+        if ($numbers === []) {
             return [];
         }
 
@@ -193,8 +200,11 @@ class Matcher
      */
     public function extractCustomerNumbersFromPurpose(?string $purpose): array
     {
+        if ($purpose === null || $purpose === '') {
+            return [];
+        }
         $pattern = $this->config->getNrFilterPattern('customer');
-        if (empty($purpose) || empty($pattern)) {
+        if ($pattern === '') {
             return [];
         }
         if (!preg_match_all($pattern, $purpose, $matches)) {
@@ -214,7 +224,7 @@ class Matcher
     protected function getDocumentsViaCustomer(TempTransaction $tempTransaction): array
     {
         $numbers = $this->extractCustomerNumbersFromPurpose($tempTransaction->getPurpose());
-        if (empty($numbers)) {
+        if ($numbers === []) {
             return [];
         }
 
@@ -312,7 +322,7 @@ class Matcher
     {
         $this->deleteConfidences($tempTransaction);
         $confidences = $this->getDocumentConfidences($tempTransaction);
-        if (!empty($confidences)) {
+        if ($confidences !== []) {
             $this->saveConfidences($tempTransaction, $confidences);
             $tempTransaction->setMatchConfidence(max($confidences));
             $tempTransaction->setDirty(TempTransaction::NOT_DIRTY);

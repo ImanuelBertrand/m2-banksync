@@ -101,10 +101,10 @@ class TempTransactionListing extends AbstractDataProvider
                     $order = $document->getOrder();
                     $documentName = $this->display->getCustomerNamesForListing($order);
 
-                    if (count($matches) == 1 || count($confidentMatches) == 1 || count($absoluteMatches) == 1) {
+                    if (count($matches) === 1 || count($confidentMatches) === 1 || count($absoluteMatches) === 1) {
                         $purposeMatches = $this->matching->getPurposeMatches($tempTransaction, $document);
                         $purpose = $tempTransaction->getPurpose();
-                        foreach ($purposeMatches as $match => $score) {
+                        foreach (array_keys($purposeMatches) as $match) {
                             $purpose = $this->display->highLightMatch($purpose, $match);
                             $documentName = $this->display->highLightMatch($documentName, $match);
                         }
@@ -164,11 +164,11 @@ class TempTransactionListing extends AbstractDataProvider
                 $text = $confidence;
 
                 $class = $confidence >= $acceptanceThreshold
-                && (count($confidentMatches) == 1 || count($absoluteMatches) == 1)
+                && (count($confidentMatches) === 1 || count($absoluteMatches) === 1)
                     ? 'high'
                     : 'low';
             }
-            $item['allow_book'] = $matchCount == 1 || $class == 'high';
+            $item['allow_book'] = $matchCount === 1 || $class === 'high';
             $item['match_confidence'] = "<div class='banksync-confidence-$class'>$text</div>";
         }
 

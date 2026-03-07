@@ -53,7 +53,7 @@ class ImportFile extends Action
             return $this->csvFormatRepository->getById($this->getRequest()->getParam('csv_format'));
         } catch (Exception $e) {
             $this->logger->error($e);
-            throw new LocalizedException(__('CSV format not found.'));
+            throw new LocalizedException(__('CSV format not found.'), $e->getCode(), $e);
         }
     }
 
@@ -65,11 +65,7 @@ class ImportFile extends Action
      */
     public function isRowValid(array $row): bool
     {
-        if ($row['amount'] < 0 && !$this->config->isSupportCreditmemos()) {
-            return false;
-        }
-
-        return true;
+        return !($row['amount'] < 0 && !$this->config->isSupportCreditmemos());
     }
 
     /**

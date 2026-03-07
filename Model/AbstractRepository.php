@@ -27,7 +27,7 @@ class AbstractRepository
         try {
             $this->objectResourceModel->save($object);
         } catch (Exception $e) {
-            throw new CouldNotSaveException(__($e->getMessage()));
+            throw new CouldNotSaveException(__($e->getMessage()), $e->getCode(), $e);
         }
         return $object;
     }
@@ -59,7 +59,7 @@ class AbstractRepository
         try {
             $this->objectResourceModel->delete($object);
         } catch (Exception $exception) {
-            throw new CouldNotDeleteException(__($exception->getMessage()));
+            throw new CouldNotDeleteException(__($exception->getMessage()), $exception->getCode(), $exception);
         }
         return true;
     }

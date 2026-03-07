@@ -51,11 +51,11 @@ class Unbook extends Action
                 $fail++;
             }
         }
-        if ($success > 0 && $fail == 0) {
+        if ($success > 0 && $fail === 0) {
             $this->messageManager->addSuccessMessage(
                 __('%1 transaction(s) have been unbooked successfully.', $success),
             );
-        } elseif ($success == 0 && $fail > 0) {
+        } elseif ($success === 0 && $fail > 0) {
             $this->messageManager->addWarningMessage(
                 __('%1 transaction(s) have been successfully unbooked, %2 failed.', $success, $fail),
             );

@@ -6,8 +6,8 @@ class AutoBook extends MassBook
 {
     protected function getIds(): ?array
     {
-        return !empty($this->getRequest()->getParam('id'))
-            ? [$this->getRequest()->getParam('id')]
-            : null;
+        return empty($this->getRequest()->getParam('id'))
+            ? null
+            : [$this->getRequest()->getParam('id')];
     }
 }

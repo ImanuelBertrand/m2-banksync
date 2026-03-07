@@ -122,7 +122,7 @@ class CsvFormat extends AbstractModel
                 }
                 $rowValues[$name] = trim(implode(' / ', $values), ' /');
             }
-            if (empty(array_filter($rowValues))) {
+            if (array_filter($rowValues) === []) {
                 continue;
             }
             $values = array_combine(self::COLUMNS, $rowValues);
@@ -160,7 +160,7 @@ class CsvFormat extends AbstractModel
             throw $e;
         }
 
-        if (empty($regexPattern)) {
+        if ($regexPattern === '') {
             return $columnContent;
         }
 
