@@ -1,12 +1,4 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-/**
- * PHP Coding Standards fixer configuration
- */
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
