@@ -21,6 +21,8 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory as Invoice
 
 class TempTransactionDetailsListing extends TempTransactionSearchDocumentListing
 {
+    protected $collection;
+
     public function __construct(
         $name,
         $primaryFieldName,
