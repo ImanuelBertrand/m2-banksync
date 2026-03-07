@@ -36,6 +36,7 @@ class DunningListing extends AbstractDataProvider
         'email_address' => ['order'],
         'invoice_date' => ['invoice'],
         'invoice_increment_id' => ['invoice'],
+        'document_amount' => ['invoice'],
     ];
     protected array $joinedTables = [];
 
@@ -246,6 +247,7 @@ class DunningListing extends AbstractDataProvider
             'invoice_increment_id' => 'invoice.increment_id',
             'is_sent' => 'sent_at',
             'is_archived' => 'archived_at',
+            'document_amount' => 'invoice.grand_total',
         ];
 
         if (isset($changes[$field])) {
