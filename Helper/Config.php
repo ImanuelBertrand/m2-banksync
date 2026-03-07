@@ -19,7 +19,7 @@ class Config extends AbstractHelper
      */
     public function isAsyncMatching(): bool
     {
-        return (bool)$this->scopeConfig->getValue('banksync/general/async_matching');
+        return (bool) $this->scopeConfig->getValue('banksync/general/async_matching');
     }
 
     /**
@@ -40,7 +40,7 @@ class Config extends AbstractHelper
      */
     public function getAmountThreshold(): float
     {
-        return (float)$this->scopeConfig->getValue('banksync/matching/filter/amount');
+        return (float) $this->scopeConfig->getValue('banksync/matching/filter/amount');
     }
 
     /**
@@ -48,7 +48,7 @@ class Config extends AbstractHelper
      */
     public function getAcceptConfidenceThreshold(): float
     {
-        return (float)$this->scopeConfig->getValue('banksync/matching/confidence_thresholds/acceptance');
+        return (float) $this->scopeConfig->getValue('banksync/matching/confidence_thresholds/acceptance');
     }
 
     /**
@@ -67,7 +67,7 @@ class Config extends AbstractHelper
      */
     public function getWeightConfig(string $type): float
     {
-        return (float)$this->scopeConfig->getValue("banksync/matching/weights/$type");
+        return (float) $this->scopeConfig->getValue("banksync/matching/weights/$type");
     }
 
     /**
@@ -75,7 +75,7 @@ class Config extends AbstractHelper
      */
     public function getMinConfidenceThreshold(): float
     {
-        return (float)$this->scopeConfig->getValue('banksync/matching/confidence_thresholds/minimum');
+        return (float) $this->scopeConfig->getValue('banksync/matching/confidence_thresholds/minimum');
     }
 
     /**
@@ -83,7 +83,7 @@ class Config extends AbstractHelper
      */
     public function getDateThreshold(): float
     {
-        return (int)$this->scopeConfig->getValue('banksync/matching/filter/date');
+        return (int) $this->scopeConfig->getValue('banksync/matching/filter/date');
     }
 
     /**
@@ -168,7 +168,7 @@ class Config extends AbstractHelper
      */
     public function getDunningTypeDelay(string $type, int $storeId): int
     {
-        return (int)$this->scopeConfig->getValue("banksync/dunnings/types/$type/delay", 'store', $storeId);
+        return (int) $this->scopeConfig->getValue("banksync/dunnings/types/$type/delay", 'store', $storeId);
     }
 
     /**
@@ -202,6 +202,6 @@ class Config extends AbstractHelper
 
     public function getInvoiceDueDays(): int
     {
-        return (int)$this->scopeConfig->getValue('banksync/dunnings/due_days');
+        return (int) $this->scopeConfig->getValue('banksync/dunnings/due_days');
     }
 }

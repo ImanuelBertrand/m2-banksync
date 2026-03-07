@@ -21,7 +21,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CalcHashes extends Command
 {
-
     public function __construct(
         protected readonly Hashes $hashes,
         protected readonly Config $config,

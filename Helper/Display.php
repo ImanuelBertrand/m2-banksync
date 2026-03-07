@@ -13,7 +13,6 @@ use Magento\Sales\Model\Order\Invoice;
 
 class Display extends AbstractHelper
 {
-
     public function __construct(
         Context $context,
         protected readonly UrlInterface $urlBuilder,
@@ -38,7 +37,7 @@ class Display extends AbstractHelper
                 trim($billing->getCompany() ?? ""),
                 trim(($shipping->getFirstname() ?? "") . ' ' . ($shipping->getLastname() ?? "")),
                 trim($shipping->getCompany() ?? ""),
-            ]))
+            ])),
         );
     }
 
@@ -111,7 +110,7 @@ class Display extends AbstractHelper
         return preg_replace(
             $this->getHighlightPattern($highlightPart),
             '<span class="banksync-matched-text">$0</span>',
-            $fullText
+            $fullText,
         );
     }
 }

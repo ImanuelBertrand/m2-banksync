@@ -15,8 +15,7 @@ class DunningIsPaid implements DataPatchInterface, PatchRevertableInterface
     public function __construct(
         protected readonly CollectionFactory $dunningCollectionFactory,
         protected readonly DunningRepository $dunningRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @return string[]

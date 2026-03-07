@@ -30,7 +30,6 @@ use Zend_Pdf_Style;
 
 class Dunning extends AbstractPdf
 {
-
     public function __construct(
         Data $paymentData,
         StringUtils $string,
@@ -61,7 +60,7 @@ class Dunning extends AbstractPdf
             $addressRenderer,
             $data,
             $fileStorageDatabase,
-            $rtlTextHandler
+            $rtlTextHandler,
         );
     }
 
@@ -130,7 +129,7 @@ class Dunning extends AbstractPdf
                 $this->appEmulation->startEnvironmentEmulation(
                     $dunning->getStoreId(),
                     Area::AREA_FRONTEND,
-                    true
+                    true,
                 );
                 $this->storeManager->setCurrentStore($dunning->getStoreId());
             }
@@ -147,8 +146,8 @@ class Dunning extends AbstractPdf
                 $this->_scopeConfig->isSetFlag(
                     self::XML_PATH_SALES_PDF_INVOICE_PUT_ORDER_ID,
                     ScopeInterface::SCOPE_STORE,
-                    $order->getStoreId()
-                )
+                    $order->getStoreId(),
+                ),
             );
             /* Add document text and number */
             $this->insertDocumentNumber($page, $dunning->getLabel() . $dunning->getIncrementId());

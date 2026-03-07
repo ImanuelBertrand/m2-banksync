@@ -32,7 +32,6 @@ use Magento\Sales\Model\Order\InvoiceRepository;
 
 class Booker
 {
-
     public function __construct(
         protected readonly TempTransactionResource $tempTransactionResource,
         protected readonly TransactionResource $transactionResource,
@@ -49,8 +48,7 @@ class Booker
         protected readonly Config $config,
         protected readonly Matching $matching,
         protected readonly Logger $logger,
-    ) {
-    }
+    ) {}
 
     /**
      * @param Transaction|TempTransaction|Invoice|Creditmemo $object
@@ -64,7 +62,7 @@ class Booker
             $object instanceof Creditmemo => $this->creditmemoRepository,
             default => $object->getDocumentType() == 'invoice'
                 ? $this->invoiceRepository
-                : $this->creditmemoRepository
+                : $this->creditmemoRepository,
         };
     }
 
@@ -77,7 +75,7 @@ class Booker
     private function saveDocument(Invoice|Creditmemo $document, bool $isBanksynced): void
     {
         /** @noinspection PhpUndefinedMethodInspection */
-        $document->setIsBanksynced((int)$isBanksynced)
+        $document->setIsBanksynced((int) $isBanksynced)
             ->setHasDataChanges(true);
         $this->resolveDocumentRepository($document)->save($document);
 
@@ -355,15 +353,15 @@ class Booker
                 ->addFieldToFilter('confidence', ['gteq' => $minThreshold])
                 ->getItems();
 
-            $acceptMatches = array_filter($allMatches, fn ($m) => $m->getConfidence() >= $acceptanceThreshold);
-            $absoluteMatches = array_filter($allMatches, fn ($m) => $m->getConfidence() >= $absoluteThreshold);
+            $acceptMatches = array_filter($allMatches, fn($m) => $m->getConfidence() >= $acceptanceThreshold);
+            $absoluteMatches = array_filter($allMatches, fn($m) => $m->getConfidence() >= $absoluteThreshold);
 
             if (count($allMatches) !== 1 && count($acceptMatches) !== 1 && count($absoluteMatches) !== 1) {
                 $this->logger->error("Transaction {$tempTransaction->getId()} has " . count($allMatches) . " matches");
                 continue;
             }
 
-            usort($allMatches, fn ($a, $b) => $b->getConfidence() <=> $a->getConfidence());
+            usort($allMatches, fn($a, $b) => $b->getConfidence() <=> $a->getConfidence());
 
             $documentId = $allMatches[0]->getDocumentId();
             foreach ($allRelatedBookedTransaction as $bookedTransaction) {

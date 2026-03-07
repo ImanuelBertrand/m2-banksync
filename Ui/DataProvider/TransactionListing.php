@@ -50,7 +50,7 @@ class TransactionListing extends AbstractDataProvider
             $primaryFieldName,
             $requestFieldName,
             $meta,
-            $data
+            $data,
         );
     }
 
@@ -63,7 +63,7 @@ class TransactionListing extends AbstractDataProvider
                 // Add 'document' field
                 $url = $this->urlBuilder->getUrl(
                     'sales/' . $item['document_type'] . '/view',
-                    ['invoice_id' => $item['document_id']]
+                    ['invoice_id' => $item['document_id']],
                 );
                 $hasDocument = !empty($item['document_id']);
                 if ($hasDocument) {
@@ -79,7 +79,7 @@ class TransactionListing extends AbstractDataProvider
                     $item['document_date'] = $document->getCreatedAt();
                     $orderUrl = $this->urlBuilder->getUrl(
                         'sales/order/view',
-                        ['order_id' => $document->getOrder()->getId()]
+                        ['order_id' => $document->getOrder()->getId()],
                     );
                     $item['order_increment_id'] = "<a href='$orderUrl'>{$document->getOrder()->getIncrementId()}</a>";
                     $item['payment_method'] = $document->getOrder()->getPayment()->getMethodInstance()->getTitle();
@@ -90,7 +90,7 @@ class TransactionListing extends AbstractDataProvider
                         $this->customerResource->load($customer, $customerId);
                         $customerUrl = $this->urlBuilder->getUrl(
                             'customer/index/edit',
-                            ['id' => $customerId]
+                            ['id' => $customerId],
                         );
                         $item['customer_increment_id'] = "<a href='$customerUrl'>{$customer->getIncrementId()}</a>";
                     } else {
@@ -190,7 +190,7 @@ class TransactionListing extends AbstractDataProvider
                         [$filter->getConditionType() => $filter->getValue()],
                         [$filter->getConditionType() => $filter->getValue()],
                         [$filter->getConditionType() => $filter->getValue()],
-                    ]
+                    ],
                 )
                 ->getColumnValues('parent_id');
             $this->setFilterByOrderIds($filter, $orderIds);

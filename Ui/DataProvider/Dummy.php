@@ -7,9 +7,7 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class Dummy extends AbstractDataProvider
 {
-    public function addFilter(Filter $filter)
-    {
-    }
+    public function addFilter(Filter $filter) {}
 
     public function getData()
     {

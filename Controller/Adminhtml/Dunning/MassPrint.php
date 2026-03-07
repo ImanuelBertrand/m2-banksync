@@ -72,7 +72,7 @@ class MassPrint extends Action
     {
         /** @var Dunning[] $dunnings */
         $dunnings = $collection->getItems();
-        $dunnings = array_filter($dunnings, fn ($item) => !$item->getInvoiceIsBlocked());
+        $dunnings = array_filter($dunnings, fn($item) => !$item->getInvoiceIsBlocked());
         $fileContent = ['type' => 'string', 'value' => $this->getPdfContents($dunnings), 'rm' => true];
         foreach ($dunnings as $dunning) {
             /** @var Dunning $dunning */
@@ -83,7 +83,7 @@ class MassPrint extends Action
             $this->getFilename(),
             $fileContent,
             DirectoryList::VAR_DIR,
-            'application/pdf'
+            'application/pdf',
         );
     }
 

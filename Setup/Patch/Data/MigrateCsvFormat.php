@@ -15,8 +15,7 @@ class MigrateCsvFormat implements DataPatchInterface, PatchRevertableInterface
         protected readonly CsvFormatFactory $csvFormatFactory,
         protected readonly CsvFormatRepository $csvFormatRepository,
         protected readonly ScopeConfigInterface $scopeConfig,
-    ) {
-    }
+    ) {}
 
     /**
      * @return string[]

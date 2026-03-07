@@ -14,7 +14,7 @@ class Collection extends AbstractCollection
     {
         $this->_init(
             TempTransactionModel::class,
-            TempTransactionResource::class
+            TempTransactionResource::class,
         );
     }
 }

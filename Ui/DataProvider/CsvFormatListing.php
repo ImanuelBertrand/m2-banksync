@@ -7,7 +7,6 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class CsvFormatListing extends AbstractDataProvider
 {
-
     public function __construct(
         $name,
         $primaryFieldName,
@@ -22,7 +21,7 @@ class CsvFormatListing extends AbstractDataProvider
             $primaryFieldName,
             $requestFieldName,
             $meta,
-            $data
+            $data,
         );
     }
 }

@@ -14,8 +14,7 @@ class RunMatching
         protected readonly Logger $logger,
         protected readonly Matcher $matcher,
         protected readonly Config $config,
-    ) {
-    }
+    ) {}
 
     /**
      * @param Schedule $schedule

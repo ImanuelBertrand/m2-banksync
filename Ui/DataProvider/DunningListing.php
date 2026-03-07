@@ -20,7 +20,7 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DunningListing extends AbstractDataProvider
 {
-    const JOIN_CONFIG = [
+    public const JOIN_CONFIG = [
         'invoice' => [
             'table_name' => 'sales_invoice',
             'on_clause' => 'invoice.entity_id = main_table.invoice_id',
@@ -32,7 +32,7 @@ class DunningListing extends AbstractDataProvider
             'needed_joins' => ['invoice'],
         ],
     ];
-    const JOINS_NEEDED = [
+    public const JOINS_NEEDED = [
         'email_address' => ['order'],
         'invoice_date' => ['invoice'],
         'invoice_increment_id' => ['invoice'],
@@ -66,7 +66,7 @@ class DunningListing extends AbstractDataProvider
             $primaryFieldName,
             $requestFieldName,
             $meta,
-            $data
+            $data,
         );
     }
 
@@ -93,8 +93,8 @@ class DunningListing extends AbstractDataProvider
                 'email_address' => $order->getCustomerEmail(),
                 'invoice_date' => $invoice->getCreatedAt(),
                 'invoice_increment_id' => $this->display->getObjectLink($invoice),
-                'is_sent' => (int)!empty($item['sent_at']),
-                'is_archived' => (int)!empty($item['archived_at']),
+                'is_sent' => (int) !empty($item['sent_at']),
+                'is_archived' => (int) !empty($item['archived_at']),
                 'name' => implode("<br>", $names),
                 'document_amount' => $this->priceHelper->currency($invoice->getGrandTotal()),
             ]);
@@ -143,7 +143,7 @@ class DunningListing extends AbstractDataProvider
         $matchingOrders->getSelect()
             ->where(
                 'REGEXP_REPLACE(CONCAT(customer_firstname, " ", customer_lastname), "\\\\s\\\\s+", " ") LIKE ?',
-                $filterValue
+                $filterValue,
             );
         $matchingOrderIds = $matchingOrders->getColumnValues('entity_id');
 
@@ -152,24 +152,24 @@ class DunningListing extends AbstractDataProvider
             ->addFieldToFilter('entity_id', ['in' => $allBillingAddressesWithDunnings]);
         $matchingBillingAddresses->getSelect()
             ->where(
-                'REGEXP_REPLACE(CONCAT(firstname, " ", lastname), "\\\\s\\\\s+", " ") LIKE ? ' .
-                'OR REGEXP_REPLACE(company, "\\\\s\\\\s+", " ") LIKE ?',
-                $filterValue
+                'REGEXP_REPLACE(CONCAT(firstname, " ", lastname), "\\\\s\\\\s+", " ") LIKE ? '
+                . 'OR REGEXP_REPLACE(company, "\\\\s\\\\s+", " ") LIKE ?',
+                $filterValue,
             );
 
         // Deduplicate and combine matching order IDs from orders and billing addresses for efficient filtering.
         $matchingOrderIds = array_unique(array_merge(
             $matchingOrderIds,
-            $matchingBillingAddresses->getColumnValues('parent_id')
+            $matchingBillingAddresses->getColumnValues('parent_id'),
         ));
         $matchingOrderIds = array_combine($matchingOrderIds, $matchingOrderIds);
 
         // Directly filter invoices in memory using the reduced set of order IDs.
         $matchingInvoices = array_filter(
             $allInvoicesWithDunnings->getItems(),
-            fn ($invoice) => isset($matchingOrderIds[$invoice->getOrderId()])
+            fn($invoice) => isset($matchingOrderIds[$invoice->getOrderId()]),
         );
-        $matchingInvoiceIds = array_map(fn ($invoice) => $invoice->getId(), $matchingInvoices);
+        $matchingInvoiceIds = array_map(fn($invoice) => $invoice->getId(), $matchingInvoices);
 
         // Set the refined invoice ID filter.°
         $filter->setField('invoice_id')
@@ -194,7 +194,7 @@ class DunningListing extends AbstractDataProvider
         $this->collection->join(
             [$joinIdent => $joinConfig['table_name']],
             $joinConfig['on_clause'],
-            []
+            [],
         );
         $this->joinedTables[$joinIdent] = true;
     }

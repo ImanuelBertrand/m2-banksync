@@ -141,18 +141,18 @@ class ImportFile extends Action
                 } catch (Exception $e) {
                     $this->logger->error($e);
                     $this->messageManager->addErrorMessage(
-                        __('Error occurred while matching the transactions. Check the logs for more details.')
+                        __('Error occurred while matching the transactions. Check the logs for more details.'),
                     );
                 }
             } else {
                 $this->messageManager->addNoticeMessage(
-                    __('Transactions will be matched in the background. Please check the list in a few minutes.')
+                    __('Transactions will be matched in the background. Please check the list in a few minutes.'),
                 );
             }
         } catch (Exception $e) {
             $this->logger->error($e);
             $this->messageManager->addErrorMessage(
-                __('Error occurred while importing the CSV file. Check the logs for more details.')
+                __('Error occurred while importing the CSV file. Check the logs for more details.'),
             );
             return $this->resultRedirectFactory->create()->setPath('*/*/import');
         }

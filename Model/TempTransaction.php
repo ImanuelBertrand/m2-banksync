@@ -44,8 +44,8 @@ use Magento\Sales\Model\Order\InvoiceRepository;
  */
 class TempTransaction extends AbstractModel
 {
-    const DIRTY = 1;
-    const NOT_DIRTY = 0;
+    public const DIRTY = 1;
+    public const NOT_DIRTY = 0;
 
     public function __construct(
         Context $context,

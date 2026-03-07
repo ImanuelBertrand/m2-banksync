@@ -9,7 +9,6 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class Actions extends Column
 {
-
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -30,7 +29,7 @@ class Actions extends Column
                     $item[$name]['edit'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/csvformat/edit',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Edit'),
                         'hidden' => false,
@@ -38,7 +37,7 @@ class Actions extends Column
                     $item[$name]['delete'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/csvformat/delete',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Delete'),
                         'hidden' => false,

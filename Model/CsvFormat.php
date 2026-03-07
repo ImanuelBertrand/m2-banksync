@@ -59,7 +59,7 @@ use Magento\Framework\Registry;
  */
 class CsvFormat extends AbstractModel
 {
-    const COLUMNS = [
+    public const COLUMNS = [
         'amount',
         'purpose',
         'payer_name',
@@ -92,7 +92,7 @@ class CsvFormat extends AbstractModel
     public function loadFile(string $filename): array
     {
         return $this->parseCsvContent(
-            $this->loadCsvContent($filename)
+            $this->loadCsvContent($filename),
         );
     }
 

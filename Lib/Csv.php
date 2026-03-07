@@ -128,7 +128,7 @@ class Csv extends CoreCsv
                     $this->logger->notice('Row: ' . var_export($row, true));
                     $this->logger->error(
                         'Invalid line in CSV file (different number of cells compared to header): '
-                        . var_export($row, true)
+                        . var_export($row, true),
                     );
 
                     if (!$this->ignoreInvalidLines) {

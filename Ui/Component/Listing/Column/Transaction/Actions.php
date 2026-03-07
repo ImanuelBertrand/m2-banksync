@@ -28,7 +28,7 @@ class Actions extends Column
                     $item[$name]['details'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/transaction/unbook',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('⤺ Undo'),
                         'hidden' => false,

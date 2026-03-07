@@ -8,7 +8,6 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class CsvFormatEditForm extends AbstractDataProvider
 {
-
     public function __construct(
         $name,
         $primaryFieldName,

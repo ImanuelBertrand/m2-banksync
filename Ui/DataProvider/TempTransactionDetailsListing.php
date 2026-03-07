@@ -59,7 +59,7 @@ class TempTransactionDetailsListing extends TempTransactionSearchDocumentListing
             $display,
             $matching,
             $meta,
-            $data
+            $data,
         );
     }
 
@@ -84,12 +84,12 @@ class TempTransactionDetailsListing extends TempTransactionSearchDocumentListing
 
         $condition = $this->collection->getConnection()->quoteInto(
             'main_table.entity_id = t_mc.document_id AND t_mc.temp_transaction_id = ?',
-            $tempTransaction->getId()
+            $tempTransaction->getId(),
         );
         $this->collection->join(
             ['t_mc' => $this->matchConfidenceResource->getMainTable()],
             $condition,
-            ['match_confidence' => 't_mc.confidence']
+            ['match_confidence' => 't_mc.confidence'],
         );
 
         $this->collection->setOrder('t_mc.confidence');

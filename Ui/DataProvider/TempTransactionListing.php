@@ -22,7 +22,6 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class TempTransactionListing extends AbstractDataProvider
 {
-
     public function __construct(
         $name,
         $primaryFieldName,
@@ -49,7 +48,7 @@ class TempTransactionListing extends AbstractDataProvider
             $primaryFieldName,
             $requestFieldName,
             $meta,
-            $data
+            $data,
         );
     }
 
@@ -79,10 +78,10 @@ class TempTransactionListing extends AbstractDataProvider
             /** @var TempTransaction $tempTransaction */
             $tempTransaction = $this->collection->getItemById($item['entity_id']);
             $matches = $allConfidences->getItemsByColumnValue('temp_transaction_id', $item['entity_id']);
-            usort($matches, fn ($b, $a) => $a->getConfidence() <=> $b->getConfidence());
+            usort($matches, fn($b, $a) => $a->getConfidence() <=> $b->getConfidence());
 
-            $confidentMatches = array_filter($matches, fn ($m) => $m->getConfidence() >= $acceptanceThreshold);
-            $absoluteMatches = array_filter($matches, fn ($m) => $m->getConfidence() >= $absoluteThreshold);
+            $confidentMatches = array_filter($matches, fn($m) => $m->getConfidence() >= $acceptanceThreshold);
+            $absoluteMatches = array_filter($matches, fn($m) => $m->getConfidence() >= $absoluteThreshold);
 
             $item['document_type'] = $item['amount'] > 0 ? 'invoice' : 'creditmemo';
             $matchCount = count($matches);
@@ -155,7 +154,7 @@ class TempTransactionListing extends AbstractDataProvider
 
             // Add 'confidence' field with color
             $confidence = count($matches) > 0
-                ? max(array_map(fn ($match) => $match->getConfidence(), $matches))
+                ? max(array_map(fn($match) => $match->getConfidence(), $matches))
                 : null;
 
             if ($confidence === null) {

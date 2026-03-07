@@ -190,9 +190,9 @@ class Dunning extends AbstractModel
      */
     public function updatePaidStatus(): bool
     {
-        $oldStatus = (int)$this->getIsPaid();
+        $oldStatus = (int) $this->getIsPaid();
         /** @noinspection PhpUndefinedMethodInspection */
         $this->setIsPaid($this->getInvoice()->getIsBanksynced());
-        return $oldStatus !== (int)$this->getIsPaid();
+        return $oldStatus !== (int) $this->getIsPaid();
     }
 }

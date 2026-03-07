@@ -28,7 +28,7 @@ class DunningBlockButton extends Container
                 'confirm' => __('Are you sure you want to do this?'),
                 'on_click' => "deleteConfirm( '" . __('Sure?') . "', '" . $this->getTargetUrl() . "')",
             ],
-            sortOrder: -5
+            sortOrder: -5,
         );
 
         parent::_construct();
@@ -68,7 +68,7 @@ class DunningBlockButton extends Container
         $setBlocked = $this->invoiceIsBlocked() ? 0 : 1;
         return $this->getUrl(
             "banksync/dunning/block",
-            ['invoice_id' => $this->getInvoiceId(), 'set_blocked' => $setBlocked]
+            ['invoice_id' => $this->getInvoiceId(), 'set_blocked' => $setBlocked],
         );
     }
 

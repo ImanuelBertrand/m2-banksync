@@ -9,7 +9,6 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class Actions extends Column
 {
-
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -30,7 +29,7 @@ class Actions extends Column
                         $item[$name]['autobook'] = [
                             'href' => $this->urlBuilder->getUrl(
                                 'banksync/temptransaction/autoBook',
-                                ['id' => $item['entity_id']]
+                                ['id' => $item['entity_id']],
                             ),
                             'label' => __('✓ Book'),
                             'hidden' => false,
@@ -40,7 +39,7 @@ class Actions extends Column
                     $item[$name]['search'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/temptransaction/search',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('🔍 Search'),
                         'hidden' => false,
@@ -50,7 +49,7 @@ class Actions extends Column
                         $item[$name]['details'] = [
                             'href' => $this->urlBuilder->getUrl(
                                 'banksync/temptransaction/details',
-                                ['id' => $item['entity_id']]
+                                ['id' => $item['entity_id']],
                             ),
                             'label' => __('≡ Details'),
                             'hidden' => false,
@@ -60,7 +59,7 @@ class Actions extends Column
                     $item[$name]['edit'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/temptransaction/edit',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('🖉 Edit comment'),
                         'hidden' => false,
@@ -69,7 +68,7 @@ class Actions extends Column
                     $item[$name]['archive'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/temptransaction/archive',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('📁 Archive'),
                         'hidden' => false,
@@ -77,7 +76,7 @@ class Actions extends Column
                             'title' => __('Archive "%1"', $item['entity_id']),
                             'message' => __(
                                 'Are you sure you want to archive the record "%1"?',
-                                $item['entity_id']
+                                $item['entity_id'],
                             ),
                         ],
                     ];
@@ -85,7 +84,7 @@ class Actions extends Column
                     $item[$name]['delete'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/temptransaction/delete',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('✖ Delete'),
                         'hidden' => false,
@@ -93,7 +92,7 @@ class Actions extends Column
                             'title' => __('Delete "%1"', $item['entity_id']),
                             'message' => __(
                                 'Are you sure you want to delete the record "%1"?',
-                                $item['entity_id']
+                                $item['entity_id'],
                             ),
                         ],
                     ];

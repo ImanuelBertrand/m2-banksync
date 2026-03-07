@@ -55,7 +55,7 @@ class MassSend extends Action
     {
         /** @var Dunning[] $dunnings */
         $dunnings = $collection->getItems();
-        $dunnings = array_filter($dunnings, fn ($dunning) => !$dunning->getInvoiceIsBlocked());
+        $dunnings = array_filter($dunnings, fn($dunning) => !$dunning->getInvoiceIsBlocked());
         if (count($dunnings) < $collection->getSize()) {
             $count = $collection->getSize() - count($dunnings);
             $this->messageManager->addErrorMessage($count . ' dunning(s) could not be sent because the invoice is blocked.');

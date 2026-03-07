@@ -28,7 +28,7 @@ class Actions extends Column
                     $item[$name]['book'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/temptransaction/book',
-                            ['id' => $item['transaction_id'], 'document_id' => $item['entity_id']]
+                            ['id' => $item['transaction_id'], 'document_id' => $item['entity_id']],
                         ),
                         'label' => __('✓ Book'),
                         'hidden' => false,
@@ -37,7 +37,7 @@ class Actions extends Column
                         $item[$name]['partial_book'] = [
                             'href' => $this->urlBuilder->getUrl(
                                 'banksync/temptransaction/book',
-                                ['id' => $item['transaction_id'], 'document_id' => $item['entity_id'], 'partial' => 1]
+                                ['id' => $item['transaction_id'], 'document_id' => $item['entity_id'], 'partial' => 1],
                             ),
                             'label' => __('✓ Partial book'),
                             'hidden' => false,

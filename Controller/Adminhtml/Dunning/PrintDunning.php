@@ -54,7 +54,7 @@ class PrintDunning extends Action
                 $dunning->getLabel() . ' ' . $invoice->getIncrementId() . '_print.pdf',
                 $fileContent,
                 DirectoryList::VAR_DIR,
-                'application/pdf'
+                'application/pdf',
             );
         }
 

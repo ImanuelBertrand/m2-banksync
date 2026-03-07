@@ -9,12 +9,10 @@ use Magento\Sales\Setup\SalesSetup;
 
 class IsBanksynced implements DataPatchInterface, PatchRevertableInterface
 {
-
     public function __construct(
         protected readonly ModuleDataSetupInterface $moduleDataSetup,
         protected readonly SalesSetup $salesSetup,
-    ) {
-    }
+    ) {}
 
     public static function getDependencies(): array
     {
@@ -40,7 +38,7 @@ class IsBanksynced implements DataPatchInterface, PatchRevertableInterface
                 'default' => 0,
                 'required' => true,
                 'grid' => true,
-            ]
+            ],
         );
 
         $this->moduleDataSetup->endSetup();

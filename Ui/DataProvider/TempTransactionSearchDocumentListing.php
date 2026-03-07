@@ -116,8 +116,8 @@ class TempTransactionSearchDocumentListing extends AbstractDataProvider
 
             $amountIsMatched = abs(abs($tempTransaction->getAmount()) - $document->getGrandTotal()) < 0.01;
             $amountClass = $amountIsMatched ? 'banksync-matched-text' : '';
-            $item['transaction_amount'] = "<span class='$amountClass'>" .
-                $this->priceHelper->currency($tempTransaction->getAmount()) . "</span>";
+            $item['transaction_amount'] = "<span class='$amountClass'>"
+                . $this->priceHelper->currency($tempTransaction->getAmount()) . "</span>";
             $item['grand_total'] = "<span class='$amountClass'>{$this->priceHelper->currency($document->getGrandTotal())}</span>";
 
             $item['transaction_amount_raw'] = $tempTransaction->getAmount();

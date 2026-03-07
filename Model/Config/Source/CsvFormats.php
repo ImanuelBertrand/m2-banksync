@@ -11,8 +11,7 @@ class CsvFormats implements OptionSourceInterface
 
     public function __construct(
         protected readonly CollectionFactory $collectionFactory,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array|array[]

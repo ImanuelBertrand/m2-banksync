@@ -9,8 +9,7 @@ class DunningTypes implements OptionSourceInterface
 {
     public function __construct(
         protected readonly Dunning $dunningHelper,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array|array[]
@@ -19,7 +18,7 @@ class DunningTypes implements OptionSourceInterface
     {
         $storeId = 0;
         return array_map(
-            fn ($type) => ['value' => $type, 'label' => $this->dunningHelper->getTypeLabel($type, $storeId)],
+            fn($type) => ['value' => $type, 'label' => $this->dunningHelper->getTypeLabel($type, $storeId)],
             $this->dunningHelper->getEnabledDunningTypes($storeId),
         );
     }

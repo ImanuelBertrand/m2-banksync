@@ -16,7 +16,6 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory as Invoice
 
 class Dunning extends AbstractHelper
 {
-
     public function __construct(
         Context $context,
         protected readonly Config $config,
@@ -51,7 +50,7 @@ class Dunning extends AbstractHelper
      */
     public function getEnabledDunningTypes(int $storeId): array
     {
-        return array_filter($this->getDunningTypes(), fn ($type) => $this->isTypeEnabled($type, $storeId));
+        return array_filter($this->getDunningTypes(), fn($type) => $this->isTypeEnabled($type, $storeId));
     }
 
     /**
@@ -252,7 +251,7 @@ class Dunning extends AbstractHelper
         if (empty($types)) {
             return 0;
         }
-        return min(array_map(fn ($type) => $this->getTypeDelay($type, $storeId), $types));
+        return min(array_map(fn($type) => $this->getTypeDelay($type, $storeId), $types));
     }
 
     /**
@@ -276,7 +275,7 @@ class Dunning extends AbstractHelper
             $collection->join(
                 ['payment' => 'sales_order_payment'],
                 'main_table.order_id = payment.parent_id',
-                []
+                [],
             )->addFieldToFilter('payment.method', ['in' => $this->config->getPaymentMethods()]);
         }
 

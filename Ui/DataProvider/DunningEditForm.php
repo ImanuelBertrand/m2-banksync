@@ -9,7 +9,6 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DunningEditForm extends AbstractDataProvider
 {
-
     public function __construct(
         $name,
         $primaryFieldName,

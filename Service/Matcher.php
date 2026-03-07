@@ -46,8 +46,7 @@ class Matcher
         protected readonly OrderCollectionFactory $orderCollectionFactory,
         protected readonly Config $config,
         protected readonly Matching $matching,
-    ) {
-    }
+    ) {}
 
     /**
      * @param callable $progressCallBack
@@ -98,7 +97,7 @@ class Matcher
             $collection->join(
                 ['payment' => 'sales_order_payment'],
                 'main_table.order_id = payment.parent_id',
-                []
+                [],
             )->addFieldToFilter('payment.method', ['in' => $paymentMethods]);
         }
 
@@ -252,7 +251,7 @@ class Matcher
         $amountThreshold = $this->config->getAmountThreshold();
         $latestDate = date(
             'Y-m-d H:i:s',
-            strtotime((string) $tempTransaction->getTransactionDate()) + $this->config->getDateThreshold() * 86400
+            strtotime((string) $tempTransaction->getTransactionDate()) + $this->config->getDateThreshold() * 86400,
         );
 
         $collection = $this->getBaseDocumentCollection($tempTransaction)

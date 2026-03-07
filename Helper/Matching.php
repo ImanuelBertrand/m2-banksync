@@ -16,7 +16,7 @@ use Magento\Sales\Model\Order\Invoice;
 
 class Matching extends AbstractHelper
 {
-    const SPECIAL_CHARACTERS = [
+    public const SPECIAL_CHARACTERS = [
         'ae' => '(?:[aáà]e|ä|æ)',
         'oe' => '(?:[oóò]e|ö|œ)',
         'ue' => '(?:[uúù]e|ü)',
@@ -240,7 +240,7 @@ class Matching extends AbstractHelper
         $pattern = str_replace(
             array_keys(self::SPECIAL_CHARACTERS),
             array_values(self::SPECIAL_CHARACTERS),
-            $pattern
+            $pattern,
         );
         return '/\b' . $pattern . '\b/iu';
     }

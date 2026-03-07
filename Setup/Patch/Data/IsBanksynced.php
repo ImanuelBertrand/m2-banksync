@@ -12,13 +12,11 @@ use Magento\Sales\Api\InvoiceRepositoryInterface;
 
 class IsBanksynced implements DataPatchInterface, PatchRevertableInterface
 {
-
     public function __construct(
         protected readonly CollectionFactory $transactionCollectionFactory,
         protected readonly InvoiceRepositoryInterface $invoiceRepository,
         protected readonly CreditmemoRepositoryInterface $creditmemoRepository,
-    ) {
-    }
+    ) {}
 
     public static function getDependencies(): array
     {

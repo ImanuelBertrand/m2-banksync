@@ -59,7 +59,7 @@ class Delete extends Action
         } catch (Exception $e) {
             $this->logger->error($e);
             $this->messageManager->addErrorMessage(
-                __('Error occurred while deleted the transaction(s). Check the logs for more details.')
+                __('Error occurred while deleted the transaction(s). Check the logs for more details.'),
             );
         }
 

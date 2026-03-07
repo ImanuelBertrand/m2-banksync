@@ -9,7 +9,6 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class Actions extends Column
 {
-
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -29,7 +28,7 @@ class Actions extends Column
                     $item[$name]['edit'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/dunning/edit',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Edit'),
                         'hidden' => false,
@@ -37,7 +36,7 @@ class Actions extends Column
                     $item[$name]['send'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/dunning/sendMail',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Send Mail'),
                         'hidden' => false,
@@ -45,7 +44,7 @@ class Actions extends Column
                     $item[$name]['print'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/dunning/printDunning',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Print'),
                         'hidden' => false,
@@ -53,7 +52,7 @@ class Actions extends Column
                     $item[$name]['archive'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/dunning/archive',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Archive'),
                         'hidden' => !empty($item['archived_at']),
@@ -61,7 +60,7 @@ class Actions extends Column
                     $item[$name]['unarchive'] = [
                         'href' => $this->urlBuilder->getUrl(
                             'banksync/dunning/unarchive',
-                            ['id' => $item['entity_id']]
+                            ['id' => $item['entity_id']],
                         ),
                         'label' => __('Unarchive'),
                         'hidden' => empty($item['archived_at']),

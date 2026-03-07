@@ -7,6 +7,6 @@ if (class_exists(ComponentRegistrar::class)) {
     ComponentRegistrar::register(
         ComponentRegistrar::MODULE,
         'Ibertrand_BankSync',
-        __DIR__
+        __DIR__,
     );
 }

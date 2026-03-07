@@ -36,7 +36,7 @@ class MassBook extends Action
      * @return int[]|null
      * @throws LocalizedException
      */
-    protected function getIds(): array|null
+    protected function getIds(): ?array
     {
         return $this->filter->getCollection($this->collectionFactory->create())->getAllIds();
     }

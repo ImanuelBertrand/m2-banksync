@@ -28,7 +28,7 @@ class Price extends \Magento\Sales\Ui\Component\Listing\Column\Price
             $components,
             $data,
             $currency,
-            $storeManager
+            $storeManager,
         );
     }
 
@@ -53,8 +53,8 @@ class Price extends \Magento\Sales\Ui\Component\Listing\Column\Price
 
                 if (!$currencyCode) {
                     $itemStoreId = $item['store_id'] ?? '';
-                    $storeId = $itemStoreId && is_numeric($itemStoreId) ? $itemStoreId :
-                        $this->context->getFilterParam('store_id', Store::DEFAULT_STORE_ID);
+                    $storeId = $itemStoreId && is_numeric($itemStoreId) ? $itemStoreId
+                        : $this->context->getFilterParam('store_id', Store::DEFAULT_STORE_ID);
                     $store = $this->storeManager->getStore($storeId);
                     $currencyCode = $store->getBaseCurrency()->getCurrencyCode();
                 }

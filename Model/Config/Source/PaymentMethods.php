@@ -10,8 +10,7 @@ class PaymentMethods implements OptionSourceInterface
 {
     public function __construct(
         protected readonly Config $paymentModelConfig,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array

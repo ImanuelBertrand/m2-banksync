@@ -21,8 +21,7 @@ class CreateDunnings
         protected readonly DunningResourceModel $dunningResourceModel,
         protected readonly StoreManager $storeManager,
         protected readonly Logger $logger,
-    ) {
-    }
+    ) {}
 
     /**
      * @param int $storeId
