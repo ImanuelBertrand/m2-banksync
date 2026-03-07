@@ -36,6 +36,8 @@ jobs:
             ${{ runner.os }}-php-cs-fixer-${{ hashFiles('.php-cs-fixer.dist.php') }}-
             ${{ runner.os }}-php-cs-fixer-
 
+      - run: mkdir -p /tmp/rector_cache
+
       - name: Cache Rector
         uses: actions/cache@v4
         with:
@@ -49,4 +51,4 @@ jobs:
         run: php-cs-fixer fix --dry-run --diff --ansi
 
       - name: Run Rector
-        run: rector process --dry-run --ansi --cache-directory /tmp/rector_cache
+        run: rector process --dry-run --ansi
