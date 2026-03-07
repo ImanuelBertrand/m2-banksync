@@ -1,0 +1,52 @@
+name: Lint Code
+
+on:
+  push:
+    branches:
+      - '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring
+          # We add the tools back in globally here
+          tools: php-cs-fixer, rector
+          coverage: none
+
+      - name: Cache PHP-CS-Fixer
+        uses: actions/cache@v4
+        with:
+          path: .php-cs-fixer.cache
+          key: ${{ runner.os }}-php-cs-fixer-${{ hashFiles('.php-cs-fixer.dist.php') }}-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-php-cs-fixer-${{ hashFiles('.php-cs-fixer.dist.php') }}-
+            ${{ runner.os }}-php-cs-fixer-
+
+      - name: Cache Rector
+        uses: actions/cache@v4
+        with:
+          path: /tmp/rector_cache
+          key: ${{ runner.os }}-rector-${{ hashFiles('rector.php') }}-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-rector-${{ hashFiles('rector.php') }}-
+            ${{ runner.os }}-rector-
+
+      - name: Run PHP-CS-Fixer
+        run: php-cs-fixer fix --dry-run --diff --ansi
+
+      - name: Run Rector
+        run: rector process --dry-run --ansi --cache-directory /tmp/rector_cache
