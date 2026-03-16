@@ -34,4 +34,13 @@
         </arguments>
     </type>
 
+    <!-- Use a lazy proxy for CustomerResource to prevent EAV queries during setup:install.
+         CustomerResource::__construct calls setType('customer') which queries eav_entity_type
+         before EAV tables exist, crashing installation. -->
+    <type name="Ibertrand\BankSync\Helper\Matching">
+        <arguments>
+            <argument name="customerResource" xsi:type="object">Magento\Customer\Model\ResourceModel\Customer\Proxy</argument>
+        </arguments>
+    </type>
+
 </config>
