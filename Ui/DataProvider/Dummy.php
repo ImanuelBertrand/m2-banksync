@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ibertrand\BankSync\Ui\DataProvider;
 
 use Magento\Framework\Api\Filter;

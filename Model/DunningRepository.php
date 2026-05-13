@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ibertrand\BankSync\Model;
 
 use Ibertrand\BankSync\Model\ResourceModel\Dunning as ObjectResourceModel;
