@@ -5,5 +5,11 @@
         <referenceBlock name="page.actions.toolbar">
             <block class="Ibertrand\BankSync\Block\Adminhtml\DunningBlockButton" as="banksync_block_dunning_button"/>
         </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Ibertrand\BankSync\Block\Adminhtml\Order\Invoice\View\BanksyncStatus"
+                   name="banksync_invoice_status"
+                   template="Ibertrand_BankSync::order/invoice/view/banksync_status.phtml"
+                   before="sales_invoice_view"/>
+        </referenceContainer>
     </body>
 </page>

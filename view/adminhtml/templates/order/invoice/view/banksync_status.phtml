@@ -1,0 +1,23 @@
+<?php
+/** @var \Ibertrand\BankSync\Block\Adminhtml\Order\Invoice\View\BanksyncStatus $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Payment Status')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary">
+            <tr>
+                <th><?= $escaper->escapeHtml(__('Bank Transfer Confirmed')) ?></th>
+                <td>
+                    <?php if ($block->isBanksynced()): ?>
+                        <span class="grid-severity-notice"><span><?= $escaper->escapeHtml(__('Yes')) ?></span></span>
+                    <?php else: ?>
+                        <span class="grid-severity-critical"><span><?= $escaper->escapeHtml(__('No')) ?></span></span>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
