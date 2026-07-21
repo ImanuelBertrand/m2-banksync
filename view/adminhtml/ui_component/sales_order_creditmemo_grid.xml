@@ -6,7 +6,7 @@
                 <filter>select</filter>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
                 <dataType>select</dataType>
-                <label translate="true">BankSynced</label>
+                <label translate="true">Payment received</label>
             </settings>
         </column>
     </columns>

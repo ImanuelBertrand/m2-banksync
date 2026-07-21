@@ -1,0 +1,63 @@
+<?php
+/** @var \Ibertrand\BankSync\Block\Adminhtml\Order\View\PaymentStatus $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$status = $block->getPaymentStatus();
+if ($status === null) {
+    return;
+}
+$state = $status->getState();
+?>
+<section class="admin__page-section banksync-order-payment-status">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Payment Status (BankSync)')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <p>
+            <span class="<?= $escaper->escapeHtmlAttr($block->getStateBadgeClass($state)) ?>">
+                <span><?= $escaper->escapeHtml($block->getStateLabel($state)) ?></span>
+            </span>
+            <?php if ($status->hasInvoices()): ?>
+                &nbsp;<?= $escaper->escapeHtml(
+                    __('%1 of %2 invoices confirmed', $status->getPaidCount(), $status->getTotalCount()),
+                ) ?>
+            <?php endif; ?>
+        </p>
+        <?php if ($status->hasInvoices()): ?>
+            <table class="admin__table-secondary">
+                <thead>
+                    <tr>
+                        <th><?= $escaper->escapeHtml(__('Invoice #')) ?></th>
+                        <th><?= $escaper->escapeHtml(__('Invoice Date')) ?></th>
+                        <th class="a-right"><?= $escaper->escapeHtml(__('Grand Total')) ?></th>
+                        <th><?= $escaper->escapeHtml(__('Payment received')) ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($status->getInvoices() as $invoice): ?>
+                        <tr>
+                            <td>
+                                <a href="<?= $escaper->escapeUrl($block->getInvoiceUrl($invoice)) ?>">
+                                    <?= $escaper->escapeHtml($invoice->getIncrementId()) ?>
+                                </a>
+                            </td>
+                            <td>
+                                <?= $escaper->escapeHtml(
+                                    $block->formatDate($invoice->getCreatedAt(), \IntlDateFormatter::MEDIUM, true),
+                                ) ?>
+                            </td>
+                            <td class="a-right"><?= /* @noEscape */ $block->formatPrice((float) $invoice->getGrandTotal()) ?></td>
+                            <td>
+                                <?php if ($block->isInvoicePaid($invoice)): ?>
+                                    <span class="grid-severity-notice"><span><?= $escaper->escapeHtml(__('Yes')) ?></span></span>
+                                <?php else: ?>
+                                    <span class="grid-severity-critical"><span><?= $escaper->escapeHtml(__('No')) ?></span></span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </div>
+</section>

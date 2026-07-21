@@ -37,7 +37,7 @@ Attach PDF to mail,PDF an Mail anhängen
 Automatically send dunnings via mail,Mahnungen automatisch per Mail senden
 Back,Zurück
 BankSync,BankSync
-BankSynced,BankSynchronisiert
+BankSynced,Zahlungseingang
 Book,Buchen
 Book all green lines,Alle grünen Zeilen buchen
 Booked Transactions,Gebuchte Transaktionen
@@ -198,3 +198,15 @@ Upload File,Datei hochladen
 Weights,Gewichte
 Which payment methods should be considered when matching?,Welche Zahlungsmethoden sollten beim Abgleich berücksichtigt werden?
 Invoice Amount,Rechnungsbetrag
+"Invoices","Rechnungen"
+"Invoice #","Rechnung #"
+"Order #","Bestellung #"
+"Invoice Date","Rechnungsdatum"
+"Grand Total","Gesamtsumme"
+"Payment received","Zahlungseingang"
+"Payment Status (BankSync)","Zahlungsstatus (BankSync)"
+"Paid","Bezahlt"
+"Partially paid","Teilweise bezahlt"
+"Unpaid","Nicht bezahlt"
+"No invoice yet","Noch keine Rechnung"
+"%1 of %2 invoices confirmed","%1 von %2 Rechnungen bestätigt"

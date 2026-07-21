@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!-- Adds the "Payment received" column to the Orders grid on the customer edit page.
+         If another module already overrides this grid, its override should extend
+         Ibertrand\BankSync\Block\Adminhtml\Customer\Edit\Tab\Orders instead of the native class. -->
+    <preference for="Magento\Customer\Block\Adminhtml\Edit\Tab\Orders"
+                type="Ibertrand\BankSync\Block\Adminhtml\Customer\Edit\Tab\Orders"/>
+
     <!-- Commands -->
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
