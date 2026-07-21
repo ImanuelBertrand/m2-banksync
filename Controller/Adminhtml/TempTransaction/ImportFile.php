@@ -65,7 +65,7 @@ class ImportFile extends Action
      */
     public function isRowValid(array $row): bool
     {
-        return !($row['amount'] < 0 && !$this->config->isSupportCreditmemos());
+        return $row['amount'] >= 0 || $this->config->isSupportCreditmemos();
     }
 
     /**
