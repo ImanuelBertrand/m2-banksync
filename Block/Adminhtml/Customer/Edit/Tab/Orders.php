@@ -67,7 +67,9 @@ class Orders extends \Magento\Customer\Block\Adminhtml\Edit\Tab\Orders
             'index' => 'banksync_inv_total',
             'filter' => false,
             'sortable' => false,
-            'frame_callback' => $this->decoratePaymentStatus(...),
+            // Must be a [widget, method] array, not a first-class-callable/Closure:
+            // Grid\Column::getRowField() only runs the callback when is_array($frameCallback).
+            'frame_callback' => [$this, 'decoratePaymentStatus'],
         ]);
     }
 
@@ -109,16 +111,26 @@ class Orders extends \Magento\Customer\Block\Adminhtml\Edit\Tab\Orders
         $state = $this->paymentStatus->stateFromCounts($paid, $total);
         $label = $this->getPaymentStatusLabel($state);
 
+        // No invoices yet: no counts to show, keep the descriptive label.
+        if ($state === OrderPaymentStatus::STATE_NONE) {
+            if ($isExport) {
+                return (string) $label;
+            }
+
+            return '<span class="' . $this->getPaymentStatusBadgeClass($state) . '"><span>'
+                . $this->escapeHtml((string) $label) . '</span></span>';
+        }
+
+        // Show "paid / total" (e.g. "1 / 2") so it is clear at a glance whether every invoice is paid.
+        $counts = $paid . ' / ' . $total;
+
         if ($isExport) {
-            return (string) $label;
+            return $counts;
         }
 
-        if ($state === OrderPaymentStatus::STATE_PARTIAL) {
-            $label = __('%1 (%2/%3)', $label, $paid, $total);
-        }
-
-        return '<span class="' . $this->getPaymentStatusBadgeClass($state) . '"><span>'
-            . $this->escapeHtml((string) $label) . '</span></span>';
+        return '<span class="' . $this->getPaymentStatusBadgeClass($state) . '" title="'
+            . $this->escapeHtmlAttr((string) $label) . '"><span>' . $this->escapeHtml($counts)
+            . '</span></span>';
     }
 
     protected function getPaymentStatusBadgeClass(string $state): string

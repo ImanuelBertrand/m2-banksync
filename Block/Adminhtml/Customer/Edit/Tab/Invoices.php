@@ -92,7 +92,9 @@ class Invoices extends Extended
             'index' => 'is_banksynced',
             'type' => 'options',
             'options' => [0 => __('No'), 1 => __('Yes')],
-            'frame_callback' => $this->decorateBanksynced(...),
+            // Must be a [widget, method] array, not a first-class-callable/Closure:
+            // Grid\Column::getRowField() only runs the callback when is_array($frameCallback).
+            'frame_callback' => [$this, 'decorateBanksynced'],
         ]);
 
         return parent::_prepareColumns();
