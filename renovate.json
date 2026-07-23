@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "packageRules": [
+    {
+      "description": "Pin GitHub Actions to commit SHAs",
+      "matchManagers": ["github-actions"],
+      "pinDigests": true
+    },
+    {
+      "description": "Never bump PHP — Magento dictates the supported version",
+      "matchDepNames": ["php"],
+      "enabled": false
+    },
+    {
+      "description": "Group + automerge dev tooling once lint passes",
+      "matchDepTypes": ["require-dev"],
+      "groupName": "php dev tools",
+      "rangeStrategy": "bump",
+      "automerge": true,
+      "automergeType": "branch"
+    }
+  ]
+}
