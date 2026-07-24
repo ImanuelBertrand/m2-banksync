@@ -48,7 +48,7 @@ class CalcHashes extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->config->isEnabled()) {
             $output->writeln('BankSync is disabled');
