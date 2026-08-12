@@ -84,12 +84,12 @@ class Csv extends CoreCsv
     public function getData($file)
     {
         $contents = $this->file->fileGetContents($file);
-
         if (!in_array($this->encoding, mb_list_encodings())) {
             throw new Exception('Invalid CSV file encoding: ' . $this->encoding);
-        } elseif ($this->encoding !== 'UTF-8') {
-            $contents = mb_convert_encoding($contents, 'UTF-8', $this->encoding);
+        }
 
+        if ($this->encoding !== 'UTF-8') {
+            $contents = mb_convert_encoding($contents, 'UTF-8', $this->encoding);
             if ($contents === false) {
                 throw new Exception('Encoding the file to UTF-8 failed');
             }
