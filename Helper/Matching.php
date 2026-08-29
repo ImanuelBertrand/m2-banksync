@@ -112,9 +112,7 @@ class Matching extends AbstractHelper
 
         foreach ($halfScoreKeys as $key) {
             // Only set the score to 0.5 if it's not already set (i.e., it's not in the $nameScores array)
-            if (!isset($nameScores[$key])) {
-                $nameScores[$key] = 0.5;
-            }
+            $nameScores[$key] ??= 0.5;
         }
         arsort($nameScores, SORT_NUMERIC);
         return $nameScores;

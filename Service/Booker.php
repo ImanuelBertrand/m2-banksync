@@ -327,9 +327,7 @@ class Booker
             'success' => [],
             'error' => [],
         ];
-        if ($minThreshold === null) {
-            $minThreshold = $this->config->getAcceptConfidenceThreshold();
-        }
+        $minThreshold ??= $this->config->getAcceptConfidenceThreshold();
 
         $absoluteThreshold = $this->config->getAbsoluteConfidenceThreshold();
         $acceptanceThreshold = $this->config->getAcceptConfidenceThreshold();
