@@ -35,7 +35,8 @@
             "updated_at": true
         },
         "index": {
-            "BANKSYNC_TEMP_TRANSACTION_HASH": true
+            "BANKSYNC_TEMP_TRANSACTION_HASH": true,
+            "BANKSYNC_TEMP_TRANSACTION_DIRTY": true
         },
         "constraint": {
             "PRIMARY": true
@@ -59,7 +60,8 @@
             "updated_at": true
         },
         "index": {
-            "BANKSYNC_TRANSACTION_HASH": true
+            "BANKSYNC_TRANSACTION_HASH": true,
+            "BANKSYNC_TRANSACTION_DOCUMENT_TYPE_DOCUMENT_ID": true
         },
         "constraint": {
             "PRIMARY": true,

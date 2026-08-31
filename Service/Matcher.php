@@ -128,24 +128,6 @@ class Matcher
     }
 
     /**
-     * @param TempTransaction $tempTransaction
-     * @return array
-     * @throws LocalizedException
-     */
-    public function getDocumentsViaDocumentNumbers(TempTransaction $tempTransaction): array
-    {
-        $numbers = $this->extractDocumentNumbersFromPurpose($tempTransaction->getPurpose());
-        if ($numbers === []) {
-            return [];
-        }
-
-        $collection = $this->getBaseDocumentCollection($tempTransaction);
-        $collection->addFieldToFilter('increment_id', ['in' => $numbers]);
-
-        return $collection->getItems();
-    }
-
-    /**
      * @param ?string $purpose
      * @return array
      */
@@ -165,32 +147,6 @@ class Matcher
             return [];
         }
         return $matches[0];
-    }
-
-    /**
-     * @param TempTransaction $tempTransaction
-     * @return array
-     * @throws LocalizedException
-     */
-    protected function getDocumentsViaOrderNumbers(TempTransaction $tempTransaction): array
-    {
-        $numbers = $this->extractOrderNumbersFromPurpose($tempTransaction->getPurpose());
-        if ($numbers === []) {
-            return [];
-        }
-
-        $orderIds = $this->orderCollectionFactory->create()
-            ->addFieldToFilter('increment_id', ['in' => $numbers])
-            ->getAllIds();
-
-        if (empty($orderIds)) {
-            return [];
-        }
-
-        $collection = $this->getBaseDocumentCollection($tempTransaction);
-        $collection->addFieldToFilter('order_id', ['in' => $orderIds]);
-
-        return $collection->getItems();
     }
 
     /**
@@ -217,10 +173,25 @@ class Matcher
 
     /**
      * @param TempTransaction $tempTransaction
-     * @return array
-     * @throws LocalizedException
+     * @return int[]
      */
-    protected function getDocumentsViaCustomer(TempTransaction $tempTransaction): array
+    protected function getOrderIdsFromOrderNumbers(TempTransaction $tempTransaction): array
+    {
+        $numbers = $this->extractOrderNumbersFromPurpose($tempTransaction->getPurpose());
+        if ($numbers === []) {
+            return [];
+        }
+
+        return $this->orderCollectionFactory->create()
+            ->addFieldToFilter('increment_id', ['in' => $numbers])
+            ->getAllIds();
+    }
+
+    /**
+     * @param TempTransaction $tempTransaction
+     * @return int[]
+     */
+    protected function getOrderIdsFromCustomerNumbers(TempTransaction $tempTransaction): array
     {
         $numbers = $this->extractCustomerNumbersFromPurpose($tempTransaction->getPurpose());
         if ($numbers === []) {
@@ -231,25 +202,19 @@ class Matcher
             ->addFieldToFilter('increment_id', ['in' => $numbers])
             ->getAllIds();
 
-        if (empty($customerIds)) {
+        if ($customerIds === []) {
             return [];
         }
 
-        $orderIds = $this->orderCollectionFactory->create()
+        return $this->orderCollectionFactory->create()
             ->addFieldToFilter('customer_id', ['in' => $customerIds])
             ->getAllIds();
-
-        if (empty($orderIds)) {
-            return [];
-        }
-
-        $collection = $this->getBaseDocumentCollection($tempTransaction);
-        $collection->addFieldToFilter('order_id', ['in' => $orderIds]);
-
-        return $collection->getItems();
     }
 
     /**
+     * Documents whose total is within the configured threshold of the paid amount, created within
+     * the configured window around the transaction date.
+     *
      * @param TempTransaction $tempTransaction
      * @return array
      * @throws LocalizedException
@@ -263,13 +228,51 @@ class Matcher
             strtotime((string) $tempTransaction->getTransactionDate()) + $this->config->getDateThreshold() * 86400,
         );
 
-        $collection = $this->getBaseDocumentCollection($tempTransaction)
+        return $this->getBaseDocumentCollection($tempTransaction)
             ->addFieldToFilter('main_table.created_at', ['gteq' => $this->config->getStartDate()])
             ->addFieldToFilter('main_table.created_at', ['lteq' => $latestDate])
             ->addFieldToFilter('grand_total', ['gteq' => $amount - $amountThreshold])
-            ->addFieldToFilter('grand_total', ['lteq' => $amount + $amountThreshold]);
+            ->addFieldToFilter('grand_total', ['lteq' => $amount + $amountThreshold])
+            ->getItems();
+    }
 
-        return $collection->getItems();
+    /**
+     * @param TempTransaction $tempTransaction
+     * @return array
+     * @throws LocalizedException
+     */
+    public function getDocumentsViaDocumentNumbers(TempTransaction $tempTransaction): array
+    {
+        $numbers = $this->extractDocumentNumbersFromPurpose($tempTransaction->getPurpose());
+        if ($numbers === []) {
+            return [];
+        }
+
+        return $this->getBaseDocumentCollection($tempTransaction)
+            ->addFieldToFilter('increment_id', ['in' => $numbers])
+            ->getItems();
+    }
+
+    /**
+     * Order and customer numbers both resolve to a set of order ids, so they share one document query.
+     *
+     * @param TempTransaction $tempTransaction
+     * @return array
+     * @throws LocalizedException
+     */
+    protected function getDocumentsViaOrderIds(TempTransaction $tempTransaction): array
+    {
+        $orderIds = array_unique(array_merge(
+            $this->getOrderIdsFromOrderNumbers($tempTransaction),
+            $this->getOrderIdsFromCustomerNumbers($tempTransaction),
+        ));
+        if ($orderIds === []) {
+            return [];
+        }
+
+        return $this->getBaseDocumentCollection($tempTransaction)
+            ->addFieldToFilter('order_id', ['in' => $orderIds])
+            ->getItems();
     }
 
     /**
@@ -301,12 +304,13 @@ class Matcher
      */
     public function getDocuments(TempTransaction $tempTransaction): array
     {
-        return array_merge(
-            $this->getDocumentsViaAmount($tempTransaction),
-            $this->getDocumentsViaDocumentNumbers($tempTransaction),
-            $this->getDocumentsViaOrderNumbers($tempTransaction),
-            $this->getDocumentsViaCustomer($tempTransaction),
-        );
+        // One query per strategy, because each of them can use its own index. Merging them into a
+        // single OR query leaves the document table unindexable and costs a full table scan.
+        // The results are keyed by entity id, so `+` unions them and a document found by more than
+        // one strategy is scored once instead of once per strategy.
+        return $this->getDocumentsViaAmount($tempTransaction)
+            + $this->getDocumentsViaDocumentNumbers($tempTransaction)
+            + $this->getDocumentsViaOrderIds($tempTransaction);
     }
 
     /**
@@ -323,10 +327,14 @@ class Matcher
         $confidences = $this->getDocumentConfidences($tempTransaction);
         if ($confidences !== []) {
             $this->saveConfidences($tempTransaction, $confidences);
-            $tempTransaction->setMatchConfidence(max($confidences));
-            $tempTransaction->setDirty(TempTransaction::NOT_DIRTY);
-            $this->tempTransactionResource->save($tempTransaction);
         }
+
+        // The flag has to be cleared even when nothing matched. Otherwise the transaction stays dirty
+        // forever and is rematched by every single cron run, which is what made the cron job slow.
+        $tempTransaction->setMatchConfidence($confidences === [] ? null : max($confidences));
+        $tempTransaction->setDirty(TempTransaction::NOT_DIRTY);
+        $this->tempTransactionResource->save($tempTransaction);
+
         return count($confidences);
     }
 

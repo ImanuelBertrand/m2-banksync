@@ -40,6 +40,9 @@
         <index referenceId="BANKSYNC_TEMP_TRANSACTION_HASH" indexType="btree">
             <column name="hash"/>
         </index>
+        <index referenceId="BANKSYNC_TEMP_TRANSACTION_DIRTY" indexType="btree">
+            <column name="dirty"/>
+        </index>
     </table>
     <table name="banksync_transaction" resource="default" engine="innodb" comment="BankSync Transactions">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
@@ -50,7 +53,7 @@
         <column xsi:type="decimal" name="amount" precision="12" scale="4" nullable="true" comment="Amount"/>
         <column xsi:type="text" name="comment" nullable="true" comment="Comment"/>
         <column xsi:type="varchar" name="hash" nullable="true" length="40" comment="Hash"/>
-        <column xsi:type="text" name="document_type" nullable="false" comment="Document Type"/>
+        <column xsi:type="varchar" name="document_type" nullable="false" length="20" comment="Document Type"/>
         <column xsi:type="int" name="document_id" nullable="false" comment="Document ID"/>
         <column xsi:type="float" name="match_confidence" nullable="true" comment="Document ID"/>
         <column xsi:type="varchar" name="partial_hash" nullable="true" length="40" comment="Partial reference"/>
@@ -61,6 +64,13 @@
         </constraint>
         <index referenceId="BANKSYNC_TEMP_TRANSACTION_HASH" indexType="btree">
             <column name="hash"/>
+        </index>
+        <!-- The matcher excludes already-booked documents with a left join on these two columns.
+             Without the index that join degrades into a full scan of this table, which grows with
+             every payment ever booked. -->
+        <index referenceId="BANKSYNC_TRANSACTION_DOCUMENT_TYPE_DOCUMENT_ID" indexType="btree">
+            <column name="document_type"/>
+            <column name="document_id"/>
         </index>
     </table>
     <table name="banksync_temptransaction_confidence" resource="default" engine="innodb" comment="BankSync Transaction Confidence">
