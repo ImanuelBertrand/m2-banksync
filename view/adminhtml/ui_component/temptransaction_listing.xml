@@ -65,14 +65,18 @@
                     </confirm>
                 </settings>
             </action>
-            <action name="mass_delete">
+            <!-- Transactions are never deleted in the normal workflow. Ignoring keeps them on record,
+                 so a seemingly missing payment can still be accounted for, and re-importing the same
+                 month does not bring them back. Deletion is a per-row override, see
+                 banksync/general/allow_deletion. -->
+            <action name="mass_ignore">
                 <settings>
-                    <url path="banksync/temptransaction/delete"/>
-                    <type>mass_delete</type>
-                    <label translate="true">Delete</label>
+                    <url path="banksync/temptransaction/ignore"/>
+                    <type>mass_ignore</type>
+                    <label translate="true">Ignore (not a customer payment)</label>
                     <confirm>
-                        <title translate="true">Delete</title>
-                        <message translate="true">Are you sure to delete selected transactions?</message>
+                        <title translate="true">Ignore</title>
+                        <message translate="true">Are the selected transactions really not customer payments? They are kept on record and will not be imported again.</message>
                     </confirm>
                 </settings>
             </action>

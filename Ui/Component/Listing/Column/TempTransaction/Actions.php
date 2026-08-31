@@ -2,6 +2,7 @@
 
 namespace Ibertrand\BankSync\Ui\Component\Listing\Column\TempTransaction;
 
+use Ibertrand\BankSync\Helper\Config;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
@@ -13,6 +14,7 @@ class Actions extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         protected readonly UrlInterface $urlBuilder,
+        protected readonly Config $config,
         array $components = [],
         array $data = [],
     ) {
@@ -81,21 +83,39 @@ class Actions extends Column
                         ],
                     ];
 
-                    $item[$name]['delete'] = [
+                    $item[$name]['ignore'] = [
                         'href' => $this->urlBuilder->getUrl(
-                            'banksync/temptransaction/delete',
+                            'banksync/temptransaction/ignore',
                             ['id' => $item['entity_id']],
                         ),
-                        'label' => __('✖ Delete'),
+                        'label' => __('🚫 Ignore'),
                         'hidden' => false,
                         'confirm' => [
-                            'title' => __('Delete "%1"', $item['entity_id']),
+                            'title' => __('Ignore "%1"', $item['entity_id']),
                             'message' => __(
-                                'Are you sure you want to delete the record "%1"?',
-                                $item['entity_id'],
+                                'Is this really not a customer payment? The transaction is kept on '
+                                . 'record and will not be imported again.',
                             ),
                         ],
                     ];
+
+                    if ($this->config->isDeletionAllowed()) {
+                        $item[$name]['delete'] = [
+                            'href' => $this->urlBuilder->getUrl(
+                                'banksync/temptransaction/delete',
+                                ['id' => $item['entity_id']],
+                            ),
+                            'label' => __('✖ Delete'),
+                            'hidden' => false,
+                            'confirm' => [
+                                'title' => __('Delete "%1"', $item['entity_id']),
+                                'message' => __(
+                                    'This deletes the record for good. It will be re-imported the next '
+                                    . 'time this month is imported. Ignore it instead unless you are sure.',
+                                ),
+                            ],
+                        ];
+                    }
                 }
             }
         }

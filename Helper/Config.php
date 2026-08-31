@@ -30,6 +30,17 @@ class Config extends AbstractHelper
         return $this->scopeConfig->isSetFlag('banksync/general/support_creditmemos');
     }
 
+    /**
+     * Deleting transactions is an override for exceptional cases only. The normal way to get rid of a
+     * transaction that is not a customer payment is to ignore it, which keeps it on record.
+     *
+     * @return bool
+     */
+    public function isDeletionAllowed(): bool
+    {
+        return $this->scopeConfig->isSetFlag('banksync/general/allow_deletion');
+    }
+
     public function getMatchingPattern(string $type): string
     {
         return $this->scopeConfig->getValue("banksync/matching/patterns/{$type}_increment_id") ?? "";

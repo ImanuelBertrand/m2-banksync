@@ -21,6 +21,11 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment>Enable this if you want to match creditmemos as well as invoices.</comment>
                 </field>
+                <field id="allow_deletion" translate="label,comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow Deleting Transactions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Override for exceptional cases. Normally a transaction that is not a customer payment should be <em>ignored</em>, not deleted: an ignored transaction stays on record, so it can still be found when a payment seems to be missing, and re-importing the same month will not bring it back. Deleted transactions are gone and <em>will</em> be re-imported.]]></comment>
+                </field>
             </group>
             <group id="matching" translate="label,comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Matching</label>

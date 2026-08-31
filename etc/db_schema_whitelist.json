@@ -12,7 +12,8 @@
             "updated_at": true
         },
         "index": {
-            "BANKSYNC_DUNNING_ENTITY_ID": true
+            "BANKSYNC_DUNNING_ENTITY_ID": true,
+            "BANKSYNC_DUNNING_INVOICE_ID": true
         },
         "constraint": {
             "PRIMARY": true
@@ -57,10 +58,14 @@
             "match_confidence": true,
             "partial_hash": true,
             "created_at": true,
-            "updated_at": true
+            "updated_at": true,
+            "status": true,
+            "ignore_reason": true,
+            "ignored_by": true
         },
         "index": {
             "BANKSYNC_TRANSACTION_HASH": true,
+            "BANKSYNC_TRANSACTION_STATUS": true,
             "BANKSYNC_TRANSACTION_DOCUMENT_TYPE_DOCUMENT_ID": true
         },
         "constraint": {
@@ -104,7 +109,9 @@
             "date_column": true,
             "date_regex": true,
             "created_at": true,
-            "updated_at": true
+            "updated_at": true,
+            "entity_id": true,
+            "ignore_invalid_lines": true
         },
         "constraint": {
             "PRIMARY": true

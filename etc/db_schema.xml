@@ -57,6 +57,9 @@
         <column xsi:type="int" name="document_id" nullable="false" comment="Document ID"/>
         <column xsi:type="float" name="match_confidence" nullable="true" comment="Document ID"/>
         <column xsi:type="varchar" name="partial_hash" nullable="true" length="40" comment="Partial reference"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="20" default="booked" comment="Booked or ignored"/>
+        <column xsi:type="varchar" name="ignore_reason" nullable="true" length="255" comment="Why the transaction was ignored"/>
+        <column xsi:type="int" name="ignored_by" unsigned="true" nullable="true" comment="Admin user who ignored it"/>
         <column xsi:type="datetime" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
         <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Update Time"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
@@ -71,6 +74,9 @@
         <index referenceId="BANKSYNC_TRANSACTION_DOCUMENT_TYPE_DOCUMENT_ID" indexType="btree">
             <column name="document_type"/>
             <column name="document_id"/>
+        </index>
+        <index referenceId="BANKSYNC_TRANSACTION_STATUS" indexType="btree">
+            <column name="status"/>
         </index>
     </table>
     <table name="banksync_temptransaction_confidence" resource="default" engine="innodb" comment="BankSync Transaction Confidence">

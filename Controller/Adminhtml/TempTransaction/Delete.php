@@ -3,6 +3,7 @@
 namespace Ibertrand\BankSync\Controller\Adminhtml\TempTransaction;
 
 use Exception;
+use Ibertrand\BankSync\Helper\Config;
 use Ibertrand\BankSync\Logger\Logger;
 use Ibertrand\BankSync\Model\ResourceModel\TempTransaction\Collection;
 use Ibertrand\BankSync\Model\ResourceModel\TempTransaction\CollectionFactory;
@@ -24,6 +25,7 @@ class Delete extends Action
         protected readonly TempTransactionRepository $tempTransactionRepository,
         protected readonly Filter $filter,
         protected readonly CollectionFactory $collectionFactory,
+        protected readonly Config $config,
         protected readonly Logger $logger,
     ) {
         parent::__construct($context);
@@ -47,6 +49,19 @@ class Delete extends Action
      */
     public function execute()
     {
+        // Deleting is not part of the normal workflow: it loses the record, and the transaction comes
+        // back the next time its month is re-imported. Ignoring is the supported way out.
+        if (!$this->config->isDeletionAllowed()) {
+            $this->messageManager->addErrorMessage(
+                __(
+                    'Deleting transactions is disabled. Ignore them instead, or enable deletion under '
+                    . 'Stores > Configuration > Sales > BankSync > General Configuration.',
+                ),
+            );
+
+            return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath('*/*/index');
+        }
+
         try {
             $tempTransactions = $this->getCollection();
             foreach ($tempTransactions as $tempTransaction) {

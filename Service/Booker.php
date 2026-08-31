@@ -97,9 +97,9 @@ class Booker
     }
 
     /**
-     * Transforms a temp transaction into a transaction and deletes the temp transaction.
-     * This is used to archive temp transactions and move them to the transaction table,
-     * without actually booking them.
+     * Keeps a customer payment in the log without booking it against a document, usually together
+     * with a comment explaining it. The transaction is moved to the transaction table and the temp
+     * transaction is deleted.
      *
      * @param TempTransaction|int $tempTransaction
      *
@@ -110,6 +110,50 @@ class Booker
      */
     public function archive(TempTransaction|int $tempTransaction): Transaction
     {
+        return $this->moveToLog($tempTransaction, Transaction::STATUS_ARCHIVED);
+    }
+
+    /**
+     * Records that a transaction is not a customer payment and nothing we need. It stays on record
+     * so a payment that appears to be missing can still be accounted for, and so that its hash keeps
+     * a re-import of the same month from bringing it back.
+     *
+     * @param TempTransaction|int $tempTransaction
+     * @param string|null $reason
+     * @param int|null $ignoredBy Admin user id
+     *
+     * @return Transaction
+     * @throws CouldNotDeleteException
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
+     */
+    public function ignore(
+        TempTransaction|int $tempTransaction,
+        ?string $reason = null,
+        ?int $ignoredBy = null,
+    ): Transaction {
+        return $this->moveToLog($tempTransaction, Transaction::STATUS_IGNORED, $reason, $ignoredBy);
+    }
+
+    /**
+     * Moves a temp transaction into the transaction table without a document and deletes it.
+     *
+     * @param TempTransaction|int $tempTransaction
+     * @param string $status
+     * @param string|null $reason
+     * @param int|null $ignoredBy Admin user id
+     *
+     * @return Transaction
+     * @throws CouldNotDeleteException
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
+     */
+    protected function moveToLog(
+        TempTransaction|int $tempTransaction,
+        string $status,
+        ?string $reason = null,
+        ?int $ignoredBy = null,
+    ): Transaction {
         $db = $this->tempTransactionResource->getConnection();
         $db->beginTransaction();
         try {
@@ -123,7 +167,10 @@ class Booker
                 $this->matchConfidenceRepository->delete($confidence);
             }
 
-            $transaction = $this->transactionResource->fromTempTransaction($tempTransaction);
+            $transaction = $this->transactionResource->fromTempTransaction($tempTransaction)
+                ->setStatus($status)
+                ->setIgnoreReason($reason)
+                ->setIgnoredBy($ignoredBy);
             $this->transactionRepository->save($transaction);
 
             $this->tempTransactionRepository->delete($tempTransaction);
@@ -168,6 +215,7 @@ class Booker
 
             $transaction = $this->transactionResource->fromTempTransaction($tempTransaction)
                 ->setDocumentId($document->getId())
+                ->setStatus(Transaction::STATUS_BOOKED)
                 ->setMatchConfidence($this->matching->getMatchConfidence($tempTransaction, $document));
             $transaction->setHasDataChanges(true);
 
