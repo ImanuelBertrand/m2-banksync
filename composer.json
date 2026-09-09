@@ -22,7 +22,7 @@
         ]
     },
     "require-dev": {
-        "rector/rector": "^2.6.5",
+        "rector/rector": "^2.6.6",
         "friendsofphp/php-cs-fixer": "^3.95.24"
     }
 }
