@@ -16,18 +16,24 @@ use Ibertrand\BankSync\Model\TempTransactionFactory;
 use Ibertrand\BankSync\Model\TempTransactionRepository;
 use Ibertrand\BankSync\Service\Matcher;
 use Magento\Backend\App\Action;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\Directory\WriteInterface;
 
 class ImportFile extends Action
 {
     public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
 
+    protected WriteInterface $varDirectory;
+
     public function __construct(
         Action\Context $context,
+        Filesystem $filesystem,
         protected readonly Csv $csvProcessor,
         protected readonly TempTransactionFactory $tempTransactionFactory,
         protected readonly TempTransactionResource $tempTransactionResource,
@@ -40,7 +46,43 @@ class ImportFile extends Action
         protected readonly Config $config,
         protected readonly Hashes $hashes,
     ) {
+        $this->varDirectory = $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
         parent::__construct($context);
+    }
+
+    /**
+     * Resolve the uploaded file to a path inside the upload directory.
+     *
+     * The request only controls the file name, never the directory, so no file outside
+     * of Upload::UPLOAD_DIR can be read or deleted.
+     *
+     * @return string Path relative to the var directory
+     * @throws LocalizedException
+     */
+    protected function getUploadedFilePath(): string
+    {
+        $importFile = $this->getRequest()->getParam('import_file');
+        $fileName = is_array($importFile) && isset($importFile[0]['file'])
+            ? basename((string) $importFile[0]['file'])
+            : '';
+
+        if ($fileName === '' || !preg_match('/^[^.][\w.\-]*\.csv$/iD', $fileName)) {
+            throw new LocalizedException(__('File not found.'));
+        }
+
+        $path = Upload::UPLOAD_DIR . '/' . $fileName;
+        if (!$this->varDirectory->isFile($path)) {
+            throw new LocalizedException(__('File not found.'));
+        }
+
+        // Resolve symlinks: a link inside the upload directory must not redirect the read.
+        $baseDir = realpath($this->varDirectory->getAbsolutePath(Upload::UPLOAD_DIR));
+        $realPath = realpath($this->varDirectory->getAbsolutePath($path));
+        if ($baseDir === false || $realPath === false || !str_starts_with($realPath, $baseDir . '/')) {
+            throw new LocalizedException(__('File not found.'));
+        }
+
+        return $path;
     }
 
     /**
@@ -74,13 +116,8 @@ class ImportFile extends Action
     public function execute()
     {
         try {
-            $csvFile = $this->getRequest()->getParam('import_file')[0];
-
-            $csvFilePath = $csvFile['path'] . '/' . $csvFile['file'];
-
-            if (!is_file($csvFilePath)) {
-                throw new LocalizedException(__('File not found.'));
-            }
+            $csvFileRelativePath = $this->getUploadedFilePath();
+            $csvFilePath = $this->varDirectory->getAbsolutePath($csvFileRelativePath);
 
             $csvFormat = $this->getCsvFormat();
             $csvRows = $csvFormat->loadFile($csvFilePath);
@@ -127,7 +164,7 @@ class ImportFile extends Action
                     $this->tempTransactionResource->save($transaction);
                 }
             }
-            unlink($csvFilePath);
+            $this->varDirectory->delete($csvFileRelativePath);
 
             $this->messageManager->addSuccessMessage(__('CSV file has been imported successfully.'));
             if (!$this->config->isAsyncMatching()) {
