@@ -5,8 +5,19 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Sales::sales">
                     <resource id="Ibertrand_BankSync::main_menu" title="BankSync">
-                        <resource id="Ibertrand_BankSync::temp_transaction" title="New Transactions"/>
-                        <resource id="Ibertrand_BankSync::transaction" title="Matched Transactions"/>
+                        <resource id="Ibertrand_BankSync::temp_transaction" title="New Transactions">
+                            <resource id="Ibertrand_BankSync::sub_menu_temp_transactions" title="Manage New Transactions"/>
+                            <resource id="Ibertrand_BankSync::sub_menu_import" title="Import Transactions"/>
+                            <resource id="Ibertrand_BankSync::search_documents" title="Search Documents"/>
+                        </resource>
+                        <resource id="Ibertrand_BankSync::transaction" title="Booked Transactions">
+                            <resource id="Ibertrand_BankSync::sub_menu_transactions" title="View Booked Transactions"/>
+                        </resource>
+                        <resource id="Ibertrand_BankSync::book" title="Book / Unbook Transactions"/>
+                        <resource id="Ibertrand_BankSync::dunning" title="Dunnings">
+                            <resource id="Ibertrand_BankSync::sub_menu_dunnings" title="Manage Dunnings"/>
+                        </resource>
+                        <resource id="Ibertrand_BankSync::sub_menu_csv_format" title="CSV Formats"/>
                     </resource>
                 </resource>
             </resource>

@@ -12,6 +12,8 @@ use Magento\MediaStorage\Model\File\UploaderFactory;
 
 class Upload extends Action
 {
+    public const ADMIN_RESOURCE = 'Ibertrand_BankSync::sub_menu_import';
+
     public const UPLOAD_DIR = 'tmp/banksync';
 
     protected WriteInterface $varDirectory;
