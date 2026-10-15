@@ -20,13 +20,25 @@ class DunningBlockButton extends Container
 
     protected function _construct()
     {
+        $isBlocked = $this->invoiceIsBlocked();
         $this->addButton(
             'banksync_block_dunning_button',
             [
                 'label' => $this->getLabel(),
                 'class' => 'dunning_block',
-                'confirm' => __('Are you sure you want to do this?'),
-                'on_click' => "deleteConfirm( '" . __('Sure?') . "', '" . $this->getTargetUrl() . "')",
+                'data_attribute' => [
+                    'mage-init' => [
+                        'Ibertrand_BankSync/js/dunning-block' => [
+                            'url' => $this->getUrl('banksync/dunning/block', ['invoice_id' => $this->getInvoiceId()]),
+                            'setBlocked' => $isBlocked ? 0 : 1,
+                            'commentRequired' => !$isBlocked,
+                            'title' => $this->getLabel(),
+                            'content' => $isBlocked
+                                ? (string) __('Comment (optional):')
+                                : (string) __('Please enter the reason for the dunning block:'),
+                        ],
+                    ],
+                ],
             ],
             sortOrder: -5,
         );
@@ -58,18 +70,6 @@ class DunningBlockButton extends Container
     protected function getInvoice(): EntityInterface
     {
         return $this->registry->registry('current_invoice');
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTargetUrl(): string
-    {
-        $setBlocked = $this->invoiceIsBlocked() ? 0 : 1;
-        return $this->getUrl(
-            "banksync/dunning/block",
-            ['invoice_id' => $this->getInvoiceId(), 'set_blocked' => $setBlocked],
-        );
     }
 
     /**

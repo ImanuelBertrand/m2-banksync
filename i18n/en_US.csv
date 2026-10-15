@@ -27,7 +27,6 @@ Are you sure to delete selected transactions?,Are you sure to delete selected tr
 Are you sure to unbook selected transactions?,Are you sure to unbook selected transactions?
 "Are you sure you want to archive the record ""%1""?","Are you sure you want to archive the record ""%1""?"
 "Are you sure you want to delete the record ""%1""?","Are you sure you want to delete the record ""%1""?"
-Are you sure you want to do this?,Are you sure you want to do this?
 Are you want to print the selected?,Are you want to print the selected?
 Are you want to send the selected dunnings via mail?,Are you want to send the selected dunnings via mail?
 Async Matching,Async Matching
@@ -182,3 +181,15 @@ Upload CSV file,Upload CSV file
 Upload File,Upload File
 Weights,Weights
 Which payment methods should be considered when matching?,Which payment methods should be considered when matching?
+"Comment (optional):","Comment (optional):"
+"Please enter the reason for the dunning block:","Please enter the reason for the dunning block:"
+"Please enter the reason for the dunning block.","Please enter the reason for the dunning block."
+"Dunning block for invoice %1 set by %2: %3","Dunning block for invoice %1 set by %2: %3"
+"Dunning block for invoice %1 removed by %2","Dunning block for invoice %1 removed by %2"
+"Dunning block for invoice %1 removed by %2: %3","Dunning block for invoice %1 removed by %2: %3"
+"This invoice no longer exists.","This invoice no longer exists."
+"The dunning block for this invoice is already set.","The dunning block for this invoice is already set."
+"The dunning block for this invoice has already been removed.","The dunning block for this invoice has already been removed."
+"The dunning block could not be changed. Please check the log.","The dunning block could not be changed. Please check the log."
+"The dunning block has been set.","The dunning block has been set."
+"The dunning block has been removed.","The dunning block has been removed."

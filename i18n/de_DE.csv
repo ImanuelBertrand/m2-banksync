@@ -29,7 +29,6 @@ Are you sure to delete selected transactions?,"Sind Sie sicher, dass die ausgew�
 Are you sure to unbook selected transactions?,"Sind Sie sicher, dass die ausgewählten Transaktionen storniert werden sollen?"
 "Are you sure you want to archive the record ""%1""?","Sind Sie sicher, dass Sie den Eintrag ""%1"" archivieren wollen?"
 "Are you sure you want to delete the record ""%1""?","Sind Sie sicher, dass Sie den Eintrag ""%1"" löschen wollen?"
-Are you sure you want to do this?,Sind Sie sicher?
 Are you want to print the selected?,"Sind Sie sicher, dass Sie die ausgewählten drucken wollen?"
 Are you want to send the selected dunnings via mail?,"Sind Sie sicher, dass Sie die ausgewählten verschicken wollen?"
 Async Matching,Asynchrones Abgleichen
@@ -154,7 +153,6 @@ Send Mail,Mail senden
 Send mails,Mails senden
 Sent,Gesendet
 Sent At,Gesendet am
-Sure?,Sicher?
 SKU,SKU
 Some transactions could not be recalculated.,Einige Transaktionen konnten nicht neu berechnet werden.
 Source,Quelle
@@ -212,3 +210,15 @@ Invoice Amount,Rechnungsbetrag
 "%1 of %2 invoices confirmed","%1 von %2 Rechnungen bestätigt"
 "🚫 Ignore","🚫 Ignorieren"
 "Ignore (not a customer payment)","Ignorieren (keine Kundenzahlung)"
+"Comment (optional):","Kommentar (optional):"
+"Please enter the reason for the dunning block:","Bitte den Grund für die Mahnsperre angeben:"
+"Please enter the reason for the dunning block.","Bitte den Grund für die Mahnsperre angeben."
+"Dunning block for invoice %1 set by %2: %3","Mahnsperre für Rechnung %1 gesetzt von %2: %3"
+"Dunning block for invoice %1 removed by %2","Mahnsperre für Rechnung %1 aufgehoben von %2"
+"Dunning block for invoice %1 removed by %2: %3","Mahnsperre für Rechnung %1 aufgehoben von %2: %3"
+"This invoice no longer exists.","Diese Rechnung existiert nicht mehr."
+"The dunning block for this invoice is already set.","Die Mahnsperre für diese Rechnung ist bereits gesetzt."
+"The dunning block for this invoice has already been removed.","Die Mahnsperre für diese Rechnung wurde bereits aufgehoben."
+"The dunning block could not be changed. Please check the log.","Die Mahnsperre konnte nicht geändert werden. Bitte das Log prüfen."
+"The dunning block has been set.","Die Mahnsperre wurde gesetzt."
+"The dunning block has been removed.","Die Mahnsperre wurde aufgehoben."
